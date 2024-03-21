@@ -2,12 +2,14 @@ package hg.jh.luko6.service;
 
 import hg.jh.luko6.entity.InputLotto;
 import hg.jh.luko6.entity.Lotto;
+import hg.jh.luko6.entity.OutputLotto;
 import hg.jh.luko6.repository.LottoRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,11 +19,13 @@ public class LottoService {
 
     private final LottoRepository lottoRepository;
 
-    public List<Lotto> LottoAll(InputLotto inputLotto){
 
+    public List<OutputLotto> LottoAll(InputLotto inputLotto){
 
 
         List<Lotto> lottoList = lottoRepository.findAll();
+
+        List<OutputLotto> outputLottoList = new ArrayList<>();
 
         String[] inputArr = new String[]{inputLotto.getNum1()+"",inputLotto.getNum2()+"",inputLotto.getNum3()+"",inputLotto.getNum4()+"",inputLotto.getNum5()+"",inputLotto.getNum6()+""};
 
@@ -66,53 +70,81 @@ public class LottoService {
             if(score>10){
                 log.info("2등");
                 log.info("라운드" + lotto.getRound());
-//                @Autowired
-//                OutputLotto outputLotto
-//                outputLotto.setWining( =lotto.getSecondWinning());
-//                outputLotto.setWinner("2등");
-//
-//
-//                List<OutputLotto> list =
-//                lotto.getRound();
                 log.info(score);
 
+                OutputLotto outputLotto = new OutputLotto();
+
+                outputLotto.setRound(lotto.getRound());
+                outputLotto.setWinning(lotto.getSecondWinning());
+                outputLotto.setPlace("2등");
+
+                outputLottoList.add(outputLotto);
 
             }else
                 if(score==6){
                 log.info("라운드" + lotto.getRound());
-
                 log.info("1등");
                 log.info(score);
 
+                    OutputLotto outputLotto = new OutputLotto();
+
+                    outputLotto.setRound(lotto.getRound());
+                    outputLotto.setWinning(lotto.getFirstWinning());
+                    outputLotto.setPlace("1등");
+
+                    outputLottoList.add(outputLotto);
 
             }else if(score==5){
                     log.info("라운드" + lotto.getRound());
                     log.info("3등");
                     log.info(score);
 
+                    OutputLotto outputLotto = new OutputLotto();
+
+                    outputLotto.setRound(lotto.getRound());
+                    outputLotto.setWinning(lotto.getThirdWinning());
+                    outputLotto.setPlace("3등");
+
+                    outputLottoList.add(outputLotto);
+
             }else if(score==4){
                 log.info("라운드" + lotto.getRound());
                 log.info("4등");
                 log.info(score);
+
+                    OutputLotto outputLotto = new OutputLotto();
+
+                    outputLotto.setRound(lotto.getRound());
+                    outputLotto.setWinning(lotto.getFourthWinning());
+                    outputLotto.setPlace("4등");
+
+                    outputLottoList.add(outputLotto);
+
 
             }else if(score==3){
                 log.info("라운드" + lotto.getRound());
                 log.info("5등");
                 log.info(score);
 
+                    OutputLotto outputLotto = new OutputLotto();
+
+                    outputLotto.setRound(lotto.getRound());
+                    outputLotto.setWinning(lotto.getFifthWinning());
+                    outputLotto.setPlace("5등");
+
+                    outputLottoList.add(outputLotto);
+
             }else{
 
             }
 
 
-
         }
 
-        return lottoList;
+        log.info(outputLottoList);
+
+        return outputLottoList;
 
     }
-
-
-
 
 }
