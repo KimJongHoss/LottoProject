@@ -37,13 +37,27 @@ public class LottoService {
 
 
 
-            for(String inputStr : inputArr ){
-                for(String lottoStr : lottoArr){
+            for(String inputStr : inputArr ) { //각 회차별 score 추출
+                for (String lottoStr : lottoArr) {// 각 번호별 맞으면 score에 +1
 
-                    if(inputStr.equals(lottoStr)){
-                        score+=1;
+                    if (inputStr.equals(lottoStr)) {
+                        score += 1;
                         continue;
+                    }
+                    }
 
+            }
+
+            if (score == 5) {
+                log.info(score);
+                log.info(lotto.getNo7());
+                log.info(lotto);
+                for(String inputStr : inputArr ) {
+                    log.info(lotto.getNo7() + " for문 안에 들어옴: 2등보너스 번호");
+                    log.info(inputStr + " for문 안에 들어옴: 입력한 번호");
+                    if (inputStr.equals(lotto.getNo7())) {
+                        log.info(lotto.getNo7() + "if문 안에 들어옴");
+                        score += 10;
                     }
                 }
 
@@ -52,11 +66,19 @@ public class LottoService {
             if(score>10){
                 log.info("2등");
                 log.info("라운드" + lotto.getRound());
-
+//                @Autowired
+//                OutputLotto outputLotto
+//                outputLotto.setWining( =lotto.getSecondWinning());
+//                outputLotto.setWinner("2등");
+//
+//
+//                List<OutputLotto> list =
+//                lotto.getRound();
                 log.info(score);
 
 
-            }else if(score==6){
+            }else
+                if(score==6){
                 log.info("라운드" + lotto.getRound());
 
                 log.info("1등");
@@ -64,11 +86,9 @@ public class LottoService {
 
 
             }else if(score==5){
-                log.info("라운드" + lotto.getRound());
-
-                log.info("3등");
-                log.info(score);
-
+                    log.info("라운드" + lotto.getRound());
+                    log.info("3등");
+                    log.info(score);
 
             }else if(score==4){
                 log.info("라운드" + lotto.getRound());
