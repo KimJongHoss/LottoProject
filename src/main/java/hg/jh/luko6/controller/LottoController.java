@@ -51,9 +51,9 @@ public class LottoController {
 
 
         log.info(OutputLottoList);
-        log.info("리버스 전후@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@리버스 전후@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-        Collections.reverse(OutputLottoList);
-        log.info(OutputLottoList);
+//        log.info("리버스 전후@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@리버스 전후@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+//        Collections.reverse(OutputLottoList);
+//        log.info(OutputLottoList);
 
         log.info("누적금액 : "+totalWinning);
 
