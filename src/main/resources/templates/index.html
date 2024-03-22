@@ -1,10 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>로또 번호 입력</title>
 </head>
 <body>
-
+<h1>로또 번호 입력</h1>
+<!-- action에는 서버의 URL을 넣으세요. method="post"는 입력 데이터를 서버로 보내는 방식입니다. -->
+<form action="/getLotto" method="post">
+    <!-- 각 input 필드에는 name 속성이 있어야 서버에서 식별 가능합니다. -->
+    <div><label for="num1">번호 1:</label><input type="number" id="num1" name="num1" min="1" max="45" required /></div>
+    <div><label for="num2">번호 2:</label><input type="number" id="num2" name="num2" min="1" max="45" required /></div>
+    <div><label for="num3">번호 3:</label><input type="number" id="num3" name="num3" min="1" max="45" required /></div>
+    <div><label for="num4">번호 4:</label><input type="number" id="num4" name="num4" min="1" max="45" required /></div>
+    <div><label for="num5">번호 5:</label><input type="number" id="num5" name="num5" min="1" max="45" required /></div>
+    <div><label for="num6">번호 6:</label><input type="number" id="num6" name="num6" min="1" max="45" required /></div>
+    <!-- 제출 버튼 -->
+    <div><button type="submit">제출</button></div>
+</form>
 </body>
 </html>
