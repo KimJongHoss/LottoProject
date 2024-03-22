@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -32,11 +33,11 @@ public class LottoController {
 
         List<OutputLotto> OutputLottoList = lottoService.LottoAll(inputLotto);//가공된 데이터만 담겨있는 리스트 가져오기
 
-        int totalWinning = 0;
+        Long totalWinning = 0L;
 
         for(OutputLotto outputLotto : OutputLottoList){//누적 금액 생성
 
-            int winningCal = Integer.parseInt(outputLotto.getWinning());
+            Long winningCal = Long.valueOf((outputLotto.getWinning()));
 
             log.info("회차"+outputLotto.getRound() + "당첨금 : "+winningCal);
 
@@ -46,6 +47,13 @@ public class LottoController {
             log.info("회차"+outputLotto.getRound() + "누적 금액 :"+totalWinning);
 
         }
+
+
+
+        log.info(OutputLottoList);
+        log.info("리버스 전후@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@리버스 전후@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        Collections.reverse(OutputLottoList);
+        log.info(OutputLottoList);
 
         log.info("누적금액 : "+totalWinning);
 
