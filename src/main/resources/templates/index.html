@@ -3,11 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>로또 번호 입력</title>
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
 </head>
 <body>
 <h1>로또 번호 입력</h1>
 <!-- action에는 서버의 URL을 넣으세요. method="post"는 입력 데이터를 서버로 보내는 방식입니다. -->
-<form action="/getLotto" method="post">
+    <span>누적 금액: </span>
+    <div id="totalWinning"></div>
+
     <!-- 각 input 필드에는 name 속성이 있어야 서버에서 식별 가능합니다. -->
     <div><label for="num1">번호 1:</label><input type="number" id="num1" name="num1" min="1" max="45" required /></div>
     <div><label for="num2">번호 2:</label><input type="number" id="num2" name="num2" min="1" max="45" required /></div>
@@ -16,7 +23,92 @@
     <div><label for="num5">번호 5:</label><input type="number" id="num5" name="num5" min="1" max="45" required /></div>
     <div><label for="num6">번호 6:</label><input type="number" id="num6" name="num6" min="1" max="45" required /></div>
     <!-- 제출 버튼 -->
-    <div><button type="submit">제출</button></div>
-</form>
+    <div><button onclick="lottoResult()">결과 보기</button></div>
+    <br>
+    <span>&lt;당첨된 회차 목록&gt;</span>
+    <ul id="resultList"></ul>
+
+<button id="kakao-share-button">카카오톡으로 공유하기</button>
+
+<script>
+    // 카카오톡 공유하기 기능
+    document.getElementById('kakao-share-button').addEventListener('click', function() {
+        Kakao.Link.sendDefault({
+            objectType: 'feed',
+            content: {
+                title: '1회차부터 지금까지 당신의 로또당첨금액은? 확인해보세요',
+                description: '똑같은 번호로 로또를 20여년동안 샀을 때 !',
+                imageUrl: 'https://dimg.donga.com/wps/NEWS/IMAGE/2023/11/25/122348638.2.jpg',  // 최대 500px * 500px
+                link: {
+                    mobileWebUrl: '웹사이트 URL',
+                    webUrl: '웹사이트 URL'
+                }
+            }
+        });
+    });
+</script>
+
+<script>
+    Kakao.init('cdd687b8d3ebcd08a63998adc198823f'); // 여기에 JavaScript 키를 입력합니다.
+</script>
 </body>
+<script>
+
+    const resultListElement = document.getElementById("resultList");
+
+    const lottoResult = () => {
+        const num1 = document.getElementById("num1").value;
+        const num2 = document.getElementById("num2").value;
+        const num3 = document.getElementById("num3").value;
+        const num4 = document.getElementById("num4").value;
+        const num5 = document.getElementById("num5").value;
+        const num6 = document.getElementById("num6").value;
+
+        const params = {
+            "num1": num1,
+            "num2": num2,
+            "num3": num3,
+            "num4": num4,
+            "num5": num5,
+            "num6": num6
+
+        }
+
+        $.ajax({
+            //     요청 방식: post
+            //     요청 주소: /lottoResult
+            type: "post",
+            url: "/lottoResult",
+            //parameter 전달하기
+            contentType: "application/json",
+            data: JSON.stringify(params),
+            // 요청이 성공햇을 때 실행되는 부분
+            success: function (res){
+                console.log("성공", res);
+                document.getElementById("totalWinning").innerText = res.totalWinning +"원";
+                resultListElement.innerHTML = "<li>" + res.totalWinning + "</li>";
+
+                // 기존 내용 비우기
+                resultListElement.innerHTML = "";
+
+                // 리스트 순회 및 출력
+                res.OutputLottoList.forEach(function(outputLotto) {
+                    const listItem = document.createElement("li");
+                    listItem.textContent = "회차: " + outputLotto.round + "회" + ", 당첨금: " + outputLotto.winning + "원" + ", 등수: " + outputLotto.place;
+                    resultListElement.appendChild(listItem);
+                });
+
+                },
+            //요청이 실패했을 때 실행되는 부분
+            error: function () {
+                console.log("실패");
+            }
+
+
+
+        })
+
+    }
+
+</script>
 </html>
