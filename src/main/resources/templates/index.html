@@ -5,6 +5,9 @@
     <title>로또 번호 입력</title>
     <!-- jQuery CDN -->
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
 </head>
 <body>
 <h1>로또 번호 입력</h1>
@@ -24,6 +27,30 @@
     <br>
     <span>&lt;당첨된 회차 목록&gt;</span>
     <ul id="resultList"></ul>
+
+<button id="kakao-share-button">카카오톡으로 공유하기</button>
+
+<script>
+    // 카카오톡 공유하기 기능
+    document.getElementById('kakao-share-button').addEventListener('click', function() {
+        Kakao.Link.sendDefault({
+            objectType: 'feed',
+            content: {
+                title: '1회차부터 지금까지 당신의 로또당첨금액은? 확인해보세요',
+                description: '똑같은 번호로 로또를 20여년동안 샀을 때 !',
+                imageUrl: 'https://dimg.donga.com/wps/NEWS/IMAGE/2023/11/25/122348638.2.jpg',  // 최대 500px * 500px
+                link: {
+                    mobileWebUrl: '웹사이트 URL',
+                    webUrl: '웹사이트 URL'
+                }
+            }
+        });
+    });
+</script>
+
+<script>
+    Kakao.init('cdd687b8d3ebcd08a63998adc198823f'); // 여기에 JavaScript 키를 입력합니다.
+</script>
 </body>
 <script>
 
