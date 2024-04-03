@@ -5,6 +5,9 @@ import hg.jh.luko6.entity.InputLotto;
 import hg.jh.luko6.entity.Lotto;
 import hg.jh.luko6.entity.OutputLotto;
 import hg.jh.luko6.service.LottoService;
+import hg.jh.luko6.service.VisitStatsService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
@@ -25,9 +28,13 @@ import java.util.Map;
 public class LottoController {
 
     private final LottoService lottoService;
+    private  final VisitStatsService visitStatsService;
 
     @GetMapping("/")
-    public String index(){
+    public String index(HttpServletRequest request
+            , HttpServletResponse response){
+        visitStatsService.incrementVisitorCount(request, response);
+
         log.info("index로 갑니당");
         return "index";
     }
