@@ -2,6 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+    <meta name="_csrf" th:content="${_csrf.token}">
     <title>로또 번호 입력</title>
     <!-- jQuery CDN -->
     <script src="/jquery-3.7.1.min.js"></script>
@@ -74,11 +76,17 @@
 
         }
 
+        var header = $("meta[name='_csrf_header']").attr('content');
+        var token = $("meta[name='_csrf']").attr('content');
+
         $.ajax({
             //     요청 방식: post
             //     요청 주소: /lottoResult
             type: "post",
             url: "/lottoResult",
+            beforeSend: function(xhr){
+                xhr.setRequestHeader(header, token);
+            },
             //parameter 전달하기
             contentType: "application/json",
             data: JSON.stringify(params),
@@ -103,7 +111,6 @@
             error: function () {
                 console.log("실패");
             }
-
 
 
         })
