@@ -28,6 +28,9 @@ dependencies {
     testAnnotationProcessor("org.projectlombok:lombok")
     implementation("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.1.0")
     implementation ("org.springframework.boot:spring-boot-starter-validation")
+    implementation("mysql:mysql-connector-java:8.0.28")
+    implementation("org.springframework.boot:spring-boot-starter-security")
+
 
 }
 
