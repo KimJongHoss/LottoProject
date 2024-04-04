@@ -31,8 +31,7 @@ dependencies {
     implementation("mysql:mysql-connector-java:8.0.28")
     implementation("org.springframework.boot:spring-boot-starter-security")
     //swagger 관련 의존성 주입
-    implementation("io.springfox:springfox-swagger2:2.9.2")
-    implementation("io.springfox:springfox-swagger-ui:2.9.2")
+    implementation ("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
 
 }
 
