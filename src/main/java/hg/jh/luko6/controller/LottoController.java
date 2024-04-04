@@ -4,23 +4,20 @@ package hg.jh.luko6.controller;
 import hg.jh.luko6.entity.InputLotto;
 import hg.jh.luko6.entity.Lotto;
 import hg.jh.luko6.entity.OutputLotto;
+import hg.jh.luko6.entity.VisitStats;
+import hg.jh.luko6.repository.VisitStatsRepository;
 import hg.jh.luko6.service.LottoService;
 import hg.jh.luko6.service.VisitStatsService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @Log4j2
@@ -29,14 +26,23 @@ public class LottoController {
 
     private final LottoService lottoService;
     private  final VisitStatsService visitStatsService;
+    @Autowired
+    private VisitStatsRepository visitStatsRepository;
+
 
     @GetMapping("/")
-    public String index(HttpServletRequest request
+    @ResponseBody
+    public VisitStats index(HttpServletRequest request
             , HttpServletResponse response){
         visitStatsService.incrementVisitorCount(request, response);
+        Optional<VisitStats> optionalVisitStats = visitStatsRepository.findById(1L);
+        VisitStats visitStats = optionalVisitStats.get();
+        Long userCount = visitStats.getUserCount();
+        log.info("이용자수: "+userCount+"명");
+
 
         log.info("index로 갑니당");
-        return "index";
+        return optionalVisitStats.orElse(null);
     }
 
 //    @PostMapping("/getLotto")
@@ -76,6 +82,7 @@ public class LottoController {
 //
 //    }
 
+
     @PostMapping("/lottoResult")
     public @ResponseBody Map<String, Object> getLotto(@RequestBody InputLotto inputLotto){
 
@@ -86,6 +93,9 @@ public class LottoController {
         log.info("4번 : "+inputLotto.getNum4());
         log.info("5번 : "+inputLotto.getNum5());
         log.info("6번 : "+inputLotto.getNum6());
+
+
+
 
 
         List<OutputLotto> OutputLottoList = lottoService.LottoAll(inputLotto);//가공된 데이터만 담겨있는 리스트 가져오기
@@ -114,9 +124,30 @@ public class LottoController {
 
         log.info("누적금액 : "+totalWinning);
 
+        // VisitStats 테이블에서 id가 1인 레코드 조회
+        Optional<VisitStats> optionalVisitStats = visitStatsRepository.findById(1L);
+
         Map<String, Object> lottoMap = new HashMap<>();
         lottoMap.put("OutputLottoList", OutputLottoList);
         lottoMap.put("totalWinning", totalWinning);
+//       로직이 돌아가면 이용자수에 +1하기
+
+        if (optionalVisitStats.isPresent()) {
+            VisitStats visitStats = optionalVisitStats.get();
+            if (OutputLottoList != null) {
+
+
+                visitStats.addUserCount();//1증가시키는 메서드 호출
+                visitStatsRepository.save(visitStats);
+                log.info(visitStats);
+
+
+            }
+            lottoMap.put("usercount", visitStats.getUserCount());
+        }
+        log.info("로또 맵:"+lottoMap);
+
+
         return lottoMap;
 
     }

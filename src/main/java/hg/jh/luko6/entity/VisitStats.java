@@ -17,4 +17,15 @@ public class VisitStats {
 
     private Long visitorCount;
     private Long userCount;
+
+//    userCount를 추가하는 메서드
+    public void addUserCount(){
+        if (userCount != null){
+            userCount++;
+        }else{
+            userCount = 1L;
+        }
+    }
+
+
 }
