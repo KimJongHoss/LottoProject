@@ -31,12 +31,15 @@ public class LottoController {
 
 
     @GetMapping("/")
-    @ResponseBody
-    public VisitStats index(HttpServletRequest request
+//    @ResponseBody//협업용
+//    public VisitStats index(HttpServletRequest request//협업용
+//            , HttpServletResponse response){//협업용
+    public String index(HttpServletRequest request
             , HttpServletResponse response){
 
+
 //        방문자수
-        Long visitorCount = visitStatsService.getVisitorCount(request);
+        Long visitorCount = visitStatsService.getVisitorCount(request, response);
 
 
         log.info("방문자수: "+visitorCount+"명");
@@ -49,7 +52,8 @@ public class LottoController {
         log.info("이용자수: "+userCount+"명");
 
         log.info("index로 갑니당");
-        return optionalVisitStats.orElse(null);
+//        return optionalVisitStats.orElse(null);
+        return "index";
     }
 
 //    @PostMapping("/getLotto")
