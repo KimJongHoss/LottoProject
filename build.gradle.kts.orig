@@ -30,8 +30,13 @@ dependencies {
     implementation ("org.springframework.boot:spring-boot-starter-validation")
     implementation("mysql:mysql-connector-java:8.0.28")
     implementation("org.springframework.boot:spring-boot-starter-security")
+<<<<<<< HEAD
 
+
+=======
+    //swagger 관련 의존성 주입
     implementation ("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
+>>>>>>> 1a25a1fe9e8cbcffaa2603a9235e25c28ac33c13
 
 }
 

@@ -31,6 +31,7 @@ public class LottoService {
         List<Lotto> lottoList = lottoRepository.findAll(Sort.by(Sort.Direction.DESC, "round"));
 
 
+
         List<OutputLotto> outputLottoList = new ArrayList<>();
 
         String[] inputArr = new String[]{inputLotto.getNum1()+"",inputLotto.getNum2()+"",inputLotto.getNum3()+"",inputLotto.getNum4()+"",inputLotto.getNum5()+"",inputLotto.getNum6()+""};
