@@ -27,5 +27,13 @@ public class VisitStats {
         }
     }
 
+    public void addVisitorCount(){
+        if (visitorCount != null){
+            visitorCount++;
+        }else{
+            visitorCount = 1L;
+        }
+    }
+
 
 }

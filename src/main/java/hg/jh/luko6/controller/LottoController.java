@@ -34,12 +34,19 @@ public class LottoController {
     @ResponseBody
     public VisitStats index(HttpServletRequest request
             , HttpServletResponse response){
-        visitStatsService.incrementVisitorCount(request, response);
-        Optional<VisitStats> optionalVisitStats = visitStatsRepository.findById(1L);
-        VisitStats visitStats = optionalVisitStats.get();
+
+//        방문자수
+        Long visitorCount = visitStatsService.getVisitorCount(request);
+
+
+        log.info("방문자수: "+visitorCount+"명");
+
+
+//        이용자수
+        Optional<VisitStats> optionalVisitStats = visitStatsRepository.findById(1L);//visitStats에 있는 id가 1인 컬럼을 불러온다
+        VisitStats visitStats = optionalVisitStats.get();//optional은 값이 존재한다면 반환, 없을 경우 NoSuchElementException 발생
         Long userCount = visitStats.getUserCount();
         log.info("이용자수: "+userCount+"명");
-
 
         log.info("index로 갑니당");
         return optionalVisitStats.orElse(null);
@@ -137,7 +144,7 @@ public class LottoController {
             if (OutputLottoList != null) {
 
 
-                visitStats.addUserCount();//1증가시키는 메서드 호출
+                visitStats.addUserCount();//사용자수 1증가시키는 메서드 호출
                 visitStatsRepository.save(visitStats);
                 log.info(visitStats);
 
