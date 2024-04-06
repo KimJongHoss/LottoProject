@@ -72,6 +72,12 @@
         <div><label for="num4">번호 4:</label><input type="number" id="num4" name="num4" min="1" max="45" required /></div>
         <div><label for="num5">번호 5:</label><input type="number" id="num5" name="num5" min="1" max="45" required /></div>
         <div><label for="num6">번호 6:</label><input type="number" id="num6" name="num6" min="1" max="45" required /></div>
+
+        <div class="divider-custom divider-light">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
         <br>
         <!-- 제출 버튼 -->
 
@@ -80,6 +86,9 @@
             랜덤 뽑기
         </button>
 
+        <br>
+
+
         <button class="btn btn-light" data-bs-dismiss="modal" onclick="reset()">
             <!--            <i class="fas fa-xmark fa-fw"></i>-->
             초기화
@@ -87,23 +96,14 @@
 
         <script>
             function reset() {
-                const totalNumbers = 45;
-                const amount = 6;
-                let numbers = [];
-
-                // 중복 없이 숫자 생성
-                while(numbers.length < amount) {
-                    let n = Math.floor(Math.random() * totalNumbers) + 1;
-                    if(numbers.indexOf(n) === -1) numbers.push(n);
-                }
 
                 // 생성된 숫자를 각 입력 필드에 할당
-                document.getElementById("num1").value = numbers[0];
-                document.getElementById("num2").value = numbers[1];
-                document.getElementById("num3").value = numbers[2];
-                document.getElementById("num4").value = numbers[3];
-                document.getElementById("num5").value = numbers[4];
-                document.getElementById("num6").value = numbers[5];
+                document.getElementById("num1").value = "";
+                document.getElementById("num2").value = "";
+                document.getElementById("num3").value = "";
+                document.getElementById("num4").value = "";
+                document.getElementById("num5").value = "";
+                document.getElementById("num6").value = "";
             }
 
         </script>
@@ -595,6 +595,19 @@
         const num4 = document.getElementById("num4").value;
         const num5 = document.getElementById("num5").value;
         const num6 = document.getElementById("num6").value;
+
+        const numbers = [num1, num2, num3, num4, num5, num6].map(Number); // 문자열을 숫자로 변환
+
+        // 유효성 검사: 모든 번호가 1~45 범위 내에 있는지 확인
+        const isValidRange = numbers.every(num => num >= 1 && num <= 45);
+
+        // 유효성 검사: 중복된 번호가 없는지 확인
+        const isUnique = numbers.length === new Set(numbers).size;
+
+        if (!isValidRange || !isUnique) {
+            alert("번호는 1부터 45 사이여야 하며, 중복될 수 없습니다.");
+            return; // 유효하지 않으면 여기서 함수 실행을 중단
+        }
 
         const params = {
             "num1": num1,
