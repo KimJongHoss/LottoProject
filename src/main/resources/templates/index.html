@@ -29,6 +29,12 @@
     text-align: center; /* 가운데 정렬 */
     font-size: 24px; /* 글자 크기 조정, 원하는 크기로 조절 가능 */
     }
+
+    #ranking {
+        text-align: center; /* 가운데 정렬 */
+        font-size: 24px; /* 글자 크기 조정, 원하는 크기로 조절 가능 */
+
+    }
     </style>
 </head>
 <body id="page-top">
@@ -157,6 +163,7 @@
         <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">누적 금액 </h2>
         <!-- Icon Divider-->
         <div id="totalWinning"></div>
+        <div id="ranking"></div>
 
 
 
@@ -640,6 +647,7 @@
             // 요청이 성공햇을 때 실행되는 부분
             success: function (res){
                 console.log("성공", res);
+                document.getElementById("ranking").innerText="상위 " + res.Ranking +"%";
                 document.getElementById("totalWinning").innerText = res.totalWinning +"원";
                 resultListElement.innerHTML = "<li>" + res.totalWinning + "</li>";
 

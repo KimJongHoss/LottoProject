@@ -1,10 +1,7 @@
 package hg.jh.luko6.controller;
 
 
-import hg.jh.luko6.entity.InputLotto;
-import hg.jh.luko6.entity.Lotto;
-import hg.jh.luko6.entity.OutputLotto;
-import hg.jh.luko6.entity.VisitStats;
+import hg.jh.luko6.entity.*;
 import hg.jh.luko6.repository.VisitStatsRepository;
 import hg.jh.luko6.service.LottoService;
 import hg.jh.luko6.service.VisitStatsService;
@@ -28,6 +25,8 @@ public class LottoController {
     private  final VisitStatsService visitStatsService;
     @Autowired
     private VisitStatsRepository visitStatsRepository;
+
+
 
 
     @GetMapping("/")
@@ -138,7 +137,28 @@ public class LottoController {
         // VisitStats 테이블에서 id가 1인 레코드 조회
         Optional<VisitStats> optionalVisitStats = visitStatsRepository.findById(1L);
 
+
+
+
+        lottoService.addPercentage(totalWinning);
+        lottoService.calculatePercentage(totalWinning);
+        log.info("////////////////////////////////");
+        log.info("상위"+((int)(lottoService.calculatePercentage(totalWinning)*100))+"%");
+        log.info("////////////////////////////////");
+
+        int Ranking = ((int)(lottoService.calculatePercentage(totalWinning)*100));
+
         Map<String, Object> lottoMap = new HashMap<>();
+
+        lottoMap.put("Ranking",Ranking);
+
+
+
+
+
+
+
+
         lottoMap.put("OutputLottoList", OutputLottoList);
         lottoMap.put("totalWinning", totalWinning);
 //       로직이 돌아가면 이용자수에 +1하기
