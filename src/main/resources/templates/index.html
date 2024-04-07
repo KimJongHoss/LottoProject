@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Freelancer - Start Bootstrap Theme</title>
+    <title>1회부터 지금까지 로또를 샀다면?</title>
     <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="assets/lucoFavicon.png" />
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
@@ -145,6 +145,13 @@
         </button>
         </div>
         <br>
+
+
+
+        <span>&lt;누적 금액&gt;</span>
+        <div id="totalWinning"></div>
+        <span>&lt;내 누적 금액의 상위 랭크&gt;</span>
+        <div id="ranking"></div>
         <span>&lt;당첨된 회차 목록&gt;</span>
         <ul id="resultList"></ul>
 
@@ -160,10 +167,9 @@
 <section class="page-section portfolio" id="portfolio">
     <div class="container">
         <!-- Portfolio Section Heading-->
-        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">누적 금액 </h2>
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">내가 이만큼 당첨 받는다면? </h2>
         <!-- Icon Divider-->
-        <div id="totalWinning"></div>
-        <div id="ranking"></div>
+
 
 
 
@@ -374,7 +380,7 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <!-- Portfolio Modal - Title-->
-                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Log Cabin</h2>
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">통나무 집</h2>
                             <!-- Icon Divider-->
                             <div class="divider-custom">
                                 <div class="divider-custom-line"></div>
@@ -384,10 +390,12 @@
                             <!-- Portfolio Modal - Image-->
                             <img class="img-fluid rounded mb-5" src="assets/img/portfolio/cabin.png" alt="..." />
                             <!-- Portfolio Modal - Text-->
-                            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                            <p class="mb-4">통나무 집의 평균 가격은 450만원입니다.</p>
+                            <p class="mb-4">해당 누적 금액으로 살 수 있는 통나무 집의 개수는 <span id="logCabin"></span>입니다.</p>
+
                             <button class="btn btn-primary" data-bs-dismiss="modal">
                                 <i class="fas fa-xmark fa-fw"></i>
-                                Close Window
+                                창 닫기
                             </button>
                         </div>
                     </div>
@@ -406,7 +414,7 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <!-- Portfolio Modal - Title-->
-                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Tasty Cake</h2>
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">스벅 초코 케이크 한 조각</h2>
                             <!-- Icon Divider-->
                             <div class="divider-custom">
                                 <div class="divider-custom-line"></div>
@@ -416,10 +424,11 @@
                             <!-- Portfolio Modal - Image-->
                             <img class="img-fluid rounded mb-5" src="assets/img/portfolio/cake.png" alt="..." />
                             <!-- Portfolio Modal - Text-->
-                            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                            <p class="mb-4">스벅 초코 케이크 한 조각의 가격은 5,900원입니다.</p>
+                            <p class="mb-4">해당 누적 금액으로 살 수 있는 스벅 초코 케이크 한 조각의 개수는 <span id="cochoCake"></span>입니다.</p>
                             <button class="btn btn-primary" data-bs-dismiss="modal">
                                 <i class="fas fa-xmark fa-fw"></i>
-                                Close Window
+                                창 닫기
                             </button>
                         </div>
                     </div>
@@ -438,7 +447,7 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <!-- Portfolio Modal - Title-->
-                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Circus Tent</h2>
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">서커스 텐트</h2>
                             <!-- Icon Divider-->
                             <div class="divider-custom">
                                 <div class="divider-custom-line"></div>
@@ -448,10 +457,11 @@
                             <!-- Portfolio Modal - Image-->
                             <img class="img-fluid rounded mb-5" src="assets/img/portfolio/circus.png" alt="..." />
                             <!-- Portfolio Modal - Text-->
-                            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                            <p class="mb-4">서커스 텐트 1대의 가격은 74만 8천원입니다.</p>
+                            <p class="mb-4">해당 누적 금액으로 살 수 있는 서커스 텐트의 개수는 <span id="circusTent"></span>입니다.</p>
                             <button class="btn btn-primary" data-bs-dismiss="modal">
                                 <i class="fas fa-xmark fa-fw"></i>
-                                Close Window
+                                창 닫기
                             </button>
                         </div>
                     </div>
@@ -470,7 +480,7 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <!-- Portfolio Modal - Title-->
-                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Controller</h2>
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">게임 컨트롤러</h2>
                             <!-- Icon Divider-->
                             <div class="divider-custom">
                                 <div class="divider-custom-line"></div>
@@ -480,10 +490,11 @@
                             <!-- Portfolio Modal - Image-->
                             <img class="img-fluid rounded mb-5" src="assets/img/portfolio/game.png" alt="..." />
                             <!-- Portfolio Modal - Text-->
-                            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                            <p class="mb-4">게임 컨트롤러 1개의 평균 가격은 45,050원입니다.</p>
+                            <p class="mb-4">해당 누적 금액으로 살 수 있는 게임 컨트롤러의 개수는 <span id="gameController"></span>입니다.</p>
                             <button class="btn btn-primary" data-bs-dismiss="modal">
                                 <i class="fas fa-xmark fa-fw"></i>
-                                Close Window
+                                창 닫기
                             </button>
                         </div>
                     </div>
@@ -512,10 +523,11 @@
                             <!-- Portfolio Modal - Image-->
                             <img class="img-fluid rounded mb-5" src="assets/img/portfolio/safe.png" alt="..." />
                             <!-- Portfolio Modal - Text-->
-                            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                            <p class="mb-4">금고 1개의 평균 가격은 114만4천원입니다.</p>
+                            <p class="mb-4">해당 누적 금액으로 살 수 있는 금고의 개수는 <span id="lockedSafed"></span>입니다.</p>
                             <button class="btn btn-primary" data-bs-dismiss="modal">
                                 <i class="fas fa-xmark fa-fw"></i>
-                                Close Window
+                                창 닫기
                             </button>
                         </div>
                     </div>
@@ -534,7 +546,7 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <!-- Portfolio Modal - Title-->
-                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Submarine</h2>
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">잠수함</h2>
                             <!-- Icon Divider-->
                             <div class="divider-custom">
                                 <div class="divider-custom-line"></div>
@@ -544,14 +556,101 @@
                             <!-- Portfolio Modal - Image-->
                             <img class="img-fluid rounded mb-5" src="assets/img/portfolio/submarine.png" alt="..." />
                             <!-- Portfolio Modal - Text-->
-                            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                            <p class="mb-4">잠수함 1개의 평균 가격은 1조 4천억원입니다.</p>
+                            <p class="mb-4">해당 누적 금액으로 살 수 있는 잠수함의 개수는 <span id="submarine"></span>입니다.</p>
                             <button class="btn btn-primary" data-bs-dismiss="modal">
                                 <i class="fas fa-xmark fa-fw"></i>
-                                Close Window
+                                창닫기
                             </button>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 결과보기를 누르기 전에 나오는 모달창-->
+<!-- Placeholder Modal -->
+<div class="portfolio-modal modal fade" id="placeholderModal1" tabindex="-1" aria-labelledby="placeholderModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <h2 class="mb-4">결과보기를 먼저 실행해주세요</h2>
+                <button class="btn btn-primary" data-bs-dismiss="modal">
+                    <i class="fas fa-xmark fa-fw"></i>
+                    창 닫기
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Placeholder Modal -->
+<div class="portfolio-modal modal fade" id="placeholderModal2" tabindex="-1" aria-labelledby="placeholderModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <h2 class="mb-4">결과보기를 먼저 실행해주세요</h2>
+                <button class="btn btn-primary" data-bs-dismiss="modal">
+                    <i class="fas fa-xmark fa-fw"></i>
+                    창 닫기
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Placeholder Modal -->
+<div class="portfolio-modal modal fade" id="placeholderModal3" tabindex="-1" aria-labelledby="placeholderModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <h2 class="mb-4">결과보기를 먼저 실행해주세요</h2>
+                <button class="btn btn-primary" data-bs-dismiss="modal">
+                    <i class="fas fa-xmark fa-fw"></i>
+                    창 닫기
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Placeholder Modal -->
+<div class="portfolio-modal modal fade" id="placeholderModal4" tabindex="-1" aria-labelledby="placeholderModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <h2 class="mb-4">결과보기를 먼저 실행해주세요</h2>
+                <button class="btn btn-primary" data-bs-dismiss="modal">
+                    <i class="fas fa-xmark fa-fw"></i>
+                    창 닫기
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Placeholder Modal -->
+<div class="portfolio-modal modal fade" id="placeholderModal5" tabindex="-1" aria-labelledby="placeholderModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <h2 class="mb-4">결과보기를 먼저 실행해주세요</h2>
+                <button class="btn btn-primary" data-bs-dismiss="modal">
+                    <i class="fas fa-xmark fa-fw"></i>
+                    창 닫기
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Placeholder Modal -->
+<div class="portfolio-modal modal fade" id="placeholderModal6" tabindex="-1" aria-labelledby="placeholderModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <h2 class="mb-4">결과보기를 먼저 실행해주세요</h2>
+                <button class="btn btn-primary" data-bs-dismiss="modal">
+                    <i class="fas fa-xmark fa-fw"></i>
+                    창 닫기
+                </button>
             </div>
         </div>
     </div>
@@ -630,6 +729,15 @@
         // var header = $("meta[name='_csrf_header']").attr('content');
         // var token = $("meta[name='_csrf']").attr('content');
         // ///////////////////////////////////
+
+        // Ajax 요청이 실패하거나 아직 요청이 완료되지 않았을 때 모달을 숨기는 기능
+        $('#portfolioModal1').modal('hide');
+        $('#portfolioModal2').modal('hide');
+        $('#portfolioModal3').modal('hide');
+        $('#portfolioModal4').modal('hide');
+        $('#portfolioModal5').modal('hide');
+        $('#portfolioModal6').modal('hide');
+
         $.ajax({
             //     요청 방식: post
             //     요청 주소: /lottoResult
@@ -645,17 +753,32 @@
             contentType: "application/json",
             data: JSON.stringify(params),
             // 요청이 성공햇을 때 실행되는 부분
-            success: function (res){
+            success: function (res) {
                 console.log("성공", res);
-                document.getElementById("ranking").innerText="상위 " + res.Ranking +"%";
-                document.getElementById("totalWinning").innerText = res.totalWinning +"원";
+                // Ajax 요청이 성공해야 모달창 뜨는 기능
+                $('#portfolioModal1').modal('show');
+                $('#portfolioModal2').modal('show');
+                $('#portfolioModal3').modal('show');
+                $('#portfolioModal4').modal('show');
+                $('#portfolioModal5').modal('show');
+                $('#portfolioModal6').modal('show');
+                // 데이터 추가
+                document.getElementById("ranking").innerText = "상위 " + res.Ranking + "%";
+                document.getElementById("totalWinning").innerText = res.totalWinning + "원";
+                document.getElementById("logCabin").innerText = res.logCabin + "채";
+                document.getElementById("cochoCake").innerText = res.cochoCake + "개";
+                document.getElementById("circusTent").innerText = res.circusTent + "대";
+                document.getElementById("gameController").innerText = res.gameController + "개";
+                document.getElementById("lockedSafed").innerText = res.lockedSafed + "개";
+                document.getElementById("submarine").innerText = res.submarine + "대";
+
                 resultListElement.innerHTML = "<li>" + res.totalWinning + "</li>";
 
                 // 기존 내용 비우기
                 resultListElement.innerHTML = "";
 
                 // 리스트 순회 및 출력
-                res.OutputLottoList.forEach(function(outputLotto) {
+                res.OutputLottoList.forEach(function (outputLotto) {
                     const listItem = document.createElement("li");
                     listItem.textContent = "회차: " + outputLotto.round + "회" + ", 당첨금: " + outputLotto.winning + "원" + ", 등수: " + outputLotto.place;
                     resultListElement.appendChild(listItem);
@@ -665,6 +788,15 @@
             //요청이 실패했을 때 실행되는 부분
             error: function () {
                 console.log("실패");
+            },
+            complete: function () {
+                // Ajax 요청이 완료되면 Placeholder 모달 닫기
+                $('#placeholderModal1').modal('hide');
+                $('#placeholderModal2').modal('hide');
+                $('#placeholderModal3').modal('hide');
+                $('#placeholderModal4').modal('hide');
+                $('#placeholderModal5').modal('hide');
+                $('#placeholderModal6').modal('hide');
             }
 
 
