@@ -52,17 +52,11 @@ public class LottoController {
         Optional<VisitStats> optionalVisitStats = visitStatsRepository.findById(1L);//visitStats에 있는 id가 1인 컬럼을 불러온다
         VisitStats visitStats = optionalVisitStats.get();//optional은 값이 존재한다면 반환, 없을 경우 NoSuchElementException 발생
         Long userCount = visitStats.getUserCount();
-        log.info("이용자수: "+userCount+"명");
+
 
         log.info("index로 갑니당");
 //        return optionalVisitStats.orElse(null);
-        statsMap.put("visitorCount", visitorCount);
-        statsMap.put("userCount", userCount);
 
-        model.addAttribute("stats", statsMap);
-
-        log.info("맵에 있는 데이터"+statsMap);
-        log.info("모델 데이터"+model);
         return "index";
     }
 
@@ -221,9 +215,7 @@ public class LottoController {
             lottoMap.put("usercount", visitStats.getUserCount());
         }
 
-
         log.info("로또 맵:"+lottoMap);
-
 
         return lottoMap;
 

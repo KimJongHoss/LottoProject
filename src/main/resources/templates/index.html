@@ -472,22 +472,10 @@
 </footer>
 <!-- Copyright Section-->
 <div class="copyright py-4 text-center text-white">
-    <div class="container">
-        <span id="visitorCount"></span>
-        <span id="userCount"></span>
-    </div>
 
     <div class="container"><small>Copyright &copy; luco777 2024</small></div>
 
 
-    <script>
-        // 컨트롤러에서 전달한 맵을 JavaScript로 받아와서 처리
-        var data = stats;
-
-        // 각 데이터를 가져와서 화면에 출력
-        document.getElementById("visitorCount").innerText = "Visitor Count: " + data.visitorCount;
-        document.getElementById("userCount").innerText = "User Count: " + data.userCount;
-    </script>
 </div>
 
 
@@ -842,15 +830,6 @@
             error: function () {
                 console.log("실패");
             },
-            complete: function () {
-                // Ajax 요청이 완료되면 Placeholder 모달 닫기
-                $('#placeholderModal1').modal('hide');
-                $('#placeholderModal2').modal('hide');
-                $('#placeholderModal3').modal('hide');
-                $('#placeholderModal4').modal('hide');
-                $('#placeholderModal5').modal('hide');
-                $('#placeholderModal6').modal('hide');
-            }
 
 
         })
