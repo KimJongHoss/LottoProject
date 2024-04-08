@@ -1,42 +1,797 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="_csrf_header" th:content="${_csrf.headerName}">
-    <meta name="_csrf" th:content="${_csrf.token}">
-    <title>로또 번호 입력</title>
-    <!-- jQuery CDN -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>1회부터 지금까지 로또를 샀다면?</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/lucoFavicon.png" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
     <script src="/jquery-3.7.1.min.js"></script>
 
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
+
+    로컬환경에서 주석처리하기
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+    <meta name="_csrf" th:content="${_csrf.token}">
+<!--////////////////////////////////////////////////-->
+    <style>
+    #totalWinning {
+    text-align: center; /* 가운데 정렬 */
+    font-size: 24px; /* 글자 크기 조정, 원하는 크기로 조절 가능 */
+    }
+
+    #ranking {
+        text-align: center; /* 가운데 정렬 */
+        font-size: 24px; /* 글자 크기 조정, 원하는 크기로 조절 가능 */
+
+    }
+    </style>
 </head>
-<body>
-<h1>로또 번호 입력</h1>
-<!-- action에는 서버의 URL을 넣으세요. method="post"는 입력 데이터를 서버로 보내는 방식입니다. -->
-    <span>누적 금액: </span>
-    <div id="totalWinning"></div>
 
-    <!-- 각 input 필드에는 name 속성이 있어야 서버에서 식별 가능합니다. -->
-    <div><label for="num1">번호 1:</label><input type="number" id="num1" name="num1" min="1" max="45" required /></div>
-    <div><label for="num2">번호 2:</label><input type="number" id="num2" name="num2" min="1" max="45" required /></div>
-    <div><label for="num3">번호 3:</label><input type="number" id="num3" name="num3" min="1" max="45" required /></div>
-    <div><label for="num4">번호 4:</label><input type="number" id="num4" name="num4" min="1" max="45" required /></div>
-    <div><label for="num5">번호 5:</label><input type="number" id="num5" name="num5" min="1" max="45" required /></div>
-    <div><label for="num6">번호 6:</label><input type="number" id="num6" name="num6" min="1" max="45" required /></div>
-    <!-- 제출 버튼 -->
-    <div><button onclick="lottoResult()">결과 보기</button></div>
+<body id="page-top">
+
+
+
+
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand" href="#page-top">luco777</a>
+        <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#portfolio">상품 목록</a></li>
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#about">팀 설명</a></li>
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#contact">건의사항</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- Masthead-->
+<header class="masthead bg-primary text-white text-center">
+    <div class="container d-flex align-items-center flex-column">
+        <!-- Masthead Avatar Image-->
+        <img class="masthead-avatar mb-5" src="assets/img/lottoprofile.png" alt="..." />
+        <!-- Masthead Heading-->
+        <h1 class="masthead-heading text-uppercase mb-0">로또 번호</h1>
+        <!-- Icon Divider-->
+        <div class="divider-custom divider-light">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+
+
+
+        <!-- 각 input 필드에는 name 속성이 있어야 서버에서 식별 가능합니다. -->
+        <div><label for="num1">번호 1:</label><input type="number" id="num1" name="num1" min="1" max="45" required /></div>
+        <div><label for="num2">번호 2:</label><input type="number" id="num2" name="num2" min="1" max="45" required /></div>
+        <div><label for="num3">번호 3:</label><input type="number" id="num3" name="num3" min="1" max="45" required /></div>
+        <div><label for="num4">번호 4:</label><input type="number" id="num4" name="num4" min="1" max="45" required /></div>
+        <div><label for="num5">번호 5:</label><input type="number" id="num5" name="num5" min="1" max="45" required /></div>
+        <div><label for="num6">번호 6:</label><input type="number" id="num6" name="num6" min="1" max="45" required /></div>
+
+        <div class="divider-custom divider-light">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <br>
+        <!-- 제출 버튼 -->
+
+        <button class="btn btn-light" data-bs-dismiss="modal" onclick="lottoRandomResult()">
+            <!--            <i class="fas fa-xmark fa-fw"></i>-->
+            랜덤 뽑기
+        </button>
+
+        <br>
+
+
+        <button class="btn btn-light" data-bs-dismiss="modal" onclick="reset()">
+            <!--            <i class="fas fa-xmark fa-fw"></i>-->
+            초기화
+        </button>
+
+        <script>
+            function reset() {
+
+                // 생성된 숫자를 각 입력 필드에 할당
+                document.getElementById("num1").value = "";
+                document.getElementById("num2").value = "";
+                document.getElementById("num3").value = "";
+                document.getElementById("num4").value = "";
+                document.getElementById("num5").value = "";
+                document.getElementById("num6").value = "";
+            }
+
+        </script>
+
+        <script>
+            function lottoRandomResult() {
+                const totalNumbers = 45;
+                const amount = 6;
+                let numbers = [];
+
+                // 중복 없이 숫자 생성
+                while(numbers.length < amount) {
+                    let n = Math.floor(Math.random() * totalNumbers) + 1;
+                    if(numbers.indexOf(n) === -1) numbers.push(n);
+                }
+
+                // 생성된 숫자를 각 입력 필드에 할당
+                document.getElementById("num1").value = numbers[0];
+                document.getElementById("num2").value = numbers[1];
+                document.getElementById("num3").value = numbers[2];
+                document.getElementById("num4").value = numbers[3];
+                document.getElementById("num5").value = numbers[4];
+                document.getElementById("num6").value = numbers[5];
+            }
+
+        </script>
+
+        <br>
+
+        <button class="btn btn-light" data-bs-dismiss="modal" onclick="lottoResult()">
+<!--            <i class="fas fa-xmark fa-fw"></i>-->
+            결과 보기
+        </button>
+        </div>
+        <br>
+
+        <span>&lt;누적 금액&gt;</span>
+        <br>
+        <div id="totalWinning"></div>
+        <span>&lt;내 누적 금액의 상위 랭크&gt;</span>
+        <br>
+        <div id="ranking"></div>
+        <span>&lt;당첨된 회차 목록&gt;</span>
+        <br>
+        <ul id="resultList"></ul>
+
+
+    <button class="btn btn-light" id="kakao-share-button">
+        <!--            <i class="fas fa-xmark fa-fw"></i>-->
+        카카오톡으로 공유하기    </button>
+    <!-- Masthead Subheading-->
+
+    </div>
+</header>
+<!-- Portfolio Section-->
+<section class="page-section portfolio" id="portfolio">
+    <div class="container">
+        <!-- Portfolio Section Heading-->
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">내가 이만큼 당첨 받는다면? </h2>
+        <!-- Icon Divider-->
+
+
+
+
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- Portfolio Grid Items-->
+        <div class="row justify-content-center">
+            <!-- Portfolio Item 1-->
+            <div class="col-md-6 col-lg-4 mb-5">
+                <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal1">
+                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                        <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                    </div>
+                    <img class="img-fluid" src="assets/img/portfolio/cabin.png" alt="..." />
+                </div>
+            </div>
+            <!-- Portfolio Item 2-->
+            <div class="col-md-6 col-lg-4 mb-5">
+                <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal2">
+                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                        <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                    </div>
+                    <img class="img-fluid" src="assets/img/portfolio/cake.png" alt="..." />
+                </div>
+            </div>
+            <!-- Portfolio Item 3-->
+            <div class="col-md-6 col-lg-4 mb-5">
+                <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal3">
+                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                        <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                    </div>
+                    <img class="img-fluid" src="assets/img/portfolio/circus.png" alt="..." />
+                </div>
+            </div>
+            <!-- Portfolio Item 4-->
+            <div class="col-md-6 col-lg-4 mb-5 mb-lg-0">
+                <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal4">
+                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                        <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                    </div>
+                    <img class="img-fluid" src="assets/img/portfolio/game.png" alt="..." />
+                </div>
+            </div>
+            <!-- Portfolio Item 5-->
+            <div class="col-md-6 col-lg-4 mb-5 mb-md-0">
+                <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal5">
+                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                        <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                    </div>
+                    <img class="img-fluid" src="assets/img/portfolio/safe.png" alt="..." />
+                </div>
+            </div>
+            <!-- Portfolio Item 6-->
+            <div class="col-md-6 col-lg-4">
+                <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal6">
+                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                        <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                    </div>
+                    <img class="img-fluid" src="assets/img/portfolio/submarine.png" alt="..." />
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</section>
+<!-- About Section-->
+<section class="page-section bg-primary text-white mb-0" id="about" style="text-align: center">
+
+
+
+    <h2>Contact LuCo</h2>
+    <form id="contactForm">
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone">
+        </div>
+        <div>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required></textarea>
+        </div>
+        <button type="submit">Send</button>
+    </form>
+
+    <script>
+        $(document).ready(function(){
+            $("#contactForm").submit(function(event){
+                event.preventDefault(); // Prevent the default form submit action
+
+                var formData = {
+                    name: $("#name").val(),
+                    email: $("#email").val(),
+                    phone: $("#phone").val(),
+                    message: $("#message").val()
+                };
+
+                var header = $("meta[name='_csrf_header']").attr('content');
+                var token = $("meta[name='_csrf']").attr('content');
+
+                $.ajax({
+                    type: "POST",
+                    url: "/sendEmail",
+
+                    beforeSend: function(xhr){
+                        xhr.setRequestHeader(header, token);
+                    },
+
+
+                    contentType: "application/json",
+                    data: JSON.stringify(formData),
+                    success: function(response) {
+                        alert("연락주셔서 감사합니다 ~ 빠른 시일 내에 확인하겠습니다 ! ")
+                        // Optionally clear the form here
+                        $("#contactForm")[0].reset();
+                    },
+                    error: function(xhr, status, error) {
+                        alert("An error occurred: " + xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+
     <br>
-    <span>&lt;당첨된 회차 목록&gt;</span>
-    <ul id="resultList"></ul>
+    <br>
+    <br>
 
-<button id="kakao-share-button">카카오톡으로 공유하기</button>
+    <div class="container">
+        <!-- About Section Heading-->
+        <h2 class="page-section-heading text-center text-uppercase text-white">Luminuos coders</h2>
+        <!-- Icon Divider-->
+        <div class="divider-custom divider-light">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- About Section Content-->
+        <div class="row">
+            <div class="col-lg-4 ms-auto"><p class="lead">빛나는, 반짝이는이라는 의미를 가지고 있어 조원 각자의 능력과 열정이 빛을 발하고 함께 빛을 내며 프로젝트를 이끌어 나가는 의미를 담고 있습니다.</p></div>
+            <div class="col-lg-4 me-auto"><p class="lead"> 또한 "코더스"는 개발자들을 의미하여 프로젝트에서 함께 코드를 작성하고 빛을 발하는 팀원들을 상징합니다.</p></div>
+        </div>
+        <!-- About Section Button-->
+        <div class="text-center mt-4">
+        </div>
+    </div>
+</section>
+<!-- Contact Section-->
+<!--<section class="page-section" id="contact">-->
+<!--    <div class="container">-->
+<!--        &lt;!&ndash; Contact Section Heading&ndash;&gt;-->
+<!--        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Contact Me</h2>-->
+<!--        &lt;!&ndash; Icon Divider&ndash;&gt;-->
+<!--        <div class="divider-custom">-->
+<!--            <div class="divider-custom-line"></div>-->
+<!--            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>-->
+<!--            <div class="divider-custom-line"></div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; Contact Section Form&ndash;&gt;-->
+<!--        <div class="row justify-content-center">-->
+<!--            <div class="col-lg-8 col-xl-7">-->
+<!--                &lt;!&ndash; * * * * * * * * * * * * * * *&ndash;&gt;-->
+<!--                &lt;!&ndash; * * SB Forms Contact Form * *&ndash;&gt;-->
+<!--                &lt;!&ndash; * * * * * * * * * * * * * * *&ndash;&gt;-->
+<!--                &lt;!&ndash; This form is pre-integrated with SB Forms.&ndash;&gt;-->
+<!--                &lt;!&ndash; To make this form functional, sign up at&ndash;&gt;-->
+<!--                &lt;!&ndash; https://startbootstrap.com/solution/contact-forms&ndash;&gt;-->
+<!--                &lt;!&ndash; to get an API token!&ndash;&gt;-->
+<!--                <form id="contactForm" data-sb-form-api-token="API_TOKEN">-->
+<!--                    &lt;!&ndash; Name input&ndash;&gt;-->
+<!--                    <div class="form-floating mb-3">-->
+<!--                        <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />-->
+<!--                        <label for="name">Full name</label>-->
+<!--                        <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash; Email address input&ndash;&gt;-->
+<!--                    <div class="form-floating mb-3">-->
+<!--                        <input class="form-control" id="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" />-->
+<!--                        <label for="email">Email address</label>-->
+<!--                        <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>-->
+<!--                        <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash; Phone number input&ndash;&gt;-->
+<!--                    <div class="form-floating mb-3">-->
+<!--                        <input class="form-control" id="phone" type="tel" placeholder="(123) 456-7890" data-sb-validations="required" />-->
+<!--                        <label for="phone">Phone number</label>-->
+<!--                        <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash; Message input&ndash;&gt;-->
+<!--                    <div class="form-floating mb-3">-->
+<!--                        <textarea class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required"></textarea>-->
+<!--                        <label for="message">Message</label>-->
+<!--                        <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash; Submit success message&ndash;&gt;-->
+<!--                    &lt;!&ndash;&ndash;&gt;-->
+<!--                    &lt;!&ndash; This is what your users will see when the form&ndash;&gt;-->
+<!--                    &lt;!&ndash; has successfully submitted&ndash;&gt;-->
+<!--                    <div class="d-none" id="submitSuccessMessage">-->
+<!--                        <div class="text-center mb-3">-->
+<!--                            <div class="fw-bolder">Form submission successful!</div>-->
+<!--                            To activate this form, sign up at-->
+<!--                            <br />-->
+<!--                            <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash; Submit error message&ndash;&gt;-->
+<!--                    &lt;!&ndash;&ndash;&gt;-->
+<!--                    &lt;!&ndash; This is what your users will see when there is&ndash;&gt;-->
+<!--                    &lt;!&ndash; an error submitting the form&ndash;&gt;-->
+<!--                    <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>-->
+<!--                    &lt;!&ndash; Submit Button&ndash;&gt;-->
+<!--                    <button class="btn btn-primary btn-xl disabled" id="submitButton" type="submit">Send</button>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
 
-<br>
-<br>
-<br>
+<!--<script>-->
+<!--    $(document).ready(function(){-->
+<!--        $("#contactForm").submit(function(event){-->
+<!--            event.preventDefault(); // 폼 제출의 기본 동작 방지-->
+
+<!--            var formData = {-->
+<!--                name: $("#name").val(),-->
+<!--                email: $("#email").val(),-->
+<!--                phone: $("#phone").val(),-->
+<!--                message: $("#message").val()-->
+<!--            };-->
+
+<!--            $.ajax({-->
+<!--                type: "POST",-->
+<!--                url: "/sendEmail", // 서버의 엔드포인트로 변경하세요-->
+<!--                data: JSON.stringify(formData),-->
+<!--                contentType: "application/json; charset=utf-8",-->
+<!--                dataType: "json",-->
+<!--                success: function(data){-->
+<!--                    alert("Message sent successfully!");-->
+<!--                    // 성공적으로 메시지를 전송했을 때의 처리-->
+<!--                },-->
+<!--                error: function(errMsg) {-->
+<!--                    alert("Error sending message!");-->
+<!--                    // 메시지 전송에 실패했을 때의 처리-->
+<!--                }-->
+<!--            });-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+<!-- Footer-->
+<footer class="footer text-center">
+    <div class="container">
+        <div class="row">
+            <!-- Footer Location-->
+            <div class="col-lg-4 mb-5 mb-lg-0">
+                <h4 class="text-uppercase mb-4">Location</h4>
+                <p class="lead mb-0">
+                    수원역
+                    <br />
+                    Clark,  65243
+                </p>
+            </div>
+            <!-- Footer Social Icons-->
+            <div class="col-lg-4 mb-5 mb-lg-0">
+                <h4 class="text-uppercase mb-4">Around the Web</h4>
+                <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-facebook-f"></i></a>
+                <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-twitter"></i></a>
+                <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-linkedin-in"></i></a>
+                <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-dribbble"></i></a>
+            </div>
+            <!-- Footer About Text-->
+            <div class="col-lg-4">
+                <h4 class="text-uppercase mb-4">루코짱루코짱</h4>
+                <p class="lead mb-0">
+
+                    <a>루코루코루코루코</a>
+
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Copyright Section-->
+<div class="copyright py-4 text-center text-white">
+    <div class="container"><small>Copyright &copy; luco777 2024</small></div>
+</div>
+<!-- Portfolio Modals-->
+<!-- Portfolio Modal 1-->
+<div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" aria-labelledby="portfolioModal1" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+            <div class="modal-body text-center pb-5">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <!-- Portfolio Modal - Title-->
+
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">통나무 집</h2>
+                            <!-- Icon Divider-->
+                            <div class="divider-custom">
+                                <div class="divider-custom-line"></div>
+                                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                <div class="divider-custom-line"></div>
+                            </div>
+                            <!-- Portfolio Modal - Image-->
+                            <img class="img-fluid rounded mb-5" src="assets/img/portfolio/cabin.png" alt="..." />
+                            <!-- Portfolio Modal - Text-->
+                            <p class="mb-4">통나무 집의 평균 가격은 450만원입니다.</p>
+                            <p class="mb-4">해당 누적 금액으로 살 수 있는 통나무 집의 개수는 <span id="logCabin"></span>입니다.</p>
+
+                            <p class="mb-4">"오두막은 마치 인생의 잠깐 휴식처 같아요. 그래서 '오두막'이라는 말을 들으면 자동으로 '아, 휴가 좀 가고 싶다' 생각이 들죠!"</p>
 
 
+                            <button class="btn btn-primary" data-bs-dismiss="modal">
+                                <i class="fas fa-xmark fa-fw"></i>
+                                창 닫기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Portfolio Modal 2-->
+<div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" aria-labelledby="portfolioModal2" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+            <div class="modal-body text-center pb-5">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <!-- Portfolio Modal - Title-->
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">스벅 초코 케이크 한 조각</h2>
+                            <!-- Icon Divider-->
+                            <div class="divider-custom">
+                                <div class="divider-custom-line"></div>
+                                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                <div class="divider-custom-line"></div>
+                            </div>
+                            <!-- Portfolio Modal - Image-->
+                            <img class="img-fluid rounded mb-5" src="assets/img/portfolio/cake.png" alt="..." />
+                            <!-- Portfolio Modal - Text-->
+
+                            <p class="mb-4">스벅 초코 케이크 한 조각의 가격은 5,900원입니다.</p>
+                            <p class="mb-4">해당 누적 금액으로 살 수 있는 스벅 초코 케이크 한 조각의 개수는 <span id="cochoCake"></span>입니다.</p>
+
+                            <p class="mb-4">"초코파이를 먹다가 '와, 이거 너무 맛있어서 하나 더 먹고 싶다!' 하면서 하나를 더 먹는데, 그때 '초코파이는 한 개만 먹는다는 말을 들어봤어?'라는 소리가 들려오면, 그건 아마도 초코파이 자체가 내게 말을 걸고 있는 거야!"</p>
+                            <button class="btn btn-primary" data-bs-dismiss="modal">
+                                <i class="fas fa-xmark fa-fw"></i>
+                                창 닫기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Portfolio Modal 3-->
+<div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" aria-labelledby="portfolioModal3" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+            <div class="modal-body text-center pb-5">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <!-- Portfolio Modal - Title-->
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">서커스 텐트</h2>
+                            <!-- Icon Divider-->
+                            <div class="divider-custom">
+                                <div class="divider-custom-line"></div>
+                                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                <div class="divider-custom-line"></div>
+                            </div>
+                            <!-- Portfolio Modal - Image-->
+                            <img class="img-fluid rounded mb-5" src="assets/img/portfolio/circus.png" alt="..." />
+                            <!-- Portfolio Modal - Text-->
+
+                            <p class="mb-4">서커스 텐트 1대의 가격은 74만 8천원입니다.</p>
+                            <p class="mb-4">해당 누적 금액으로 살 수 있는 서커스 텐트의 개수는 <span id="circusTent"></span>입니다.</p>
+
+                            <p class="mb-4">"서커스는 마치 마법같은 곳이에요. 거기에 들어가면 현실에서는 상상할 수 없는 일들이 벌어지죠. 단지 '산타가 있을 거야' 생각하면서 기대하면 안 돼요!"</p>
+                            <button class="btn btn-primary" data-bs-dismiss="modal">
+                                <i class="fas fa-xmark fa-fw"></i>
+                                창 닫기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Portfolio Modal 4-->
+<div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" aria-labelledby="portfolioModal4" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+            <div class="modal-body text-center pb-5">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <!-- Portfolio Modal - Title-->
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">게임 컨트롤러</h2>
+                            <!-- Icon Divider-->
+                            <div class="divider-custom">
+                                <div class="divider-custom-line"></div>
+                                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                <div class="divider-custom-line"></div>
+                            </div>
+                            <!-- Portfolio Modal - Image-->
+                            <img class="img-fluid rounded mb-5" src="assets/img/portfolio/game.png" alt="..." />
+                            <!-- Portfolio Modal - Text-->
+
+                            <p class="mb-4">게임 컨트롤러 1개의 평균 가격은 45,050원입니다.</p>
+                            <p class="mb-4">해당 누적 금액으로 살 수 있는 게임 컨트롤러의 개수는 <span id="gameController"></span>입니다.</p>
+
+                            <p class="mb-4">
+                                Controller에 관한 재미있는 사실 중 하나는, 현대 소프트웨어 개발에서 Controller가 MVC 패턴에서 중요한 역할을 한다는 것입니다. MVC는 Model-View-Controller의 약자로, 사용자 인터페이스를 구성하는 세 가지 요소를 나타냅니다. 여기서 Controller는 사용자의 입력을 처리하고 Model과 View 간의 상호 작용을 조정합니다.
+
+                                또한, 재미있는 사실 중 하나는 스프링(Spring) 프레임워크에서 Controller를 작성할 때 @Controller 어노테이션을 사용한다는 것입니다. 이 어노테이션은 해당 클래스가 웹 애플리케이션의 컨트롤러임을 나타내며, 스프링에게 해당 클래스를 검색하고 관리하도록 지시합니다.
+
+                                또한, Controller가 클라이언트로부터 요청을 받고 적절한 서비스나 비즈니스 로직을 호출하여 응답을 생성하는데 사용되는 것을 알 수 있습니다. 이런 식으로 Controller는 웹 애플리케이션의 중심 역할을 하며, 사용자와 애플리케이션 간의 상호 작용을 담당합니다.</p>
+                            <button class="btn btn-primary" data-bs-dismiss="modal">
+                                <i class="fas fa-xmark fa-fw"></i>
+                                창 닫기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Portfolio Modal 5-->
+<div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" aria-labelledby="portfolioModal5" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+            <div class="modal-body text-center pb-5">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <!-- Portfolio Modal - Title-->
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">금고</h2>
+                            <!-- Icon Divider-->
+                            <div class="divider-custom">
+                                <div class="divider-custom-line"></div>
+                                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                <div class="divider-custom-line"></div>
+                            </div>
+                            <!-- Portfolio Modal - Image-->
+                            <img class="img-fluid rounded mb-5" src="assets/img/portfolio/safe.png" alt="..." />
+                            <!-- Portfolio Modal - Text-->
+
+                            <p class="mb-4">금고 1개의 평균 가격은 114만4천원입니다.</p>
+                            <p class="mb-4">해당 누적 금액으로 살 수 있는 금고의 개수는 <span id="lockedSafed"></span>입니다.</p>
+
+                            <p class="mb-4">어떤 사람들은 금고에 잠겨있는 비밀을 알아내기 위해 수년간 노력합니다. 그렇게 시간을 보내던 어느 날, 한 사람이 마침내 금고를 열었는데, 그 안에는 엄청난 비밀이나 보물이 들어있는 게 아니었습니다. 대신 그 안에는 다른 금고가 있었다고 해요! 그것이 어떻게 된 일일까요? 아마도 그 비밀을 알아내는 것이 이제 시작일지도 모르겠네요!</p>
+                            <button class="btn btn-primary" data-bs-dismiss="modal">
+                                <i class="fas fa-xmark fa-fw"></i>
+                                창 닫기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Portfolio Modal 6-->
+<div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" aria-labelledby="portfolioModal6" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+            <div class="modal-body text-center pb-5">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <!-- Portfolio Modal - Title-->
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">잠수함</h2>
+                            <!-- Icon Divider-->
+                            <div class="divider-custom">
+                                <div class="divider-custom-line"></div>
+                                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                <div class="divider-custom-line"></div>
+                            </div>
+                            <!-- Portfolio Modal - Image-->
+                            <img class="img-fluid rounded mb-5" src="assets/img/portfolio/submarine.png" alt="..." />
+                            <!-- Portfolio Modal - Text-->
+
+                            <p class="mb-4">잠수함 1개의 평균 가격은 1조 4천억원입니다.</p>
+                            <p class="mb-4">해당 누적 금액으로 살 수 있는 잠수함의 개수는 <span id="submarine"></span>입니다.</p>
+
+                            <p class="mb-4">잠수정에 관한 재미있는 사실을 알고 계시나요? 바로 이것인데, 1916년에는 세계 최초의 여행용 잠수정이 만들어졌는데요, 그 이름은 "오너리다"였습니다. 이 잠수정은 당시 최신 기술을 사용하여 바닷속을 탐험하고 사람들에게 놀라운 경험을 제공했습니다. 이렇게 보니 잠수정은 역사적으로도 흥미로운 차원이 있죠!</p>
+                            <button class="btn btn-primary" data-bs-dismiss="modal">
+                                <i class="fas fa-xmark fa-fw"></i>
+                                창닫기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 결과보기를 누르기 전에 나오는 모달창-->
+<!-- Placeholder Modal -->
+<div class="portfolio-modal modal fade" id="placeholderModal1" tabindex="-1" aria-labelledby="placeholderModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <h2 class="mb-4">결과보기를 먼저 실행해주세요</h2>
+                <button class="btn btn-primary" data-bs-dismiss="modal">
+                    <i class="fas fa-xmark fa-fw"></i>
+                    창 닫기
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Placeholder Modal -->
+<div class="portfolio-modal modal fade" id="placeholderModal2" tabindex="-1" aria-labelledby="placeholderModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <h2 class="mb-4">결과보기를 먼저 실행해주세요</h2>
+                <button class="btn btn-primary" data-bs-dismiss="modal">
+                    <i class="fas fa-xmark fa-fw"></i>
+                    창 닫기
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Placeholder Modal -->
+<div class="portfolio-modal modal fade" id="placeholderModal3" tabindex="-1" aria-labelledby="placeholderModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <h2 class="mb-4">결과보기를 먼저 실행해주세요</h2>
+                <button class="btn btn-primary" data-bs-dismiss="modal">
+                    <i class="fas fa-xmark fa-fw"></i>
+                    창 닫기
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Placeholder Modal -->
+<div class="portfolio-modal modal fade" id="placeholderModal4" tabindex="-1" aria-labelledby="placeholderModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <h2 class="mb-4">결과보기를 먼저 실행해주세요</h2>
+                <button class="btn btn-primary" data-bs-dismiss="modal">
+                    <i class="fas fa-xmark fa-fw"></i>
+                    창 닫기
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Placeholder Modal -->
+<div class="portfolio-modal modal fade" id="placeholderModal5" tabindex="-1" aria-labelledby="placeholderModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <h2 class="mb-4">결과보기를 먼저 실행해주세요</h2>
+                <button class="btn btn-primary" data-bs-dismiss="modal">
+                    <i class="fas fa-xmark fa-fw"></i>
+                    창 닫기
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Placeholder Modal -->
+<div class="portfolio-modal modal fade" id="placeholderModal6" tabindex="-1" aria-labelledby="placeholderModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <h2 class="mb-4">결과보기를 먼저 실행해주세요</h2>
+                <button class="btn btn-primary" data-bs-dismiss="modal">
+                    <i class="fas fa-xmark fa-fw"></i>
+                    창 닫기
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="js/scripts.js"></script>
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<!-- * *                               SB Forms JS                               * *-->
+<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 
 <script>
     // 카카오톡 공유하기 기능
@@ -59,8 +814,11 @@
 <script>
     Kakao.init('cdd687b8d3ebcd08a63998adc198823f'); // 여기에 JavaScript 키를 입력합니다.
 </script>
-</body>
 <script>
+
+
+
+
 
     const resultListElement = document.getElementById("resultList");
 
@@ -72,6 +830,19 @@
         const num5 = document.getElementById("num5").value;
         const num6 = document.getElementById("num6").value;
 
+        const numbers = [num1, num2, num3, num4, num5, num6].map(Number); // 문자열을 숫자로 변환
+
+        // 유효성 검사: 모든 번호가 1~45 범위 내에 있는지 확인
+        const isValidRange = numbers.every(num => num >= 1 && num <= 45);
+
+        // 유효성 검사: 중복된 번호가 없는지 확인
+        const isUnique = numbers.length === new Set(numbers).size;
+
+        if (!isValidRange || !isUnique) {
+            alert("번호는 1부터 45 사이여야 하며, 중복될 수 없습니다.");
+            return; // 유효하지 않으면 여기서 함수 실행을 중단
+        }
+
         const params = {
             "num1": num1,
             "num2": num2,
@@ -82,40 +853,71 @@
 
         }
 
+        // 로컬환경에서 주석처리하기
         var header = $("meta[name='_csrf_header']").attr('content');
         var token = $("meta[name='_csrf']").attr('content');
+        // ///////////////////////////////////
+
+        // Ajax 요청이 실패하거나 아직 요청이 완료되지 않았을 때 모달을 숨기는 기능
+        $('#portfolioModal1').modal('hide');
+        $('#portfolioModal2').modal('hide');
+        $('#portfolioModal3').modal('hide');
+        $('#portfolioModal4').modal('hide');
+        $('#portfolioModal5').modal('hide');
+        $('#portfolioModal6').modal('hide');
 
         $.ajax({
             //     요청 방식: post
             //     요청 주소: /lottoResult
             type: "post",
             url: "/lottoResult",
+
+            // 로컬환경에서 주석처리하기
             beforeSend: function(xhr){
                 xhr.setRequestHeader(header, token);
             },
+            //////////////////////////////////
             //parameter 전달하기
             contentType: "application/json",
             data: JSON.stringify(params),
             // 요청이 성공햇을 때 실행되는 부분
-            success: function (res){
+            success: function (res) {
                 console.log("성공", res);
-                document.getElementById("totalWinning").innerText = res.totalWinning +"원";
-                resultListElement.innerHTML = "<li>" + res.totalWinning + "</li>";
+                // 데이터 추가
+                document.getElementById("ranking").innerText = "상위 " + res.Ranking + "%" +"\n" +"( Beta.ver)" +"\n"+"\n";
+                document.getElementById("totalWinning").innerText = res.totalWinning + "원" +"\n"+"\n";
+                document.getElementById("logCabin").innerText = res.logCabin + "채";
+                document.getElementById("cochoCake").innerText = res.cochoCake + "개";
+                document.getElementById("circusTent").innerText = res.circusTent + "대";
+                document.getElementById("gameController").innerText = res.gameController + "개";
+                document.getElementById("lockedSafed").innerText = res.lockedSafed + "개";
+                document.getElementById("submarine").innerText = res.submarine + "대";
+
+                resultListElement.innerHTML = "<li>" + res.totalWinning + "</li>" + +"\n"+"\n"+"\n" ;
 
                 // 기존 내용 비우기
                 resultListElement.innerHTML = "";
 
                 // 리스트 순회 및 출력
-                res.OutputLottoList.forEach(function(outputLotto) {
+                res.OutputLottoList.forEach(function (outputLotto) {
                     const listItem = document.createElement("li");
                     listItem.textContent = "회차: " + outputLotto.round + "회" + ", 당첨금: " + outputLotto.winning + "원" + ", 등수: " + outputLotto.place;
                     resultListElement.appendChild(listItem);
                 });
 
-                },
+            },
             //요청이 실패했을 때 실행되는 부분
             error: function () {
                 console.log("실패");
+            },
+            complete: function () {
+                // Ajax 요청이 완료되면 Placeholder 모달 닫기
+                $('#placeholderModal1').modal('hide');
+                $('#placeholderModal2').modal('hide');
+                $('#placeholderModal3').modal('hide');
+                $('#placeholderModal4').modal('hide');
+                $('#placeholderModal5').modal('hide');
+                $('#placeholderModal6').modal('hide');
             }
 
 
@@ -124,4 +926,5 @@
     }
 
 </script>
+</body>
 </html>

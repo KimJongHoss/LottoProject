@@ -1,10 +1,7 @@
 package hg.jh.luko6.controller;
 
 
-import hg.jh.luko6.entity.InputLotto;
-import hg.jh.luko6.entity.Lotto;
-import hg.jh.luko6.entity.OutputLotto;
-import hg.jh.luko6.entity.VisitStats;
+import hg.jh.luko6.entity.*;
 import hg.jh.luko6.repository.VisitStatsRepository;
 import hg.jh.luko6.service.LottoService;
 import hg.jh.luko6.service.VisitStatsService;
@@ -17,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.DecimalFormat;
 import java.util.*;
 
 @Controller
@@ -28,6 +26,8 @@ public class LottoController {
     private  final VisitStatsService visitStatsService;
     @Autowired
     private VisitStatsRepository visitStatsRepository;
+
+
 
 
     @GetMapping("/")
@@ -113,6 +113,8 @@ public class LottoController {
 
         Long totalWinning = 0L;
 
+
+
         for(OutputLotto outputLotto : OutputLottoList){//누적 금액 생성
 
             Long winningCal = Long.valueOf((outputLotto.getWinning()));
@@ -135,12 +137,64 @@ public class LottoController {
 
         log.info("누적금액 : "+totalWinning);
 
+        float logCabinPrice = 4500000f;
+        float cochoCakePrice = 5900f;
+        float circusTentPrice = 748000f;
+        float gameControllerPrice = 45050f;
+        float lockedSafedPrice = 1144000f;
+        float submarinePrice = 1400000000000f;
+
+
+
         // VisitStats 테이블에서 id가 1인 레코드 조회
         Optional<VisitStats> optionalVisitStats = visitStatsRepository.findById(1L);
 
+
+
+
+        lottoService.addPercentage(totalWinning);
+        lottoService.calculatePercentage(totalWinning);
+        log.info("////////////////////////////////");
+        log.info("상위"+((int)(lottoService.calculatePercentage(totalWinning)*100))+"%");
+        log.info("////////////////////////////////");
+
+        int Ranking = ((int)(lottoService.calculatePercentage(totalWinning)*100));
+
         Map<String, Object> lottoMap = new HashMap<>();
+
+        lottoMap.put("Ranking",Ranking);
+
+
         lottoMap.put("OutputLottoList", OutputLottoList);
         lottoMap.put("totalWinning", totalWinning);
+
+//        각 항목을 소수점 세자리까지만 맵에 담기
+        DecimalFormat df = new DecimalFormat("#.###");
+        String logCabinValue = df.format(totalWinning / logCabinPrice);
+        float logCabin = Float.parseFloat(logCabinValue);
+
+        String cochoCakeValue = df.format(totalWinning / cochoCakePrice);
+        float cochoCake = Float.parseFloat(cochoCakeValue);
+
+        String circusTentValue = df.format(totalWinning / circusTentPrice);
+        float circusTent = Float.parseFloat(circusTentValue);
+
+        String gameControllerValue = df.format(totalWinning / gameControllerPrice);
+        float gameController = Float.parseFloat(gameControllerValue);
+
+        String lockedSafedValue = df.format(totalWinning / lockedSafedPrice);
+        float lockedSafed = Float.parseFloat(lockedSafedValue);
+
+        String submarineValue = df.format(totalWinning / submarinePrice);
+        float submarine = Float.parseFloat(submarineValue);
+
+        lottoMap.put("logCabin", logCabin);
+        lottoMap.put("cochoCake", cochoCake);
+        lottoMap.put("circusTent", circusTent);
+        lottoMap.put("gameController", gameController);
+        lottoMap.put("lockedSafed", lockedSafed);
+        lottoMap.put("submarine", submarine);
+
 //       로직이 돌아가면 이용자수에 +1하기
 
         if (optionalVisitStats.isPresent()) {
