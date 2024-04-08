@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Freelancer - Start Bootstrap Theme</title>
+    <title>1회부터 지금까지 로또를 샀다면?</title>
     <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="assets/lucoFavicon.png" />
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
@@ -150,6 +150,13 @@
         </button>
         </div>
         <br>
+
+
+
+        <span>&lt;누적 금액&gt;</span>
+        <div id="totalWinning"></div>
+        <span>&lt;내 누적 금액의 상위 랭크&gt;</span>
+        <div id="ranking"></div>
         <span>&lt;당첨된 회차 목록&gt;</span>
         <ul id="resultList"></ul>
 
@@ -165,10 +172,9 @@
 <section class="page-section portfolio" id="portfolio">
     <div class="container">
         <!-- Portfolio Section Heading-->
-        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">누적 금액 </h2>
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">내가 이만큼 당첨 받는다면? </h2>
         <!-- Icon Divider-->
-        <div id="totalWinning"></div>
-        <div id="ranking"></div>
+
 
 
 
@@ -463,7 +469,8 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <!-- Portfolio Modal - Title-->
-                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">오두막</h2>
+
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">통나무 집</h2>
                             <!-- Icon Divider-->
                             <div class="divider-custom">
                                 <div class="divider-custom-line"></div>
@@ -473,10 +480,15 @@
                             <!-- Portfolio Modal - Image-->
                             <img class="img-fluid rounded mb-5" src="assets/img/portfolio/cabin.png" alt="..." />
                             <!-- Portfolio Modal - Text-->
+                            <p class="mb-4">통나무 집의 평균 가격은 450만원입니다.</p>
+                            <p class="mb-4">해당 누적 금액으로 살 수 있는 통나무 집의 개수는 <span id="logCabin"></span>입니다.</p>
+
                             <p class="mb-4">"오두막은 마치 인생의 잠깐 휴식처 같아요. 그래서 '오두막'이라는 말을 들으면 자동으로 '아, 휴가 좀 가고 싶다' 생각이 들죠!"</p>
+
+
                             <button class="btn btn-primary" data-bs-dismiss="modal">
                                 <i class="fas fa-xmark fa-fw"></i>
-                                Close Window
+                                창 닫기
                             </button>
                         </div>
                     </div>
@@ -495,7 +507,7 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <!-- Portfolio Modal - Title-->
-                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">초코파이</h2>
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">스벅 초코 케이크 한 조각</h2>
                             <!-- Icon Divider-->
                             <div class="divider-custom">
                                 <div class="divider-custom-line"></div>
@@ -505,10 +517,14 @@
                             <!-- Portfolio Modal - Image-->
                             <img class="img-fluid rounded mb-5" src="assets/img/portfolio/cake.png" alt="..." />
                             <!-- Portfolio Modal - Text-->
+
+                            <p class="mb-4">스벅 초코 케이크 한 조각의 가격은 5,900원입니다.</p>
+                            <p class="mb-4">해당 누적 금액으로 살 수 있는 스벅 초코 케이크 한 조각의 개수는 <span id="cochoCake"></span>입니다.</p>
+
                             <p class="mb-4">"초코파이를 먹다가 '와, 이거 너무 맛있어서 하나 더 먹고 싶다!' 하면서 하나를 더 먹는데, 그때 '초코파이는 한 개만 먹는다는 말을 들어봤어?'라는 소리가 들려오면, 그건 아마도 초코파이 자체가 내게 말을 걸고 있는 거야!"</p>
                             <button class="btn btn-primary" data-bs-dismiss="modal">
                                 <i class="fas fa-xmark fa-fw"></i>
-                                Close Window
+                                창 닫기
                             </button>
                         </div>
                     </div>
@@ -527,7 +543,7 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <!-- Portfolio Modal - Title-->
-                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">서커스</h2>
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">서커스 텐트</h2>
                             <!-- Icon Divider-->
                             <div class="divider-custom">
                                 <div class="divider-custom-line"></div>
@@ -537,10 +553,14 @@
                             <!-- Portfolio Modal - Image-->
                             <img class="img-fluid rounded mb-5" src="assets/img/portfolio/circus.png" alt="..." />
                             <!-- Portfolio Modal - Text-->
+
+                            <p class="mb-4">서커스 텐트 1대의 가격은 74만 8천원입니다.</p>
+                            <p class="mb-4">해당 누적 금액으로 살 수 있는 서커스 텐트의 개수는 <span id="circusTent"></span>입니다.</p>
+
                             <p class="mb-4">"서커스는 마치 마법같은 곳이에요. 거기에 들어가면 현실에서는 상상할 수 없는 일들이 벌어지죠. 단지 '산타가 있을 거야' 생각하면서 기대하면 안 돼요!"</p>
                             <button class="btn btn-primary" data-bs-dismiss="modal">
                                 <i class="fas fa-xmark fa-fw"></i>
-                                Close Window
+                                창 닫기
                             </button>
                         </div>
                     </div>
@@ -559,7 +579,7 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <!-- Portfolio Modal - Title-->
-                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Controller</h2>
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">게임 컨트롤러</h2>
                             <!-- Icon Divider-->
                             <div class="divider-custom">
                                 <div class="divider-custom-line"></div>
@@ -569,6 +589,10 @@
                             <!-- Portfolio Modal - Image-->
                             <img class="img-fluid rounded mb-5" src="assets/img/portfolio/game.png" alt="..." />
                             <!-- Portfolio Modal - Text-->
+
+                            <p class="mb-4">게임 컨트롤러 1개의 평균 가격은 45,050원입니다.</p>
+                            <p class="mb-4">해당 누적 금액으로 살 수 있는 게임 컨트롤러의 개수는 <span id="gameController"></span>입니다.</p>
+
                             <p class="mb-4">
                                 Controller에 관한 재미있는 사실 중 하나는, 현대 소프트웨어 개발에서 Controller가 MVC 패턴에서 중요한 역할을 한다는 것입니다. MVC는 Model-View-Controller의 약자로, 사용자 인터페이스를 구성하는 세 가지 요소를 나타냅니다. 여기서 Controller는 사용자의 입력을 처리하고 Model과 View 간의 상호 작용을 조정합니다.
 
@@ -577,7 +601,7 @@
                                 또한, Controller가 클라이언트로부터 요청을 받고 적절한 서비스나 비즈니스 로직을 호출하여 응답을 생성하는데 사용되는 것을 알 수 있습니다. 이런 식으로 Controller는 웹 애플리케이션의 중심 역할을 하며, 사용자와 애플리케이션 간의 상호 작용을 담당합니다.</p>
                             <button class="btn btn-primary" data-bs-dismiss="modal">
                                 <i class="fas fa-xmark fa-fw"></i>
-                                Close Window
+                                창 닫기
                             </button>
                         </div>
                     </div>
@@ -606,10 +630,14 @@
                             <!-- Portfolio Modal - Image-->
                             <img class="img-fluid rounded mb-5" src="assets/img/portfolio/safe.png" alt="..." />
                             <!-- Portfolio Modal - Text-->
+
+                            <p class="mb-4">금고 1개의 평균 가격은 114만4천원입니다.</p>
+                            <p class="mb-4">해당 누적 금액으로 살 수 있는 금고의 개수는 <span id="lockedSafed"></span>입니다.</p>
+
                             <p class="mb-4">어떤 사람들은 금고에 잠겨있는 비밀을 알아내기 위해 수년간 노력합니다. 그렇게 시간을 보내던 어느 날, 한 사람이 마침내 금고를 열었는데, 그 안에는 엄청난 비밀이나 보물이 들어있는 게 아니었습니다. 대신 그 안에는 다른 금고가 있었다고 해요! 그것이 어떻게 된 일일까요? 아마도 그 비밀을 알아내는 것이 이제 시작일지도 모르겠네요!</p>
                             <button class="btn btn-primary" data-bs-dismiss="modal">
                                 <i class="fas fa-xmark fa-fw"></i>
-                                Close Window
+                                창 닫기
                             </button>
                         </div>
                     </div>
@@ -638,14 +666,104 @@
                             <!-- Portfolio Modal - Image-->
                             <img class="img-fluid rounded mb-5" src="assets/img/portfolio/submarine.png" alt="..." />
                             <!-- Portfolio Modal - Text-->
+
+                            <p class="mb-4">잠수함 1개의 평균 가격은 1조 4천억원입니다.</p>
+                            <p class="mb-4">해당 누적 금액으로 살 수 있는 잠수함의 개수는 <span id="submarine"></span>입니다.</p>
+
                             <p class="mb-4">잠수정에 관한 재미있는 사실을 알고 계시나요? 바로 이것인데, 1916년에는 세계 최초의 여행용 잠수정이 만들어졌는데요, 그 이름은 "오너리다"였습니다. 이 잠수정은 당시 최신 기술을 사용하여 바닷속을 탐험하고 사람들에게 놀라운 경험을 제공했습니다. 이렇게 보니 잠수정은 역사적으로도 흥미로운 차원이 있죠!</p>
                             <button class="btn btn-primary" data-bs-dismiss="modal">
                                 <i class="fas fa-xmark fa-fw"></i>
-                                Close Window
+                                창닫기
                             </button>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 결과보기를 누르기 전에 나오는 모달창-->
+<!-- Placeholder Modal -->
+<div class="portfolio-modal modal fade" id="placeholderModal1" tabindex="-1" aria-labelledby="placeholderModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <h2 class="mb-4">결과보기를 먼저 실행해주세요</h2>
+                <button class="btn btn-primary" data-bs-dismiss="modal">
+                    <i class="fas fa-xmark fa-fw"></i>
+                    창 닫기
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Placeholder Modal -->
+<div class="portfolio-modal modal fade" id="placeholderModal2" tabindex="-1" aria-labelledby="placeholderModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <h2 class="mb-4">결과보기를 먼저 실행해주세요</h2>
+                <button class="btn btn-primary" data-bs-dismiss="modal">
+                    <i class="fas fa-xmark fa-fw"></i>
+                    창 닫기
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Placeholder Modal -->
+<div class="portfolio-modal modal fade" id="placeholderModal3" tabindex="-1" aria-labelledby="placeholderModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <h2 class="mb-4">결과보기를 먼저 실행해주세요</h2>
+                <button class="btn btn-primary" data-bs-dismiss="modal">
+                    <i class="fas fa-xmark fa-fw"></i>
+                    창 닫기
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Placeholder Modal -->
+<div class="portfolio-modal modal fade" id="placeholderModal4" tabindex="-1" aria-labelledby="placeholderModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <h2 class="mb-4">결과보기를 먼저 실행해주세요</h2>
+                <button class="btn btn-primary" data-bs-dismiss="modal">
+                    <i class="fas fa-xmark fa-fw"></i>
+                    창 닫기
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Placeholder Modal -->
+<div class="portfolio-modal modal fade" id="placeholderModal5" tabindex="-1" aria-labelledby="placeholderModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <h2 class="mb-4">결과보기를 먼저 실행해주세요</h2>
+                <button class="btn btn-primary" data-bs-dismiss="modal">
+                    <i class="fas fa-xmark fa-fw"></i>
+                    창 닫기
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Placeholder Modal -->
+<div class="portfolio-modal modal fade" id="placeholderModal6" tabindex="-1" aria-labelledby="placeholderModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <h2 class="mb-4">결과보기를 먼저 실행해주세요</h2>
+                <button class="btn btn-primary" data-bs-dismiss="modal">
+                    <i class="fas fa-xmark fa-fw"></i>
+                    창 닫기
+                </button>
             </div>
         </div>
     </div>
@@ -724,6 +842,15 @@
         // var header = $("meta[name='_csrf_header']").attr('content');
         // var token = $("meta[name='_csrf']").attr('content');
         // ///////////////////////////////////
+
+        // Ajax 요청이 실패하거나 아직 요청이 완료되지 않았을 때 모달을 숨기는 기능
+        $('#portfolioModal1').modal('hide');
+        $('#portfolioModal2').modal('hide');
+        $('#portfolioModal3').modal('hide');
+        $('#portfolioModal4').modal('hide');
+        $('#portfolioModal5').modal('hide');
+        $('#portfolioModal6').modal('hide');
+
         $.ajax({
             //     요청 방식: post
             //     요청 주소: /lottoResult
@@ -739,17 +866,25 @@
             contentType: "application/json",
             data: JSON.stringify(params),
             // 요청이 성공햇을 때 실행되는 부분
-            success: function (res){
+            success: function (res) {
                 console.log("성공", res);
-                document.getElementById("ranking").innerText="상위 " + res.Ranking +"%";
-                document.getElementById("totalWinning").innerText = res.totalWinning +"원";
+                // 데이터 추가
+                document.getElementById("ranking").innerText = "상위 " + res.Ranking + "%";
+                document.getElementById("totalWinning").innerText = res.totalWinning + "원";
+                document.getElementById("logCabin").innerText = res.logCabin + "채";
+                document.getElementById("cochoCake").innerText = res.cochoCake + "개";
+                document.getElementById("circusTent").innerText = res.circusTent + "대";
+                document.getElementById("gameController").innerText = res.gameController + "개";
+                document.getElementById("lockedSafed").innerText = res.lockedSafed + "개";
+                document.getElementById("submarine").innerText = res.submarine + "대";
+
                 resultListElement.innerHTML = "<li>" + res.totalWinning + "</li>";
 
                 // 기존 내용 비우기
                 resultListElement.innerHTML = "";
 
                 // 리스트 순회 및 출력
-                res.OutputLottoList.forEach(function(outputLotto) {
+                res.OutputLottoList.forEach(function (outputLotto) {
                     const listItem = document.createElement("li");
                     listItem.textContent = "회차: " + outputLotto.round + "회" + ", 당첨금: " + outputLotto.winning + "원" + ", 등수: " + outputLotto.place;
                     resultListElement.appendChild(listItem);
@@ -759,6 +894,15 @@
             //요청이 실패했을 때 실행되는 부분
             error: function () {
                 console.log("실패");
+            },
+            complete: function () {
+                // Ajax 요청이 완료되면 Placeholder 모달 닫기
+                $('#placeholderModal1').modal('hide');
+                $('#placeholderModal2').modal('hide');
+                $('#placeholderModal3').modal('hide');
+                $('#placeholderModal4').modal('hide');
+                $('#placeholderModal5').modal('hide');
+                $('#placeholderModal6').modal('hide');
             }
 
 
