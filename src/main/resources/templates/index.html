@@ -7,7 +7,7 @@
     <meta name="author" content="" />
     <title>1회부터 지금까지 로또를 샀다면?</title>
     <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="assets/lucoFavicon.png" />
+    <link rel="icon" type="image/x-icon" href="assets/lucoFavicon2.png" />
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
@@ -697,92 +697,6 @@
         </div>
     </div>
 </div>
-
-<!-- 결과보기를 누르기 전에 나오는 모달창-->
-<!-- Placeholder Modal -->
-<div class="portfolio-modal modal fade" id="placeholderModal1" tabindex="-1" aria-labelledby="placeholderModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-body text-center">
-                <h2 class="mb-4">결과보기를 먼저 실행해주세요</h2>
-                <button class="btn btn-primary" data-bs-dismiss="modal">
-                    <i class="fas fa-xmark fa-fw"></i>
-                    창 닫기
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Placeholder Modal -->
-<div class="portfolio-modal modal fade" id="placeholderModal2" tabindex="-1" aria-labelledby="placeholderModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-body text-center">
-                <h2 class="mb-4">결과보기를 먼저 실행해주세요</h2>
-                <button class="btn btn-primary" data-bs-dismiss="modal">
-                    <i class="fas fa-xmark fa-fw"></i>
-                    창 닫기
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Placeholder Modal -->
-<div class="portfolio-modal modal fade" id="placeholderModal3" tabindex="-1" aria-labelledby="placeholderModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-body text-center">
-                <h2 class="mb-4">결과보기를 먼저 실행해주세요</h2>
-                <button class="btn btn-primary" data-bs-dismiss="modal">
-                    <i class="fas fa-xmark fa-fw"></i>
-                    창 닫기
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Placeholder Modal -->
-<div class="portfolio-modal modal fade" id="placeholderModal4" tabindex="-1" aria-labelledby="placeholderModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-body text-center">
-                <h2 class="mb-4">결과보기를 먼저 실행해주세요</h2>
-                <button class="btn btn-primary" data-bs-dismiss="modal">
-                    <i class="fas fa-xmark fa-fw"></i>
-                    창 닫기
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Placeholder Modal -->
-<div class="portfolio-modal modal fade" id="placeholderModal5" tabindex="-1" aria-labelledby="placeholderModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-body text-center">
-                <h2 class="mb-4">결과보기를 먼저 실행해주세요</h2>
-                <button class="btn btn-primary" data-bs-dismiss="modal">
-                    <i class="fas fa-xmark fa-fw"></i>
-                    창 닫기
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Placeholder Modal -->
-<div class="portfolio-modal modal fade" id="placeholderModal6" tabindex="-1" aria-labelledby="placeholderModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-body text-center">
-                <h2 class="mb-4">결과보기를 먼저 실행해주세요</h2>
-                <button class="btn btn-primary" data-bs-dismiss="modal">
-                    <i class="fas fa-xmark fa-fw"></i>
-                    창 닫기
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
@@ -832,17 +746,17 @@
 
         const numbers = [num1, num2, num3, num4, num5, num6].map(Number); // 문자열을 숫자로 변환
 
-        // 유효성 검사: 모든 번호가 1~45 범위 내에 있는지 확인
-        const isValidRange = numbers.every(num => num >= 1 && num <= 45);
-
-        // 유효성 검사: 중복된 번호가 없는지 확인
-        const isUnique = numbers.length === new Set(numbers).size;
-
-        if (!isValidRange || !isUnique) {
-            alert("번호는 1부터 45 사이여야 하며, 중복될 수 없습니다.");
-            return; // 유효하지 않으면 여기서 함수 실행을 중단
-        }
-
+        // // 유효성 검사: 모든 번호가 1~45 범위 내에 있는지 확인
+        // const isValidRange = numbers.every(num => num >= 1 && num <= 45);
+        //
+        // // 유효성 검사: 중복된 번호가 없는지 확인
+        // const isUnique = numbers.length === new Set(numbers).size;
+        //
+        // if (!isValidRange || !isUnique) {
+        //     alert("번호는 1부터 45 사이여야 하며, 중복될 수 없습니다.");
+        //     return; // 유효하지 않으면 여기서 함수 실행을 중단
+        // }
+        //
         const params = {
             "num1": num1,
             "num2": num2,
