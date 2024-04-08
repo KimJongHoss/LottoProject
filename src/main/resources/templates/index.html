@@ -755,13 +755,6 @@
             // 요청이 성공햇을 때 실행되는 부분
             success: function (res) {
                 console.log("성공", res);
-                // Ajax 요청이 성공해야 모달창 뜨는 기능
-                $('#portfolioModal1').modal('show');
-                $('#portfolioModal2').modal('show');
-                $('#portfolioModal3').modal('show');
-                $('#portfolioModal4').modal('show');
-                $('#portfolioModal5').modal('show');
-                $('#portfolioModal6').modal('show');
                 // 데이터 추가
                 document.getElementById("ranking").innerText = "상위 " + res.Ranking + "%";
                 document.getElementById("totalWinning").innerText = res.totalWinning + "원";
