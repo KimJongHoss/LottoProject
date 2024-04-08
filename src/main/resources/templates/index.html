@@ -267,7 +267,6 @@
 
 </section>
 <!-- About Section-->
-<<<<<<< HEAD
 <section class="page-section bg-primary text-white mb-0" id="contact" style="text-align: center">
 
 
@@ -374,7 +373,7 @@
         </div>
         <!-- About Section Content-->
         <div class="row">
-            <div class="col-lg-4 ms-auto"><p class="lead">빛나는, 반짝이는이라는 의미를 가지고 있어 조원 각자의 능력과 열정이 빛을 발하고 함께 빛을 내며 프로젝트를 이끌어 나가는 의미를 담고 있습니다.</p></div>
+            <div class="col-lg-4 ms-auto"><p class="lead">빛나는, 반짝이는이라는 의미를 가지고 있어 각자의 능력과 열정이 빛을 발하고 함께 빛을 내며 프로젝트를 이끌어 나가는 의미를 담고 있습니다.</p></div>
             <div class="col-lg-4 me-auto"><p class="lead"> 또한 "코더스"는 개발자들을 의미하여 프로젝트에서 함께 코드를 작성하고 빛을 발하는 팀원들을 상징합니다.</p></div>
         </div>
         <!-- About Section Button-->
@@ -527,10 +526,10 @@
             </div>
             <!-- Footer About Text-->
             <div class="col-lg-4">
-                <h4 class="text-uppercase mb-4">루코짱루코짱</h4>
+                <h4 class="text-uppercase mb-4">대표전화</h4>
                 <p class="lead mb-0">
 
-                    <a>루코루코루코루코</a>
+                    <a>010-1234-5678</a>
 
                 </p>
             </div>
@@ -800,7 +799,6 @@
         </div>
     </div>
 </div>
-<<<<<<< HEAD
 
 <script>
     // 문서가 준비되면 실행
@@ -816,8 +814,6 @@
         });
     });
 </script>
-=======
->>>>>>> 13673c01080accf335cde5a62e07c5904ab8e786
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
@@ -872,16 +868,16 @@
 
         const numbers = [num1, num2, num3, num4, num5, num6].map(Number); // 문자열을 숫자로 변환
 
-        // // 유효성 검사: 모든 번호가 1~45 범위 내에 있는지 확인
-        // const isValidRange = numbers.every(num => num >= 1 && num <= 45);
-        //
-        // // 유효성 검사: 중복된 번호가 없는지 확인
-        // const isUnique = numbers.length === new Set(numbers).size;
-        //
-        // if (!isValidRange || !isUnique) {
-        //     alert("번호는 1부터 45 사이여야 하며, 중복될 수 없습니다.");
-        //     return; // 유효하지 않으면 여기서 함수 실행을 중단
-        // }
+        // 유효성 검사: 모든 번호가 1~45 범위 내에 있는지 확인
+        const isValidRange = numbers.every(num => num >= 1 && num <= 45);
+
+        // 유효성 검사: 중복된 번호가 없는지 확인
+        const isUnique = numbers.length === new Set(numbers).size;
+
+        if (!isValidRange || !isUnique) {
+            alert("번호는 1부터 45 사이여야 하며, 중복될 수 없습니다.");
+            return; // 유효하지 않으면 여기서 함수 실행을 중단
+        }
 
         const params = {
             "num1": num1,
