@@ -30,6 +30,26 @@ public class LottoController {
 
 
 
+    @GetMapping("/stats")
+    public @ResponseBody Map<String, Object> getStats(HttpServletRequest request, HttpServletResponse response) {
+        Map<String, Object> stats = new HashMap<>();
+
+        Long visitorCount = visitStatsService.getVisitorCount(request, response);
+
+        stats.put("visitorCount", visitorCount);
+        // 추가 데이터 처리
+
+        Optional<VisitStats> optionalVisitStats = visitStatsRepository.findById(1L);//visitStats에 있는 id가 1인 컬럼을 불러온다
+        VisitStats visitStats = optionalVisitStats.get();//optional은 값이 존재한다면 반환, 없을 경우 NoSuchElementException 발생
+        Long userCount = visitStats.getUserCount();
+
+//        return optionalVisitStats.orElse(null);
+        stats.put("userCount", userCount);
+        return stats;
+    }
+
+
+
 
     @GetMapping("/")
 //    @ResponseBody//협업용

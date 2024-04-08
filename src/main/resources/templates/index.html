@@ -76,6 +76,9 @@
 
 
 
+
+
+
         <!-- 각 input 필드에는 name 속성이 있어야 서버에서 식별 가능합니다. -->
         <div><label for="num1">번호 1:</label><input type="number" id="num1" name="num1" min="1" max="45" required /></div>
         <div><label for="num2">번호 2:</label><input type="number" id="num2" name="num2" min="1" max="45" required /></div>
@@ -473,21 +476,39 @@
 <!-- Copyright Section-->
 <div class="copyright py-4 text-center text-white">
     <div class="container">
-        <span id="visitorCount"></span>
+        <div id="visitorCount" align="left">Visitor Count: </div>
+        <div id="useUserCount" align="left">Using User: </div>
         <span id="userCount"></span>
     </div>
 
     <div class="container"><small>Copyright &copy; luco777 2024</small></div>
 
-
     <script>
-        // 컨트롤러에서 전달한 맵을 JavaScript로 받아와서 처리
-        var data = stats;
+        $.ajax({
+            url: '/stats',
+            type: 'GET',
+            success: function(data) {
+                $('#visitorCount').text('Visitor Count: ' + data.visitorCount+"명");
+                $('#useUserCount').text('Using User: ' + data.userCount+"명");
 
-        // 각 데이터를 가져와서 화면에 출력
-        document.getElementById("visitorCount").innerText = "Visitor Count: " + data.visitorCount;
-        document.getElementById("userCount").innerText = "User Count: " + data.userCount;
+            },
+            error: function(error) {
+                console.error('Error:', error);
+            }
+        });
     </script>
+
+
+
+
+<!--    <script>-->
+<!--        // 컨트롤러에서 전달한 맵을 JavaScript로 받아와서 처리-->
+<!--        var data = stats;-->
+
+<!--        // 각 데이터를 가져와서 화면에 출력-->
+<!--        document.getElementById("visitorCount").innerText = "Visitor Count: " + data.visitorCount;-->
+<!--        document.getElementById("userCount").innerText = "User Count: " + data.userCount;-->
+<!--    </script>-->
 </div>
 
 
