@@ -3,7 +3,9 @@ package hg.jh.luko6.service;
 import hg.jh.luko6.entity.InputLotto;
 import hg.jh.luko6.entity.Lotto;
 import hg.jh.luko6.entity.OutputLotto;
+import hg.jh.luko6.entity.Percentage;
 import hg.jh.luko6.repository.LottoRepository;
+import hg.jh.luko6.repository.PercentageRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,38 @@ public class LottoService {
 
     private final LottoRepository lottoRepository;
 
+    private final PercentageRepository percentageRepository;
+
+
+    public void addPercentage(Long totalWinning){
+
+
+        Percentage percentage = new Percentage();
+
+        percentage.setTotalWinning(totalWinning);
+
+
+        percentageRepository.save(percentage);
+
+
+
+
+
+
+    }
+
+    public Double calculatePercentage(Long totalWinning){
+
+
+        Long Ranked= percentageRepository.findByTotalWinning(totalWinning);
+
+        Long totalCount =percentageRepository.count();
+
+        return Ranked.doubleValue()/totalCount.doubleValue();
+
+    }
+
+
 
 
 
@@ -29,6 +63,7 @@ public class LottoService {
 
 
         List<Lotto> lottoList = lottoRepository.findAll(Sort.by(Sort.Direction.DESC, "round"));
+
 
 
         List<OutputLotto> outputLottoList = new ArrayList<>();
