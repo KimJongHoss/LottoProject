@@ -40,8 +40,8 @@
 
 
 <!--    로컬환경에서 주석처리하기-->
-<!--    <meta name="_csrf_header" th:content="${_csrf.headerName}">-->
-<!--    <meta name="_csrf" th:content="${_csrf.token}">-->
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+    <meta name="_csrf" th:content="${_csrf.token}">
 <!--////////////////////////////////////////////////-->
     <style>
     #totalWinning {
@@ -324,16 +324,17 @@
                         message: $("#message").val()
                     };
 
-                    // var header = $("meta[name='_csrf_header']").attr('content');
-                    // var token = $("meta[name='_csrf']").attr('content');
+                    var header = $("meta[name='_csrf_header']").attr('content');
+                    var token = $("meta[name='_csrf']").attr('content');
 
                     $.ajax({
                         type: "POST",
                         url: "/sendEmail",
 
-                        // beforeSend: function(xhr){
-                        //     xhr.setRequestHeader(header, token);
-                        // },
+
+                        beforeSend: function(xhr){
+                            xhr.setRequestHeader(header, token);
+                        },
 
 
                         contentType: "application/json",
@@ -546,10 +547,22 @@
 
     <div class="container"><small>Copyright &copy; luco777 2024</small></div>
 
+
     <script>
+
+        var header = $("meta[name='_csrf_header']").attr('content');
+        var token = $("meta[name='_csrf']").attr('content');
+
+
         $.ajax({
             url: '/stats',
             type: 'GET',
+
+
+            beforeSend: function(xhr){
+                xhr.setRequestHeader(header, token);
+            },
+
             success: function(data) {
                 $('#visitorCount').text('방문자: ' + data.visitorCount+"명");
                 $('#useUserCount').text('이용자: ' + data.userCount+"명");
@@ -890,8 +903,8 @@
         }
 
         // 로컬환경에서 주석처리하기
-        // var header = $("meta[name='_csrf_header']").attr('content');
-        // var token = $("meta[name='_csrf']").attr('content');
+        var header = $("meta[name='_csrf_header']").attr('content');
+        var token = $("meta[name='_csrf']").attr('content');
         // ///////////////////////////////////
 
         // Ajax 요청이 실패하거나 아직 요청이 완료되지 않았을 때 모달을 숨기는 기능
@@ -909,9 +922,9 @@
             url: "/lottoResult",
 
             // 로컬환경에서 주석처리하기
-            // beforeSend: function(xhr){
-            //     xhr.setRequestHeader(header, token);
-            // },
+            beforeSend: function(xhr){
+                xhr.setRequestHeader(header, token);
+            },
             //////////////////////////////////
             //parameter 전달하기
             contentType: "application/json",
