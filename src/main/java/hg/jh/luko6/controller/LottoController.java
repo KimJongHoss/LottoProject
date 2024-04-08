@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.text.DecimalFormat;
 import java.util.*;
@@ -35,7 +36,9 @@ public class LottoController {
 //    public VisitStats index(HttpServletRequest request//협업용
 //            , HttpServletResponse response){//협업용
     public String index(HttpServletRequest request
-            , HttpServletResponse response){
+            , HttpServletResponse response
+            , Model model){
+        Map<String, Object> statsMap = new HashMap<>();
 
 
 //        방문자수
@@ -53,6 +56,13 @@ public class LottoController {
 
         log.info("index로 갑니당");
 //        return optionalVisitStats.orElse(null);
+        statsMap.put("visitorCount", visitorCount);
+        statsMap.put("userCount", userCount);
+
+        model.addAttribute("stats", statsMap);
+
+        log.info("맵에 있는 데이터"+statsMap);
+        log.info("모델 데이터"+model);
         return "index";
     }
 
@@ -210,6 +220,8 @@ public class LottoController {
             }
             lottoMap.put("usercount", visitStats.getUserCount());
         }
+
+
         log.info("로또 맵:"+lottoMap);
 
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -437,6 +437,7 @@
 <!--    });-->
 <!--</script>-->
 <!-- Footer-->
+
 <footer class="footer text-center">
     <div class="container">
         <div class="row">
@@ -471,8 +472,25 @@
 </footer>
 <!-- Copyright Section-->
 <div class="copyright py-4 text-center text-white">
+    <div class="container">
+        <span id="visitorCount"></span>
+        <span id="userCount"></span>
+    </div>
+
     <div class="container"><small>Copyright &copy; luco777 2024</small></div>
+
+
+    <script>
+        // 컨트롤러에서 전달한 맵을 JavaScript로 받아와서 처리
+        var data = stats;
+
+        // 각 데이터를 가져와서 화면에 출력
+        document.getElementById("visitorCount").innerText = "Visitor Count: " + data.visitorCount;
+        document.getElementById("userCount").innerText = "User Count: " + data.userCount;
+    </script>
 </div>
+
+
 <!-- Portfolio Modals-->
 <!-- Portfolio Modal 1-->
 <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" aria-labelledby="portfolioModal1" aria-hidden="true">
