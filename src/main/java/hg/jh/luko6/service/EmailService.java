@@ -13,7 +13,8 @@ public class EmailService {
 
     // 사용자 정보를 인자로 받는 메소드로 확장
     public void sendContactEmail(String name, String fromEmail, String phone, String messageContent) {
-        String to = "goorm94@naver.com"; // 이메일을 받을 주소
+        String[] to = { "goorm94@naver.com", "haberde97@gmail.com" }; // 이메일을 받을 주소들
+//        String to = "goorm94@naver.com"; // 이메일을 받을 주소
         String subject = "New Contact from " + name; // 메일 제목
         String text = buildEmailContent(name, fromEmail, phone, messageContent); // 이메일 본문 조합
 

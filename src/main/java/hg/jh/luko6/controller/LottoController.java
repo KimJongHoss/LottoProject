@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.text.DecimalFormat;
 import java.util.*;
@@ -29,13 +30,35 @@ public class LottoController {
 
 
 
+    @GetMapping("/stats")
+    public @ResponseBody Map<String, Object> getStats(HttpServletRequest request, HttpServletResponse response) {
+        Map<String, Object> stats = new HashMap<>();
+
+        Long visitorCount = visitStatsService.getVisitorCount(request, response);
+
+        stats.put("visitorCount", visitorCount);
+        // 추가 데이터 처리
+
+        Optional<VisitStats> optionalVisitStats = visitStatsRepository.findById(1L);//visitStats에 있는 id가 1인 컬럼을 불러온다
+        VisitStats visitStats = optionalVisitStats.get();//optional은 값이 존재한다면 반환, 없을 경우 NoSuchElementException 발생
+        Long userCount = visitStats.getUserCount();
+
+//        return optionalVisitStats.orElse(null);
+        stats.put("userCount", userCount);
+        return stats;
+    }
+
+
+
 
     @GetMapping("/")
 //    @ResponseBody//협업용
 //    public VisitStats index(HttpServletRequest request//협업용
 //            , HttpServletResponse response){//협업용
     public String index(HttpServletRequest request
-            , HttpServletResponse response){
+            , HttpServletResponse response
+            , Model model){
+        Map<String, Object> statsMap = new HashMap<>();
 
 
 //        방문자수
@@ -49,10 +72,11 @@ public class LottoController {
         Optional<VisitStats> optionalVisitStats = visitStatsRepository.findById(1L);//visitStats에 있는 id가 1인 컬럼을 불러온다
         VisitStats visitStats = optionalVisitStats.get();//optional은 값이 존재한다면 반환, 없을 경우 NoSuchElementException 발생
         Long userCount = visitStats.getUserCount();
-        log.info("이용자수: "+userCount+"명");
+
 
         log.info("index로 갑니당");
 //        return optionalVisitStats.orElse(null);
+
         return "index";
     }
 
@@ -210,8 +234,8 @@ public class LottoController {
             }
             lottoMap.put("usercount", visitStats.getUserCount());
         }
-        log.info("로또 맵:"+lottoMap);
 
+        log.info("로또 맵:"+lottoMap);
 
         return lottoMap;
 
