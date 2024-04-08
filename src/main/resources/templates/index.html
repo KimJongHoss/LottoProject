@@ -323,7 +323,7 @@
                         phone: $("#phone").val(),
                         message: $("#message").val()
                     };
-
+                    //
                     // var header = $("meta[name='_csrf_header']").attr('content');
                     // var token = $("meta[name='_csrf']").attr('content');
 
@@ -331,6 +331,7 @@
                         type: "POST",
                         url: "/sendEmail",
 
+                        //
                         // beforeSend: function(xhr){
                         //     xhr.setRequestHeader(header, token);
                         // },
@@ -546,10 +547,22 @@
 
     <div class="container"><small>Copyright &copy; luco777 2024</small></div>
 
+
     <script>
+
+//        var header = $("meta[name='_csrf_header']").attr('content');
+//        var token = $("meta[name='_csrf']").attr('content');
+
+
         $.ajax({
             url: '/stats',
             type: 'GET',
+
+            //
+            // beforeSend: function(xhr){
+            //     xhr.setRequestHeader(header, token);
+            // },
+
             success: function(data) {
                 $('#visitorCount').text('방문자: ' + data.visitorCount+"명");
                 $('#useUserCount').text('이용자: ' + data.userCount+"명");
