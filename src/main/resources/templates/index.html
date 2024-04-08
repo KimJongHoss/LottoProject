@@ -154,10 +154,13 @@
 
 
         <span>&lt;누적 금액&gt;</span>
+        <br>
         <div id="totalWinning"></div>
         <span>&lt;내 누적 금액의 상위 랭크&gt;</span>
+        <br>
         <div id="ranking"></div>
         <span>&lt;당첨된 회차 목록&gt;</span>
+        <br>
         <ul id="resultList"></ul>
 
 
@@ -246,7 +249,7 @@
 
 </section>
 <!-- About Section-->
-<section class="page-section bg-primary text-white mb-0" id="about">
+<section class="page-section bg-primary text-white mb-0" id="about" style="text-align: center">
 
 
 
@@ -300,6 +303,11 @@
             });
         });
     </script>
+
+    <br>
+    <br>
+    <br>
+
     <div class="container">
         <!-- About Section Heading-->
         <h2 class="page-section-heading text-center text-uppercase text-white">Luminuos coders</h2>
@@ -869,8 +877,8 @@
             success: function (res) {
                 console.log("성공", res);
                 // 데이터 추가
-                document.getElementById("ranking").innerText = "상위 " + res.Ranking + "%";
-                document.getElementById("totalWinning").innerText = res.totalWinning + "원";
+                document.getElementById("ranking").innerText = "상위 " + res.Ranking + "%" +"\n" +"( Beta.ver)" +"\n"+"\n";
+                document.getElementById("totalWinning").innerText = res.totalWinning + "원" +"\n"+"\n";
                 document.getElementById("logCabin").innerText = res.logCabin + "채";
                 document.getElementById("cochoCake").innerText = res.cochoCake + "개";
                 document.getElementById("circusTent").innerText = res.circusTent + "대";
@@ -878,7 +886,7 @@
                 document.getElementById("lockedSafed").innerText = res.lockedSafed + "개";
                 document.getElementById("submarine").innerText = res.submarine + "대";
 
-                resultListElement.innerHTML = "<li>" + res.totalWinning + "</li>";
+                resultListElement.innerHTML = "<li>" + res.totalWinning + "</li>" + +"\n"+"\n"+"\n" ;
 
                 // 기존 내용 비우기
                 resultListElement.innerHTML = "";
