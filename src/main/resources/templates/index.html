@@ -37,7 +37,12 @@
     }
     </style>
 </head>
+
 <body id="page-top">
+
+
+
+
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
     <div class="container">
@@ -147,10 +152,13 @@
         <br>
 
         <span>&lt;누적 금액&gt;</span>
+        <br>
         <div id="totalWinning"></div>
         <span>&lt;내 누적 금액의 상위 랭크&gt;</span>
+        <br>
         <div id="ranking"></div>
         <span>&lt;당첨된 회차 목록&gt;</span>
+        <br>
         <ul id="resultList"></ul>
 
 
@@ -239,7 +247,65 @@
 
 </section>
 <!-- About Section-->
-<section class="page-section bg-primary text-white mb-0" id="about">
+<section class="page-section bg-primary text-white mb-0" id="about" style="text-align: center">
+
+
+
+    <h2>Contact LuCo</h2>
+    <form id="contactForm">
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone">
+        </div>
+        <div>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required></textarea>
+        </div>
+        <button type="submit">Send</button>
+    </form>
+
+    <script>
+        $(document).ready(function(){
+            $("#contactForm").submit(function(event){
+                event.preventDefault(); // Prevent the default form submit action
+
+                var formData = {
+                    name: $("#name").val(),
+                    email: $("#email").val(),
+                    phone: $("#phone").val(),
+                    message: $("#message").val()
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/sendEmail",
+                    contentType: "application/json",
+                    data: JSON.stringify(formData),
+                    success: function(response) {
+                        alert("연락주셔서 감사합니다 ~ 빠른 시일 내에 확인하겠습니다 ! ")
+                        // Optionally clear the form here
+                        $("#contactForm")[0].reset();
+                    },
+                    error: function(xhr, status, error) {
+                        alert("An error occurred: " + xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+
+    <br>
+    <br>
+    <br>
+
     <div class="container">
         <!-- About Section Heading-->
         <h2 class="page-section-heading text-center text-uppercase text-white">Luminuos coders</h2>
@@ -260,76 +326,107 @@
     </div>
 </section>
 <!-- Contact Section-->
-<section class="page-section" id="contact">
-    <div class="container">
-        <!-- Contact Section Heading-->
-        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Contact Me</h2>
-        <!-- Icon Divider-->
-        <div class="divider-custom">
-            <div class="divider-custom-line"></div>
-            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-            <div class="divider-custom-line"></div>
-        </div>
-        <!-- Contact Section Form-->
-        <div class="row justify-content-center">
-            <div class="col-lg-8 col-xl-7">
-                <!-- * * * * * * * * * * * * * * *-->
-                <!-- * * SB Forms Contact Form * *-->
-                <!-- * * * * * * * * * * * * * * *-->
-                <!-- This form is pre-integrated with SB Forms.-->
-                <!-- To make this form functional, sign up at-->
-                <!-- https://startbootstrap.com/solution/contact-forms-->
-                <!-- to get an API token!-->
-                <form id="contactForm" data-sb-form-api-token="API_TOKEN">
-                    <!-- Name input-->
-                    <div class="form-floating mb-3">
-                        <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
-                        <label for="name">Full name</label>
-                        <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
-                    </div>
-                    <!-- Email address input-->
-                    <div class="form-floating mb-3">
-                        <input class="form-control" id="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" />
-                        <label for="email">Email address</label>
-                        <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
-                        <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
-                    </div>
-                    <!-- Phone number input-->
-                    <div class="form-floating mb-3">
-                        <input class="form-control" id="phone" type="tel" placeholder="(123) 456-7890" data-sb-validations="required" />
-                        <label for="phone">Phone number</label>
-                        <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
-                    </div>
-                    <!-- Message input-->
-                    <div class="form-floating mb-3">
-                        <textarea class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required"></textarea>
-                        <label for="message">Message</label>
-                        <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
-                    </div>
-                    <!-- Submit success message-->
-                    <!---->
-                    <!-- This is what your users will see when the form-->
-                    <!-- has successfully submitted-->
-                    <div class="d-none" id="submitSuccessMessage">
-                        <div class="text-center mb-3">
-                            <div class="fw-bolder">Form submission successful!</div>
-                            To activate this form, sign up at
-                            <br />
-                            <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                        </div>
-                    </div>
-                    <!-- Submit error message-->
-                    <!---->
-                    <!-- This is what your users will see when there is-->
-                    <!-- an error submitting the form-->
-                    <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
-                    <!-- Submit Button-->
-                    <button class="btn btn-primary btn-xl disabled" id="submitButton" type="submit">Send</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
+<!--<section class="page-section" id="contact">-->
+<!--    <div class="container">-->
+<!--        &lt;!&ndash; Contact Section Heading&ndash;&gt;-->
+<!--        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Contact Me</h2>-->
+<!--        &lt;!&ndash; Icon Divider&ndash;&gt;-->
+<!--        <div class="divider-custom">-->
+<!--            <div class="divider-custom-line"></div>-->
+<!--            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>-->
+<!--            <div class="divider-custom-line"></div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; Contact Section Form&ndash;&gt;-->
+<!--        <div class="row justify-content-center">-->
+<!--            <div class="col-lg-8 col-xl-7">-->
+<!--                &lt;!&ndash; * * * * * * * * * * * * * * *&ndash;&gt;-->
+<!--                &lt;!&ndash; * * SB Forms Contact Form * *&ndash;&gt;-->
+<!--                &lt;!&ndash; * * * * * * * * * * * * * * *&ndash;&gt;-->
+<!--                &lt;!&ndash; This form is pre-integrated with SB Forms.&ndash;&gt;-->
+<!--                &lt;!&ndash; To make this form functional, sign up at&ndash;&gt;-->
+<!--                &lt;!&ndash; https://startbootstrap.com/solution/contact-forms&ndash;&gt;-->
+<!--                &lt;!&ndash; to get an API token!&ndash;&gt;-->
+<!--                <form id="contactForm" data-sb-form-api-token="API_TOKEN">-->
+<!--                    &lt;!&ndash; Name input&ndash;&gt;-->
+<!--                    <div class="form-floating mb-3">-->
+<!--                        <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />-->
+<!--                        <label for="name">Full name</label>-->
+<!--                        <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash; Email address input&ndash;&gt;-->
+<!--                    <div class="form-floating mb-3">-->
+<!--                        <input class="form-control" id="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" />-->
+<!--                        <label for="email">Email address</label>-->
+<!--                        <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>-->
+<!--                        <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash; Phone number input&ndash;&gt;-->
+<!--                    <div class="form-floating mb-3">-->
+<!--                        <input class="form-control" id="phone" type="tel" placeholder="(123) 456-7890" data-sb-validations="required" />-->
+<!--                        <label for="phone">Phone number</label>-->
+<!--                        <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash; Message input&ndash;&gt;-->
+<!--                    <div class="form-floating mb-3">-->
+<!--                        <textarea class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required"></textarea>-->
+<!--                        <label for="message">Message</label>-->
+<!--                        <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash; Submit success message&ndash;&gt;-->
+<!--                    &lt;!&ndash;&ndash;&gt;-->
+<!--                    &lt;!&ndash; This is what your users will see when the form&ndash;&gt;-->
+<!--                    &lt;!&ndash; has successfully submitted&ndash;&gt;-->
+<!--                    <div class="d-none" id="submitSuccessMessage">-->
+<!--                        <div class="text-center mb-3">-->
+<!--                            <div class="fw-bolder">Form submission successful!</div>-->
+<!--                            To activate this form, sign up at-->
+<!--                            <br />-->
+<!--                            <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash; Submit error message&ndash;&gt;-->
+<!--                    &lt;!&ndash;&ndash;&gt;-->
+<!--                    &lt;!&ndash; This is what your users will see when there is&ndash;&gt;-->
+<!--                    &lt;!&ndash; an error submitting the form&ndash;&gt;-->
+<!--                    <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>-->
+<!--                    &lt;!&ndash; Submit Button&ndash;&gt;-->
+<!--                    <button class="btn btn-primary btn-xl disabled" id="submitButton" type="submit">Send</button>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
+
+<!--<script>-->
+<!--    $(document).ready(function(){-->
+<!--        $("#contactForm").submit(function(event){-->
+<!--            event.preventDefault(); // 폼 제출의 기본 동작 방지-->
+
+<!--            var formData = {-->
+<!--                name: $("#name").val(),-->
+<!--                email: $("#email").val(),-->
+<!--                phone: $("#phone").val(),-->
+<!--                message: $("#message").val()-->
+<!--            };-->
+
+<!--            $.ajax({-->
+<!--                type: "POST",-->
+<!--                url: "/sendEmail", // 서버의 엔드포인트로 변경하세요-->
+<!--                data: JSON.stringify(formData),-->
+<!--                contentType: "application/json; charset=utf-8",-->
+<!--                dataType: "json",-->
+<!--                success: function(data){-->
+<!--                    alert("Message sent successfully!");-->
+<!--                    // 성공적으로 메시지를 전송했을 때의 처리-->
+<!--                },-->
+<!--                error: function(errMsg) {-->
+<!--                    alert("Error sending message!");-->
+<!--                    // 메시지 전송에 실패했을 때의 처리-->
+<!--                }-->
+<!--            });-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
 <!-- Footer-->
 <footer class="footer text-center">
     <div class="container">
@@ -378,6 +475,7 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <!-- Portfolio Modal - Title-->
+
                             <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">통나무 집</h2>
                             <!-- Icon Divider-->
                             <div class="divider-custom">
@@ -390,6 +488,9 @@
                             <!-- Portfolio Modal - Text-->
                             <p class="mb-4">통나무 집의 평균 가격은 450만원입니다.</p>
                             <p class="mb-4">해당 누적 금액으로 살 수 있는 통나무 집의 개수는 <span id="logCabin"></span>입니다.</p>
+
+                            <p class="mb-4">"오두막은 마치 인생의 잠깐 휴식처 같아요. 그래서 '오두막'이라는 말을 들으면 자동으로 '아, 휴가 좀 가고 싶다' 생각이 들죠!"</p>
+
 
                             <button class="btn btn-primary" data-bs-dismiss="modal">
                                 <i class="fas fa-xmark fa-fw"></i>
@@ -422,8 +523,11 @@
                             <!-- Portfolio Modal - Image-->
                             <img class="img-fluid rounded mb-5" src="assets/img/portfolio/cake.png" alt="..." />
                             <!-- Portfolio Modal - Text-->
+
                             <p class="mb-4">스벅 초코 케이크 한 조각의 가격은 5,900원입니다.</p>
                             <p class="mb-4">해당 누적 금액으로 살 수 있는 스벅 초코 케이크 한 조각의 개수는 <span id="cochoCake"></span>입니다.</p>
+
+                            <p class="mb-4">"초코파이를 먹다가 '와, 이거 너무 맛있어서 하나 더 먹고 싶다!' 하면서 하나를 더 먹는데, 그때 '초코파이는 한 개만 먹는다는 말을 들어봤어?'라는 소리가 들려오면, 그건 아마도 초코파이 자체가 내게 말을 걸고 있는 거야!"</p>
                             <button class="btn btn-primary" data-bs-dismiss="modal">
                                 <i class="fas fa-xmark fa-fw"></i>
                                 창 닫기
@@ -455,8 +559,11 @@
                             <!-- Portfolio Modal - Image-->
                             <img class="img-fluid rounded mb-5" src="assets/img/portfolio/circus.png" alt="..." />
                             <!-- Portfolio Modal - Text-->
+
                             <p class="mb-4">서커스 텐트 1대의 가격은 74만 8천원입니다.</p>
                             <p class="mb-4">해당 누적 금액으로 살 수 있는 서커스 텐트의 개수는 <span id="circusTent"></span>입니다.</p>
+
+                            <p class="mb-4">"서커스는 마치 마법같은 곳이에요. 거기에 들어가면 현실에서는 상상할 수 없는 일들이 벌어지죠. 단지 '산타가 있을 거야' 생각하면서 기대하면 안 돼요!"</p>
                             <button class="btn btn-primary" data-bs-dismiss="modal">
                                 <i class="fas fa-xmark fa-fw"></i>
                                 창 닫기
@@ -488,8 +595,16 @@
                             <!-- Portfolio Modal - Image-->
                             <img class="img-fluid rounded mb-5" src="assets/img/portfolio/game.png" alt="..." />
                             <!-- Portfolio Modal - Text-->
+
                             <p class="mb-4">게임 컨트롤러 1개의 평균 가격은 45,050원입니다.</p>
                             <p class="mb-4">해당 누적 금액으로 살 수 있는 게임 컨트롤러의 개수는 <span id="gameController"></span>입니다.</p>
+
+                            <p class="mb-4">
+                                Controller에 관한 재미있는 사실 중 하나는, 현대 소프트웨어 개발에서 Controller가 MVC 패턴에서 중요한 역할을 한다는 것입니다. MVC는 Model-View-Controller의 약자로, 사용자 인터페이스를 구성하는 세 가지 요소를 나타냅니다. 여기서 Controller는 사용자의 입력을 처리하고 Model과 View 간의 상호 작용을 조정합니다.
+
+                                또한, 재미있는 사실 중 하나는 스프링(Spring) 프레임워크에서 Controller를 작성할 때 @Controller 어노테이션을 사용한다는 것입니다. 이 어노테이션은 해당 클래스가 웹 애플리케이션의 컨트롤러임을 나타내며, 스프링에게 해당 클래스를 검색하고 관리하도록 지시합니다.
+
+                                또한, Controller가 클라이언트로부터 요청을 받고 적절한 서비스나 비즈니스 로직을 호출하여 응답을 생성하는데 사용되는 것을 알 수 있습니다. 이런 식으로 Controller는 웹 애플리케이션의 중심 역할을 하며, 사용자와 애플리케이션 간의 상호 작용을 담당합니다.</p>
                             <button class="btn btn-primary" data-bs-dismiss="modal">
                                 <i class="fas fa-xmark fa-fw"></i>
                                 창 닫기
@@ -511,7 +626,7 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <!-- Portfolio Modal - Title-->
-                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Locked Safe</h2>
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">금고</h2>
                             <!-- Icon Divider-->
                             <div class="divider-custom">
                                 <div class="divider-custom-line"></div>
@@ -521,8 +636,11 @@
                             <!-- Portfolio Modal - Image-->
                             <img class="img-fluid rounded mb-5" src="assets/img/portfolio/safe.png" alt="..." />
                             <!-- Portfolio Modal - Text-->
+
                             <p class="mb-4">금고 1개의 평균 가격은 114만4천원입니다.</p>
                             <p class="mb-4">해당 누적 금액으로 살 수 있는 금고의 개수는 <span id="lockedSafed"></span>입니다.</p>
+
+                            <p class="mb-4">어떤 사람들은 금고에 잠겨있는 비밀을 알아내기 위해 수년간 노력합니다. 그렇게 시간을 보내던 어느 날, 한 사람이 마침내 금고를 열었는데, 그 안에는 엄청난 비밀이나 보물이 들어있는 게 아니었습니다. 대신 그 안에는 다른 금고가 있었다고 해요! 그것이 어떻게 된 일일까요? 아마도 그 비밀을 알아내는 것이 이제 시작일지도 모르겠네요!</p>
                             <button class="btn btn-primary" data-bs-dismiss="modal">
                                 <i class="fas fa-xmark fa-fw"></i>
                                 창 닫기
@@ -554,8 +672,11 @@
                             <!-- Portfolio Modal - Image-->
                             <img class="img-fluid rounded mb-5" src="assets/img/portfolio/submarine.png" alt="..." />
                             <!-- Portfolio Modal - Text-->
+
                             <p class="mb-4">잠수함 1개의 평균 가격은 1조 4천억원입니다.</p>
                             <p class="mb-4">해당 누적 금액으로 살 수 있는 잠수함의 개수는 <span id="submarine"></span>입니다.</p>
+
+                            <p class="mb-4">잠수정에 관한 재미있는 사실을 알고 계시나요? 바로 이것인데, 1916년에는 세계 최초의 여행용 잠수정이 만들어졌는데요, 그 이름은 "오너리다"였습니다. 이 잠수정은 당시 최신 기술을 사용하여 바닷속을 탐험하고 사람들에게 놀라운 경험을 제공했습니다. 이렇게 보니 잠수정은 역사적으로도 흥미로운 차원이 있죠!</p>
                             <button class="btn btn-primary" data-bs-dismiss="modal">
                                 <i class="fas fa-xmark fa-fw"></i>
                                 창닫기
@@ -754,8 +875,8 @@
             success: function (res) {
                 console.log("성공", res);
                 // 데이터 추가
-                document.getElementById("ranking").innerText = "상위 " + res.Ranking + "%";
-                document.getElementById("totalWinning").innerText = res.totalWinning + "원";
+                document.getElementById("ranking").innerText = "상위 " + res.Ranking + "%" +"\n" +"( Beta.ver)" +"\n"+"\n";
+                document.getElementById("totalWinning").innerText = res.totalWinning + "원" +"\n"+"\n";
                 document.getElementById("logCabin").innerText = res.logCabin + "채";
                 document.getElementById("cochoCake").innerText = res.cochoCake + "개";
                 document.getElementById("circusTent").innerText = res.circusTent + "대";
@@ -763,7 +884,7 @@
                 document.getElementById("lockedSafed").innerText = res.lockedSafed + "개";
                 document.getElementById("submarine").innerText = res.submarine + "대";
 
-                resultListElement.innerHTML = "<li>" + res.totalWinning + "</li>";
+                resultListElement.innerHTML = "<li>" + res.totalWinning + "</li>" + +"\n"+"\n"+"\n" ;
 
                 // 기존 내용 비우기
                 resultListElement.innerHTML = "";
