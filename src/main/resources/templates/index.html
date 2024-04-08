@@ -250,69 +250,11 @@
 
 </section>
 <!-- About Section-->
-<section class="page-section bg-primary text-white mb-0" id="about" style="text-align: center">
+<section class="page-section bg-primary text-white mb-0" id="about" >
 
 
 
-    <h2>Contact LuCo</h2>
-    <form id="contactForm">
-        <div>
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-        </div>
-        <div>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-        <div>
-            <label for="phone">Phone:</label>
-            <input type="tel" id="phone" name="phone">
-        </div>
-        <div>
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" required></textarea>
-        </div>
-        <button type="submit">Send</button>
-    </form>
 
-    <script>
-        $(document).ready(function(){
-            $("#contactForm").submit(function(event){
-                event.preventDefault(); // Prevent the default form submit action
-
-                var formData = {
-                    name: $("#name").val(),
-                    email: $("#email").val(),
-                    phone: $("#phone").val(),
-                    message: $("#message").val()
-                };
-
-                // var header = $("meta[name='_csrf_header']").attr('content');
-                // var token = $("meta[name='_csrf']").attr('content');
-
-                $.ajax({
-                    type: "POST",
-                    url: "/sendEmail",
-
-                    // beforeSend: function(xhr){
-                    //     xhr.setRequestHeader(header, token);
-                    // },
-
-
-                    contentType: "application/json",
-                    data: JSON.stringify(formData),
-                    success: function(response) {
-                        alert("연락주셔서 감사합니다 ~ 빠른 시일 내에 확인하겠습니다 ! ")
-                        // Optionally clear the form here
-                        $("#contactForm")[0].reset();
-                    },
-                    error: function(xhr, status, error) {
-                        alert("An error occurred: " + xhr.responseText);
-                    }
-                });
-            });
-        });
-    </script>
 
     <br>
     <br>
@@ -338,107 +280,100 @@
     </div>
 </section>
 <!-- Contact Section-->
-<!--<section class="page-section" id="contact">-->
-<!--    <div class="container">-->
-<!--        &lt;!&ndash; Contact Section Heading&ndash;&gt;-->
-<!--        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Contact Me</h2>-->
-<!--        &lt;!&ndash; Icon Divider&ndash;&gt;-->
-<!--        <div class="divider-custom">-->
-<!--            <div class="divider-custom-line"></div>-->
-<!--            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>-->
-<!--            <div class="divider-custom-line"></div>-->
-<!--        </div>-->
-<!--        &lt;!&ndash; Contact Section Form&ndash;&gt;-->
-<!--        <div class="row justify-content-center">-->
-<!--            <div class="col-lg-8 col-xl-7">-->
-<!--                &lt;!&ndash; * * * * * * * * * * * * * * *&ndash;&gt;-->
-<!--                &lt;!&ndash; * * SB Forms Contact Form * *&ndash;&gt;-->
-<!--                &lt;!&ndash; * * * * * * * * * * * * * * *&ndash;&gt;-->
-<!--                &lt;!&ndash; This form is pre-integrated with SB Forms.&ndash;&gt;-->
-<!--                &lt;!&ndash; To make this form functional, sign up at&ndash;&gt;-->
-<!--                &lt;!&ndash; https://startbootstrap.com/solution/contact-forms&ndash;&gt;-->
-<!--                &lt;!&ndash; to get an API token!&ndash;&gt;-->
-<!--                <form id="contactForm" data-sb-form-api-token="API_TOKEN">-->
-<!--                    &lt;!&ndash; Name input&ndash;&gt;-->
-<!--                    <div class="form-floating mb-3">-->
-<!--                        <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />-->
-<!--                        <label for="name">Full name</label>-->
-<!--                        <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>-->
-<!--                    </div>-->
-<!--                    &lt;!&ndash; Email address input&ndash;&gt;-->
-<!--                    <div class="form-floating mb-3">-->
-<!--                        <input class="form-control" id="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" />-->
-<!--                        <label for="email">Email address</label>-->
-<!--                        <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>-->
-<!--                        <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>-->
-<!--                    </div>-->
-<!--                    &lt;!&ndash; Phone number input&ndash;&gt;-->
-<!--                    <div class="form-floating mb-3">-->
-<!--                        <input class="form-control" id="phone" type="tel" placeholder="(123) 456-7890" data-sb-validations="required" />-->
-<!--                        <label for="phone">Phone number</label>-->
-<!--                        <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>-->
-<!--                    </div>-->
-<!--                    &lt;!&ndash; Message input&ndash;&gt;-->
-<!--                    <div class="form-floating mb-3">-->
-<!--                        <textarea class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required"></textarea>-->
-<!--                        <label for="message">Message</label>-->
-<!--                        <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>-->
-<!--                    </div>-->
-<!--                    &lt;!&ndash; Submit success message&ndash;&gt;-->
-<!--                    &lt;!&ndash;&ndash;&gt;-->
-<!--                    &lt;!&ndash; This is what your users will see when the form&ndash;&gt;-->
-<!--                    &lt;!&ndash; has successfully submitted&ndash;&gt;-->
-<!--                    <div class="d-none" id="submitSuccessMessage">-->
-<!--                        <div class="text-center mb-3">-->
-<!--                            <div class="fw-bolder">Form submission successful!</div>-->
-<!--                            To activate this form, sign up at-->
-<!--                            <br />-->
-<!--                            <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    &lt;!&ndash; Submit error message&ndash;&gt;-->
-<!--                    &lt;!&ndash;&ndash;&gt;-->
-<!--                    &lt;!&ndash; This is what your users will see when there is&ndash;&gt;-->
-<!--                    &lt;!&ndash; an error submitting the form&ndash;&gt;-->
-<!--                    <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>-->
-<!--                    &lt;!&ndash; Submit Button&ndash;&gt;-->
-<!--                    <button class="btn btn-primary btn-xl disabled" id="submitButton" type="submit">Send</button>-->
-<!--                </form>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</section>-->
+<section class="page-section" id="contact" style="text-align: center">
+    <div class="container">
+        <h2>Contact LuCo</h2>
+        <form id="contactForm">
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div>
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" name="phone">
+            </div>
+            <div>
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit">Send</button>
+        </form>
 
-<!--<script>-->
-<!--    $(document).ready(function(){-->
-<!--        $("#contactForm").submit(function(event){-->
-<!--            event.preventDefault(); // 폼 제출의 기본 동작 방지-->
+        <script>
+            $(document).ready(function(){
+                $("#contactForm").submit(function(event){
+                    event.preventDefault(); // Prevent the default form submit action
 
-<!--            var formData = {-->
-<!--                name: $("#name").val(),-->
-<!--                email: $("#email").val(),-->
-<!--                phone: $("#phone").val(),-->
-<!--                message: $("#message").val()-->
-<!--            };-->
+                    var formData = {
+                        name: $("#name").val(),
+                        email: $("#email").val(),
+                        phone: $("#phone").val(),
+                        message: $("#message").val()
+                    };
 
-<!--            $.ajax({-->
-<!--                type: "POST",-->
-<!--                url: "/sendEmail", // 서버의 엔드포인트로 변경하세요-->
-<!--                data: JSON.stringify(formData),-->
-<!--                contentType: "application/json; charset=utf-8",-->
-<!--                dataType: "json",-->
-<!--                success: function(data){-->
-<!--                    alert("Message sent successfully!");-->
-<!--                    // 성공적으로 메시지를 전송했을 때의 처리-->
-<!--                },-->
-<!--                error: function(errMsg) {-->
-<!--                    alert("Error sending message!");-->
-<!--                    // 메시지 전송에 실패했을 때의 처리-->
-<!--                }-->
-<!--            });-->
-<!--        });-->
-<!--    });-->
-<!--</script>-->
+                    // var header = $("meta[name='_csrf_header']").attr('content');
+                    // var token = $("meta[name='_csrf']").attr('content');
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/sendEmail",
+
+                        // beforeSend: function(xhr){
+                        //     xhr.setRequestHeader(header, token);
+                        // },
+
+
+                        contentType: "application/json",
+                        data: JSON.stringify(formData),
+                        success: function(response) {
+                            alert("연락주셔서 감사합니다 ~ 빠른 시일 내에 확인하겠습니다 ! ")
+                            // Optionally clear the form here
+                            $("#contactForm")[0].reset();
+                        },
+                        error: function(xhr, status, error) {
+                            alert("An error occurred: " + xhr.responseText);
+                        }
+                    });
+                });
+            });
+        </script>
+    </div>
+</section>
+
+<script>
+    $(document).ready(function(){
+        $("#contactForm").submit(function(event){
+            event.preventDefault(); // 폼 제출의 기본 동작 방지
+
+            var formData = {
+                name: $("#name").val(),
+                email: $("#email").val(),
+                phone: $("#phone").val(),
+                message: $("#message").val()
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/sendEmail", // 서버의 엔드포인트로 변경하세요
+                data: JSON.stringify(formData),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function(data){
+                    alert("Message sent successfully!");
+                    // 성공적으로 메시지를 전송했을 때의 처리
+                },
+                error: function(errMsg) {
+                    alert("Error sending message!");
+                    // 메시지 전송에 실패했을 때의 처리
+                }
+            });
+        });
+    });
+</script>
 <!-- Footer-->
 
 <footer class="footer text-center">
@@ -488,8 +423,8 @@
             url: '/stats',
             type: 'GET',
             success: function(data) {
-                $('#visitorCount').text('Visitor Count: ' + data.visitorCount+"명");
-                $('#useUserCount').text('Using User: ' + data.userCount+"명");
+                $('#visitorCount').text('방문자: ' + data.visitorCount+"명");
+                $('#useUserCount').text('이용자: ' + data.userCount+"명");
 
             },
             error: function(error) {
