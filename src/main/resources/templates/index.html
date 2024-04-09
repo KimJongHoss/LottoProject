@@ -24,7 +24,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
+
+    <meta name="당신의 행운을 확인하세요: 실시간 로또 누적 당첨액" content="환영합니다! 루코에서는 매주 업데이트되는 로또 누적 당첨액을 통해 당신의 꿈을 한 걸음 더 가깝게 할 수 있습니다. 최신 당첨 정보, 통계, 그리고 당첨 팁까지! 당신의 행운을 지금 바로 확인해보세요.">
+
     <title>1회부터 지금까지 로또를 샀다면?</title>
+
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/lucoFavicon2.png" />
     <!-- Font Awesome icons (free version)-->
@@ -344,9 +348,13 @@
                             // Optionally clear the form here
                             $("#contactForm")[0].reset();
                         },
-                        error: function(xhr, status, error) {
-                            alert("An error occurred: " + xhr.responseText);
+
+                        error: function(xhr) {
+                            console.log(xhr.responseText);
+                            var errorMessage = xhr.responseText; // 서버에서 받은 JSON 응답
+                            alert(errorMessage);
                         }
+
                     });
                 });
             });
@@ -830,7 +838,7 @@
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
-<script src="js/scripts.js"></script>
+<script src="static/js/scripts.js"></script>
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
 <!-- * *                               SB Forms JS                               * *-->
 <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
@@ -881,16 +889,16 @@
 
         const numbers = [num1, num2, num3, num4, num5, num6].map(Number); // 문자열을 숫자로 변환
 
-        // 유효성 검사: 모든 번호가 1~45 범위 내에 있는지 확인
-        const isValidRange = numbers.every(num => num >= 1 && num <= 45);
-
-        // 유효성 검사: 중복된 번호가 없는지 확인
-        const isUnique = numbers.length === new Set(numbers).size;
-
-        if (!isValidRange || !isUnique) {
-            alert("번호는 1부터 45 사이여야 하며, 중복될 수 없습니다.");
-            return; // 유효하지 않으면 여기서 함수 실행을 중단
-        }
+        // // 유효성 검사: 모든 번호가 1~45 범위 내에 있는지 확인
+        // const isValidRange = numbers.every(num => num >= 1 && num <= 45);
+        //
+        // // 유효성 검사: 중복된 번호가 없는지 확인
+        // const isUnique = numbers.length === new Set(numbers).size;
+        //
+        // if (!isValidRange || !isUnique) {
+        //     alert("번호는 1부터 45 사이여야 하며, 중복될 수 없습니다.");
+        //     return; // 유효하지 않으면 여기서 함수 실행을 중단
+        // }
 
         const params = {
             "num1": num1,
@@ -958,6 +966,7 @@
             //요청이 실패했을 때 실행되는 부분
             error: function () {
                 console.log("실패");
+                $('#failureModal').modal('show');
             },
 
 
@@ -966,5 +975,26 @@
     }
 
 </script>
+
+<!--요청 실패 모달창-->
+<div class="modal fade" id="failureModal" tabindex="-1" aria-labelledby="failureModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="failureModalLabel">잘 못된 숫자 입력</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                올바른 숫자를 입력해주세요.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 </body>
 </html>
