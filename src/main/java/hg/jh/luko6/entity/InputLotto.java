@@ -23,4 +23,8 @@ public class InputLotto {
     int num4;
     int num5;
     int num6;
+
+
+
+
 }
