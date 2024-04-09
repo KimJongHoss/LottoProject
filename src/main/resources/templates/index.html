@@ -348,9 +348,13 @@
                             // Optionally clear the form here
                             $("#contactForm")[0].reset();
                         },
-                        error: function(xhr, status, error) {
-                            alert("An error occurred: " + xhr.responseText);
+
+                        error: function(xhr) {
+                            console.log(xhr.responseText);
+                            var errorMessage = xhr.responseText; // 서버에서 받은 JSON 응답
+                            alert(errorMessage);
                         }
+
                     });
                 });
             });
