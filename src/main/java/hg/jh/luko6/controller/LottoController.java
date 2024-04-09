@@ -1,15 +1,18 @@
 package hg.jh.luko6.controller;
 
 
+import hg.jh.luko6.DTO.NumberDTO;
 import hg.jh.luko6.entity.*;
 import hg.jh.luko6.repository.VisitStatsRepository;
 import hg.jh.luko6.service.LottoService;
+import hg.jh.luko6.service.NumberCheckService;
 import hg.jh.luko6.service.VisitStatsService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,9 +27,11 @@ import java.util.*;
 public class LottoController {
 
     private final LottoService lottoService;
-    private  final VisitStatsService visitStatsService;
+    private final VisitStatsService visitStatsService;
+    private final NumberCheckService numberCheckService;
     @Autowired
     private VisitStatsRepository visitStatsRepository;
+
 
 
 
@@ -119,7 +124,16 @@ public class LottoController {
 
 
     @PostMapping("/lottoResult")
-    public @ResponseBody Map<String, Object> getLotto(@RequestBody InputLotto inputLotto){
+    public @ResponseBody ResponseEntity<?> getLotto(@RequestBody InputLotto inputLotto){
+
+        NumberDTO dto = numberCheckService.getInputEntity(inputLotto);//가져온 번호 6개를 이용해서 dto 생성
+        // NumberCheckService를 사용하여 유효성 검사 수행
+        boolean isValid = numberCheckService.processNumberDTO(dto);
+        if (!isValid) {
+            // 유효하지 않은 경우 400 Bad Request를 반환
+            return ResponseEntity.badRequest().body("유효하지 않은 입력입니다.");
+        }
+
 
         log.info("들어간값 : "+inputLotto);
         log.info("1번 : "+inputLotto.getNum1());
@@ -237,7 +251,7 @@ public class LottoController {
 
         log.info("로또 맵:"+lottoMap);
 
-        return lottoMap;
+        return ResponseEntity.ok(lottoMap);
 
     }
 
