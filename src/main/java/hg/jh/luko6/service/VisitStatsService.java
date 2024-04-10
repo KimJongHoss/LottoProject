@@ -27,7 +27,7 @@ public class VisitStatsService {
 
     // VisitStats 객체 초기화 메서드
     private void initializeVisitStats() {
-        Optional<VisitStats> optionalVisitStats = visitStatsRepository.findById(1L);
+        Optional<VisitStats> optionalVisitStats = visitStatsRepository.findById(2L);
         visitStats = optionalVisitStats.orElseGet(VisitStats::new);
     }
 
@@ -38,8 +38,6 @@ public class VisitStatsService {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals(VISIT_COUNTER_COOKIE)) {
                     // 쿠키가 이미 존재한다면 DB에서 방문자 수를 가져와 반환합니다.
-                    log.info("쿠키가 있네요!?!?!?");
-                    log.info("for문 돌린 쿠키: "+cookie.getName());
                     return visitStats.getVisitorCount();
                 }
             }
@@ -64,7 +62,6 @@ public class VisitStatsService {
         response.addCookie(newCookie);
 
         // 로그 추가: incrementVisitorCount 메서드가 호출되었음을 표시
-        log.info("incrementVisitorCount 메서드 호출됨");
 
         return visitorCount;
     }
