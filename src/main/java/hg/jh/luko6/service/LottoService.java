@@ -8,10 +8,8 @@ import hg.jh.luko6.repository.LottoRepository;
 import hg.jh.luko6.repository.PercentageRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,29 +19,19 @@ import java.util.List;
 public class LottoService {
 
     private final LottoRepository lottoRepository;
-
     private final PercentageRepository percentageRepository;
 
-
     public void addPercentage(Long totalWinning){
-
 
         Percentage percentage = new Percentage();
 
         percentage.setTotalWinning(totalWinning);
 
-
         percentageRepository.save(percentage);
-
-
-
-
-
 
     }
 
     public Double calculatePercentage(Long totalWinning){
-
 
         Long Ranked= percentageRepository.findByTotalWinning(totalWinning);
 
@@ -52,9 +40,6 @@ public class LottoService {
         return Ranked.doubleValue()/totalCount.doubleValue();
 
     }
-
-
-
 
 
 
@@ -96,14 +81,10 @@ public class LottoService {
 
             //2등로직
             if (score == 5) {
-                log.info(score);
-                log.info(lotto.getNo7());
-                log.info(lotto);
+
                 for(String inputStr : inputArr ) {
-                    log.info(lotto.getNo7() + " for문 안에 들어옴: 2등보너스 번호");
-                    log.info(inputStr + " for문 안에 들어옴: 입력한 번호");
+
                     if (lotto.getNo7().equals(inputStr)) {
-                        log.info(lotto.getNo7() + "if문 안에 들어옴");
                         score += 10;
                     }
                 }
@@ -112,10 +93,6 @@ public class LottoService {
 
             // 출력되야할 리스트에 넣는 부분.
             if(score>10){
-                log.info("2등");
-                log.info("라운드" + lotto.getRound());
-                log.info(score);
-
 
                 outputLotto.setRound(lotto.getRound());
                 outputLotto.setWinning(lotto.getSecondWinning());
@@ -124,10 +101,6 @@ public class LottoService {
                 outputLottoList.add(outputLotto);
 
             }else if(score==6){
-                log.info("라운드" + lotto.getRound());
-                log.info("1등");
-                log.info(score);
-
 
                     outputLotto.setRound(lotto.getRound());
                     outputLotto.setWinning(lotto.getFirstWinning());
@@ -136,10 +109,6 @@ public class LottoService {
                     outputLottoList.add(outputLotto);
 
             }else if(score==5){
-                    log.info("라운드" + lotto.getRound());
-                    log.info("3등");
-                    log.info(score);
-
 
                     outputLotto.setRound(lotto.getRound());
                     outputLotto.setWinning(lotto.getThirdWinning());
@@ -148,10 +117,6 @@ public class LottoService {
                     outputLottoList.add(outputLotto);
 
             }else if(score==4){
-                log.info("라운드" + lotto.getRound());
-                log.info("4등");
-                log.info(score);
-
 
                     outputLotto.setRound(lotto.getRound());
                     outputLotto.setWinning(lotto.getFourthWinning());
@@ -161,10 +126,6 @@ public class LottoService {
 
 
             }else if(score==3){
-                log.info("라운드" + lotto.getRound());
-                log.info("5등");
-                log.info(score);
-
 
                     outputLotto.setRound(lotto.getRound());
                     outputLotto.setWinning(lotto.getFifthWinning());
@@ -172,16 +133,11 @@ public class LottoService {
 
                     outputLottoList.add(outputLotto);
 
-            }else{
-
             }
 
 
         }
 
-        log.info("어디서ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ잘모된거야?????????");
-
-        log.info(outputLottoList);
 
         return outputLottoList;
 

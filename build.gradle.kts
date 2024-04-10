@@ -35,6 +35,8 @@ dependencies {
 
     implementation ("org.springframework.boot:spring-boot-starter-mail")
     implementation ("jakarta.validation:jakarta.validation-api:3.0.0")
+    implementation("org.springframework.boot:spring-boot-starter-aop")
+
 
 
 

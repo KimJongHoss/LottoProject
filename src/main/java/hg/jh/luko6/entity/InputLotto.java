@@ -1,6 +1,5 @@
 package hg.jh.luko6.entity;
 
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,4 +22,5 @@ public class InputLotto {
     int num4;
     int num5;
     int num6;
+
 }

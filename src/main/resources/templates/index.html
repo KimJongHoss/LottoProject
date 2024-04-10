@@ -1,13 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
+
+    <style>
+        .container {
+            max-width: 800px;
+        }
+
+        .card {
+            box-shadow: 0 4px 6px rgba(0,0,0,.1);
+        }
+
+        .form-label {
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background-color: #004085;
+            border-color: #004085;
+        }
+    </style>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
+
+    <meta name="당신의 행운을 확인하세요: 실시간 로또 누적 당첨액" content="환영합니다! 루코에서는 매주 업데이트되는 로또 누적 당첨액을 통해 당신의 꿈을 한 걸음 더 가깝게 할 수 있습니다. 최신 당첨 정보, 통계, 그리고 당첨 팁까지! 당신의 행운을 지금 바로 확인해보세요.">
+
     <title>1회부터 지금까지 로또를 샀다면?</title>
+
     <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="assets/lucoFavicon.png" />
+    <link rel="icon" type="image/x-icon" href="assets/lucoFavicon2.png" />
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
@@ -20,9 +43,9 @@
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
 
-    로컬환경에서 주석처리하기
-    <meta name="_csrf_header" th:content="${_csrf.headerName}">
-    <meta name="_csrf" th:content="${_csrf.token}">
+<!--    로컬환경에서 주석처리하기-->
+<!--    <meta name="_csrf_header" th:content="${_csrf.headerName}">-->
+<!--    <meta name="_csrf" th:content="${_csrf.token}">-->
 <!--////////////////////////////////////////////////-->
     <style>
     #totalWinning {
@@ -43,7 +66,6 @@
 
 
 
-<!-- Navigation-->
 <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
     <div class="container">
         <a class="navbar-brand" href="#page-top">luco777</a>
@@ -54,20 +76,16 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#portfolio">상품 목록</a></li>
-                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#about">팀 설명</a></li>
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#contact">건의사항</a></li>
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#about">팀 설명</a></li>
             </ul>
         </div>
     </div>
 </nav>
-<!-- Masthead-->
 <header class="masthead bg-primary text-white text-center">
     <div class="container d-flex align-items-center flex-column">
-        <!-- Masthead Avatar Image-->
         <img class="masthead-avatar mb-5" src="assets/img/lottoprofile.png" alt="..." />
-        <!-- Masthead Heading-->
         <h1 class="masthead-heading text-uppercase mb-0">로또 번호</h1>
-        <!-- Icon Divider-->
         <div class="divider-custom divider-light">
             <div class="divider-custom-line"></div>
             <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
@@ -76,7 +94,9 @@
 
 
 
-        <!-- 각 input 필드에는 name 속성이 있어야 서버에서 식별 가능합니다. -->
+
+
+
         <div><label for="num1">번호 1:</label><input type="number" id="num1" name="num1" min="1" max="45" required /></div>
         <div><label for="num2">번호 2:</label><input type="number" id="num2" name="num2" min="1" max="45" required /></div>
         <div><label for="num3">번호 3:</label><input type="number" id="num3" name="num3" min="1" max="45" required /></div>
@@ -93,7 +113,6 @@
         <!-- 제출 버튼 -->
 
         <button class="btn btn-light" data-bs-dismiss="modal" onclick="lottoRandomResult()">
-            <!--            <i class="fas fa-xmark fa-fw"></i>-->
             랜덤 뽑기
         </button>
 
@@ -101,7 +120,6 @@
 
 
         <button class="btn btn-light" data-bs-dismiss="modal" onclick="reset()">
-            <!--            <i class="fas fa-xmark fa-fw"></i>-->
             초기화
         </button>
 
@@ -146,7 +164,7 @@
 
         <button class="btn btn-light" data-bs-dismiss="modal" onclick="lottoResult()">
 <!--            <i class="fas fa-xmark fa-fw"></i>-->
-            결과 보기
+            당첨금 확인
         </button>
         </div>
         <br>
@@ -241,79 +259,109 @@
                 </div>
             </div>
         </div>
-
     </div>
-
 
 </section>
 <!-- About Section-->
+<section class="page-section bg-primary text-white mb-0" id="contact" style="text-align: center">
+
+
+
+    <div>
+
+        <h2 class="page-section-heading text-center text-uppercase text-white">Contact LuCo</h2>
+        <!-- Icon Divider-->
+        <div class="divider-custom divider-light">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <form id="contactForm">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Name:</label>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Your name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email:</label>
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Your email address" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="phone" class="form-label">Phone:</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="Your phone number">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message" class="form-label">Message:</label>
+                                    <textarea class="form-control" id="message" name="message" rows="5" placeholder="Your message" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Send</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <script>
+            $(document).ready(function(){
+                $("#contactForm").submit(function(event){
+                    event.preventDefault(); // Prevent the default form submit action
+
+                    var formData = {
+                        name: $("#name").val(),
+                        email: $("#email").val(),
+                        phone: $("#phone").val(),
+                        message: $("#message").val()
+                    };
+                    //
+                    // var header = $("meta[name='_csrf_header']").attr('content');
+                    // var token = $("meta[name='_csrf']").attr('content');
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/sendEmail",
+
+                        //
+                        // beforeSend: function(xhr){
+                        //     xhr.setRequestHeader(header, token);
+                        // },
+
+
+                        contentType: "application/json",
+                        data: JSON.stringify(formData),
+                        success: function(response) {
+                            alert("연락주셔서 감사합니다 ~ 빠른 시일 내에 확인하겠습니다 ! ")
+                            // Optionally clear the form here
+                            $("#contactForm")[0].reset();
+                        },
+
+                        error: function(xhr) {
+                            console.log(xhr.responseText);
+                            var errorMessage = xhr.responseText; // 서버에서 받은 JSON 응답
+                            alert(errorMessage);
+                        }
+
+                    });
+                });
+            });
+        </script>
+
+    </div>
+
+</section>
+
+
+
+
 <section class="page-section bg-primary text-white mb-0" id="about" style="text-align: center">
 
 
-
-    <h2>Contact LuCo</h2>
-    <form id="contactForm">
-        <div>
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-        </div>
-        <div>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-        <div>
-            <label for="phone">Phone:</label>
-            <input type="tel" id="phone" name="phone">
-        </div>
-        <div>
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" required></textarea>
-        </div>
-        <button type="submit">Send</button>
-    </form>
-
-    <script>
-        $(document).ready(function(){
-            $("#contactForm").submit(function(event){
-                event.preventDefault(); // Prevent the default form submit action
-
-                var formData = {
-                    name: $("#name").val(),
-                    email: $("#email").val(),
-                    phone: $("#phone").val(),
-                    message: $("#message").val()
-                };
-
-                var header = $("meta[name='_csrf_header']").attr('content');
-                var token = $("meta[name='_csrf']").attr('content');
-
-                $.ajax({
-                    type: "POST",
-                    url: "/sendEmail",
-
-                    beforeSend: function(xhr){
-                        xhr.setRequestHeader(header, token);
-                    },
-
-
-                    contentType: "application/json",
-                    data: JSON.stringify(formData),
-                    success: function(response) {
-                        alert("연락주셔서 감사합니다 ~ 빠른 시일 내에 확인하겠습니다 ! ")
-                        // Optionally clear the form here
-                        $("#contactForm")[0].reset();
-                    },
-                    error: function(xhr, status, error) {
-                        alert("An error occurred: " + xhr.responseText);
-                    }
-                });
-            });
-        });
-    </script>
-
-    <br>
-    <br>
-    <br>
 
     <div class="container">
         <!-- About Section Heading-->
@@ -326,7 +374,7 @@
         </div>
         <!-- About Section Content-->
         <div class="row">
-            <div class="col-lg-4 ms-auto"><p class="lead">빛나는, 반짝이는이라는 의미를 가지고 있어 조원 각자의 능력과 열정이 빛을 발하고 함께 빛을 내며 프로젝트를 이끌어 나가는 의미를 담고 있습니다.</p></div>
+            <div class="col-lg-4 ms-auto"><p class="lead">빛나는, 반짝이는이라는 의미를 가지고 있어 각자의 능력과 열정이 빛을 발하고 함께 빛을 내며 프로젝트를 이끌어 나가는 의미를 담고 있습니다.</p></div>
             <div class="col-lg-4 me-auto"><p class="lead"> 또한 "코더스"는 개발자들을 의미하여 프로젝트에서 함께 코드를 작성하고 빛을 발하는 팀원들을 상징합니다.</p></div>
         </div>
         <!-- About Section Button-->
@@ -334,109 +382,15 @@
         </div>
     </div>
 </section>
-<!-- Contact Section-->
-<!--<section class="page-section" id="contact">-->
-<!--    <div class="container">-->
-<!--        &lt;!&ndash; Contact Section Heading&ndash;&gt;-->
-<!--        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Contact Me</h2>-->
-<!--        &lt;!&ndash; Icon Divider&ndash;&gt;-->
-<!--        <div class="divider-custom">-->
-<!--            <div class="divider-custom-line"></div>-->
-<!--            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>-->
-<!--            <div class="divider-custom-line"></div>-->
-<!--        </div>-->
-<!--        &lt;!&ndash; Contact Section Form&ndash;&gt;-->
-<!--        <div class="row justify-content-center">-->
-<!--            <div class="col-lg-8 col-xl-7">-->
-<!--                &lt;!&ndash; * * * * * * * * * * * * * * *&ndash;&gt;-->
-<!--                &lt;!&ndash; * * SB Forms Contact Form * *&ndash;&gt;-->
-<!--                &lt;!&ndash; * * * * * * * * * * * * * * *&ndash;&gt;-->
-<!--                &lt;!&ndash; This form is pre-integrated with SB Forms.&ndash;&gt;-->
-<!--                &lt;!&ndash; To make this form functional, sign up at&ndash;&gt;-->
-<!--                &lt;!&ndash; https://startbootstrap.com/solution/contact-forms&ndash;&gt;-->
-<!--                &lt;!&ndash; to get an API token!&ndash;&gt;-->
-<!--                <form id="contactForm" data-sb-form-api-token="API_TOKEN">-->
-<!--                    &lt;!&ndash; Name input&ndash;&gt;-->
-<!--                    <div class="form-floating mb-3">-->
-<!--                        <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />-->
-<!--                        <label for="name">Full name</label>-->
-<!--                        <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>-->
-<!--                    </div>-->
-<!--                    &lt;!&ndash; Email address input&ndash;&gt;-->
-<!--                    <div class="form-floating mb-3">-->
-<!--                        <input class="form-control" id="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" />-->
-<!--                        <label for="email">Email address</label>-->
-<!--                        <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>-->
-<!--                        <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>-->
-<!--                    </div>-->
-<!--                    &lt;!&ndash; Phone number input&ndash;&gt;-->
-<!--                    <div class="form-floating mb-3">-->
-<!--                        <input class="form-control" id="phone" type="tel" placeholder="(123) 456-7890" data-sb-validations="required" />-->
-<!--                        <label for="phone">Phone number</label>-->
-<!--                        <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>-->
-<!--                    </div>-->
-<!--                    &lt;!&ndash; Message input&ndash;&gt;-->
-<!--                    <div class="form-floating mb-3">-->
-<!--                        <textarea class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required"></textarea>-->
-<!--                        <label for="message">Message</label>-->
-<!--                        <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>-->
-<!--                    </div>-->
-<!--                    &lt;!&ndash; Submit success message&ndash;&gt;-->
-<!--                    &lt;!&ndash;&ndash;&gt;-->
-<!--                    &lt;!&ndash; This is what your users will see when the form&ndash;&gt;-->
-<!--                    &lt;!&ndash; has successfully submitted&ndash;&gt;-->
-<!--                    <div class="d-none" id="submitSuccessMessage">-->
-<!--                        <div class="text-center mb-3">-->
-<!--                            <div class="fw-bolder">Form submission successful!</div>-->
-<!--                            To activate this form, sign up at-->
-<!--                            <br />-->
-<!--                            <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    &lt;!&ndash; Submit error message&ndash;&gt;-->
-<!--                    &lt;!&ndash;&ndash;&gt;-->
-<!--                    &lt;!&ndash; This is what your users will see when there is&ndash;&gt;-->
-<!--                    &lt;!&ndash; an error submitting the form&ndash;&gt;-->
-<!--                    <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>-->
-<!--                    &lt;!&ndash; Submit Button&ndash;&gt;-->
-<!--                    <button class="btn btn-primary btn-xl disabled" id="submitButton" type="submit">Send</button>-->
-<!--                </form>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</section>-->
 
-<!--<script>-->
-<!--    $(document).ready(function(){-->
-<!--        $("#contactForm").submit(function(event){-->
-<!--            event.preventDefault(); // 폼 제출의 기본 동작 방지-->
 
-<!--            var formData = {-->
-<!--                name: $("#name").val(),-->
-<!--                email: $("#email").val(),-->
-<!--                phone: $("#phone").val(),-->
-<!--                message: $("#message").val()-->
-<!--            };-->
 
-<!--            $.ajax({-->
-<!--                type: "POST",-->
-<!--                url: "/sendEmail", // 서버의 엔드포인트로 변경하세요-->
-<!--                data: JSON.stringify(formData),-->
-<!--                contentType: "application/json; charset=utf-8",-->
-<!--                dataType: "json",-->
-<!--                success: function(data){-->
-<!--                    alert("Message sent successfully!");-->
-<!--                    // 성공적으로 메시지를 전송했을 때의 처리-->
-<!--                },-->
-<!--                error: function(errMsg) {-->
-<!--                    alert("Error sending message!");-->
-<!--                    // 메시지 전송에 실패했을 때의 처리-->
-<!--                }-->
-<!--            });-->
-<!--        });-->
-<!--    });-->
-<!--</script>-->
+
+
+
+
 <!-- Footer-->
+
 <footer class="footer text-center">
     <div class="container">
         <div class="row">
@@ -444,25 +398,27 @@
             <div class="col-lg-4 mb-5 mb-lg-0">
                 <h4 class="text-uppercase mb-4">Location</h4>
                 <p class="lead mb-0">
-                    수원역
+                    경상북도 울릉군 울릉읍
                     <br />
-                    Clark,  65243
+                    독도리 1-96번지
                 </p>
             </div>
             <!-- Footer Social Icons-->
             <div class="col-lg-4 mb-5 mb-lg-0">
                 <h4 class="text-uppercase mb-4">Around the Web</h4>
-                <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-facebook-f"></i></a>
-                <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-twitter"></i></a>
-                <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-linkedin-in"></i></a>
-                <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-dribbble"></i></a>
+                <a class="btn btn-outline-light btn-social mx-1" href="https://github.com/HyungGeun94/luko6" target="_blank">
+                    <i class="fab fa-fw fa-github"></i>
+                </a>
+                <a class="btn btn-outline-light btn-social mx-1" href="https://carpal-dumpling-37b.notion.site/5ae55b5632ed4e719effd6abe0558f83?v=2dc108364f7542d6a1557ef722396c66&pvs=4" target="_blank">
+                    <img src="assets/img/notionImg3.png" width="32" height="32">
+                </a>
             </div>
             <!-- Footer About Text-->
             <div class="col-lg-4">
-                <h4 class="text-uppercase mb-4">루코짱루코짱</h4>
+                <h4 class="text-uppercase mb-4">대표전화</h4>
                 <p class="lead mb-0">
 
-                    <a>루코루코루코루코</a>
+                    <a>010-1234-5678</a>
 
                 </p>
             </div>
@@ -471,8 +427,47 @@
 </footer>
 <!-- Copyright Section-->
 <div class="copyright py-4 text-center text-white">
+    <div class="container">
+        <div id="visitorCount" align="left">Visitor Count: </div>
+        <div id="useUserCount" align="left">Using User: </div>
+        <span id="userCount"></span>
+    </div>
+
     <div class="container"><small>Copyright &copy; luco777 2024</small></div>
+
+
+    <script>
+
+//        var header = $("meta[name='_csrf_header']").attr('content');
+//        var token = $("meta[name='_csrf']").attr('content');
+
+
+        $.ajax({
+            url: '/stats',
+            type: 'GET',
+
+            //
+            // beforeSend: function(xhr){
+            //     xhr.setRequestHeader(header, token);
+            // },
+
+            success: function(data) {
+                $('#visitorCount').text('방문자: ' + data.visitorCount+"명");
+                $('#useUserCount').text('이용자: ' + data.userCount+"명");
+
+            },
+            error: function(error) {
+                console.error('Error:', error);
+            }
+        });
+    </script>
+
+
+
+
 </div>
+
+
 <!-- Portfolio Modals-->
 <!-- Portfolio Modal 1-->
 <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" aria-labelledby="portfolioModal1" aria-hidden="true">
@@ -698,99 +693,26 @@
     </div>
 </div>
 
-<!-- 결과보기를 누르기 전에 나오는 모달창-->
-<!-- Placeholder Modal -->
-<div class="portfolio-modal modal fade" id="placeholderModal1" tabindex="-1" aria-labelledby="placeholderModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-body text-center">
-                <h2 class="mb-4">결과보기를 먼저 실행해주세요</h2>
-                <button class="btn btn-primary" data-bs-dismiss="modal">
-                    <i class="fas fa-xmark fa-fw"></i>
-                    창 닫기
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Placeholder Modal -->
-<div class="portfolio-modal modal fade" id="placeholderModal2" tabindex="-1" aria-labelledby="placeholderModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-body text-center">
-                <h2 class="mb-4">결과보기를 먼저 실행해주세요</h2>
-                <button class="btn btn-primary" data-bs-dismiss="modal">
-                    <i class="fas fa-xmark fa-fw"></i>
-                    창 닫기
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Placeholder Modal -->
-<div class="portfolio-modal modal fade" id="placeholderModal3" tabindex="-1" aria-labelledby="placeholderModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-body text-center">
-                <h2 class="mb-4">결과보기를 먼저 실행해주세요</h2>
-                <button class="btn btn-primary" data-bs-dismiss="modal">
-                    <i class="fas fa-xmark fa-fw"></i>
-                    창 닫기
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Placeholder Modal -->
-<div class="portfolio-modal modal fade" id="placeholderModal4" tabindex="-1" aria-labelledby="placeholderModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-body text-center">
-                <h2 class="mb-4">결과보기를 먼저 실행해주세요</h2>
-                <button class="btn btn-primary" data-bs-dismiss="modal">
-                    <i class="fas fa-xmark fa-fw"></i>
-                    창 닫기
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Placeholder Modal -->
-<div class="portfolio-modal modal fade" id="placeholderModal5" tabindex="-1" aria-labelledby="placeholderModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-body text-center">
-                <h2 class="mb-4">결과보기를 먼저 실행해주세요</h2>
-                <button class="btn btn-primary" data-bs-dismiss="modal">
-                    <i class="fas fa-xmark fa-fw"></i>
-                    창 닫기
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Placeholder Modal -->
-<div class="portfolio-modal modal fade" id="placeholderModal6" tabindex="-1" aria-labelledby="placeholderModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-body text-center">
-                <h2 class="mb-4">결과보기를 먼저 실행해주세요</h2>
-                <button class="btn btn-primary" data-bs-dismiss="modal">
-                    <i class="fas fa-xmark fa-fw"></i>
-                    창 닫기
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
+<script>
+    // 문서가 준비되면 실행
+    $(document).ready(function() {
+        // 모든 포트폴리오 모달에 대해 이벤트 리스너를 설정합니다.
+        $('.portfolio-modal').on('show.bs.modal', function (e) {
+            // isResultViewed 플래그를 검사합니다.
+            if (!isResultViewed) {
+                // 플래그가 false일 경우, 모달을 표시하지 않고 경고창을 띄웁니다.
+                alert("먼저 '당첨금 확인' 을 해주세요.");
+                e.preventDefault(); // 모달 표시 이벤트를 중단합니다.
+            }
+        });
+    });
+</script>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
-<script src="js/scripts.js"></script>
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-<!-- * *                               SB Forms JS                               * *-->
-<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<script src="static/js/scripts.js"></script>
+
+
 <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 
 <script>
@@ -818,11 +740,16 @@
 
 
 
+    let isResultViewed = false; // 사용자가 '당첨금 확인'를 클릭했는지 추적하는 플래그
 
 
     const resultListElement = document.getElementById("resultList");
 
     const lottoResult = () => {
+
+        isResultViewed = true;
+
+
         const num1 = document.getElementById("num1").value;
         const num2 = document.getElementById("num2").value;
         const num3 = document.getElementById("num3").value;
@@ -832,16 +759,16 @@
 
         const numbers = [num1, num2, num3, num4, num5, num6].map(Number); // 문자열을 숫자로 변환
 
-        // 유효성 검사: 모든 번호가 1~45 범위 내에 있는지 확인
-        const isValidRange = numbers.every(num => num >= 1 && num <= 45);
-
-        // 유효성 검사: 중복된 번호가 없는지 확인
-        const isUnique = numbers.length === new Set(numbers).size;
-
-        if (!isValidRange || !isUnique) {
-            alert("번호는 1부터 45 사이여야 하며, 중복될 수 없습니다.");
-            return; // 유효하지 않으면 여기서 함수 실행을 중단
-        }
+        // // 유효성 검사: 모든 번호가 1~45 범위 내에 있는지 확인
+        // const isValidRange = numbers.every(num => num >= 1 && num <= 45);
+        //
+        // // 유효성 검사: 중복된 번호가 없는지 확인
+        // const isUnique = numbers.length === new Set(numbers).size;
+        //
+        // if (!isValidRange || !isUnique) {
+        //     alert("번호는 1부터 45 사이여야 하며, 중복될 수 없습니다.");
+        //     return; // 유효하지 않으면 여기서 함수 실행을 중단
+        // }
 
         const params = {
             "num1": num1,
@@ -854,8 +781,8 @@
         }
 
         // 로컬환경에서 주석처리하기
-        var header = $("meta[name='_csrf_header']").attr('content');
-        var token = $("meta[name='_csrf']").attr('content');
+        // var header = $("meta[name='_csrf_header']").attr('content');
+        // var token = $("meta[name='_csrf']").attr('content');
         // ///////////////////////////////////
 
         // Ajax 요청이 실패하거나 아직 요청이 완료되지 않았을 때 모달을 숨기는 기능
@@ -873,9 +800,9 @@
             url: "/lottoResult",
 
             // 로컬환경에서 주석처리하기
-            beforeSend: function(xhr){
-                xhr.setRequestHeader(header, token);
-            },
+            // beforeSend: function(xhr){
+            //     xhr.setRequestHeader(header, token);
+            // },
             //////////////////////////////////
             //parameter 전달하기
             contentType: "application/json",
@@ -909,16 +836,8 @@
             //요청이 실패했을 때 실행되는 부분
             error: function () {
                 console.log("실패");
+                $('#failureModal').modal('show');
             },
-            complete: function () {
-                // Ajax 요청이 완료되면 Placeholder 모달 닫기
-                $('#placeholderModal1').modal('hide');
-                $('#placeholderModal2').modal('hide');
-                $('#placeholderModal3').modal('hide');
-                $('#placeholderModal4').modal('hide');
-                $('#placeholderModal5').modal('hide');
-                $('#placeholderModal6').modal('hide');
-            }
 
 
         })
@@ -926,5 +845,26 @@
     }
 
 </script>
+
+<!--요청 실패 모달창-->
+<div class="modal fade" id="failureModal" tabindex="-1" aria-labelledby="failureModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="failureModalLabel">잘 못된 숫자 입력</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                올바른 숫자를 입력해주세요.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 </body>
 </html>

@@ -20,7 +20,6 @@ public class Lotto {
     Integer round;
 
     String lottoDate;
-
     String firstWinner;
     String firstWinning;
     String secondWinner;
