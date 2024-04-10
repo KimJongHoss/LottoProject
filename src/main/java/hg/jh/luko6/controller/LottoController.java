@@ -1,6 +1,5 @@
 package hg.jh.luko6.controller;
 
-
 import hg.jh.luko6.DTO.NumberDTO;
 import hg.jh.luko6.entity.*;
 import hg.jh.luko6.repository.VisitStatsRepository;
@@ -14,10 +13,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
 import java.text.DecimalFormat;
 import java.util.*;
 
@@ -32,16 +28,25 @@ public class LottoController {
     @Autowired
     private VisitStatsRepository visitStatsRepository;
 
+    @GetMapping("/")//홈페이지 시작시 index로 가는 메서드
+//    @ResponseBody//협업용
+//    public VisitStats index(HttpServletRequest request//협업용
+//            , HttpServletResponse response){//협업용
+    public String index(){
 
+        log.info("index로 갑니당");
 
+        return "index";
+//        return optionalVisitStats.orElse(null);
+    }
 
-    @GetMapping("/stats")
+    @GetMapping("/stats")//방문자/이용자 수 view에 보내기
     public @ResponseBody Map<String, Object> getStats(HttpServletRequest request, HttpServletResponse response) {
         Map<String, Object> stats = new HashMap<>();
 
-        Long visitorCount = visitStatsService.getVisitorCount(request, response);
+        Long visitorCount = visitStatsService.getVisitorCount(request, response);//방문자수 불러오기
 
-        stats.put("visitorCount", visitorCount);
+        stats.put("visitorCount", visitorCount);//방문자수 맵에 넣기
         // 추가 데이터 처리
 
         Optional<VisitStats> optionalVisitStats = visitStatsRepository.findById(1L);//visitStats에 있는 id가 1인 컬럼을 불러온다
@@ -49,40 +54,8 @@ public class LottoController {
         Long userCount = visitStats.getUserCount();
 
 //        return optionalVisitStats.orElse(null);
-        stats.put("userCount", userCount);
+        stats.put("userCount", userCount);//이용자수 맵에 넣기
         return stats;
-    }
-
-
-
-
-    @GetMapping("/")
-//    @ResponseBody//협업용
-//    public VisitStats index(HttpServletRequest request//협업용
-//            , HttpServletResponse response){//협업용
-    public String index(HttpServletRequest request
-            , HttpServletResponse response
-            , Model model){
-        Map<String, Object> statsMap = new HashMap<>();
-
-
-//        방문자수
-        Long visitorCount = visitStatsService.getVisitorCount(request, response);
-
-
-        log.info("방문자수: "+visitorCount+"명");
-
-
-//        이용자수
-        Optional<VisitStats> optionalVisitStats = visitStatsRepository.findById(1L);//visitStats에 있는 id가 1인 컬럼을 불러온다
-        VisitStats visitStats = optionalVisitStats.get();//optional은 값이 존재한다면 반환, 없을 경우 NoSuchElementException 발생
-        Long userCount = visitStats.getUserCount();
-
-
-        log.info("index로 갑니당");
-//        return optionalVisitStats.orElse(null);
-
-        return "index";
     }
 
 //    @PostMapping("/getLotto")
@@ -122,8 +95,7 @@ public class LottoController {
 //
 //    }
 
-
-    @PostMapping("/lottoResult")
+    @PostMapping("/lottoResult")//로또 기능
     public @ResponseBody ResponseEntity<?> getLotto(@RequestBody InputLotto inputLotto){
 
         NumberDTO dto = numberCheckService.getInputEntity(inputLotto);//가져온 번호 6개를 이용해서 dto 생성
@@ -134,7 +106,6 @@ public class LottoController {
             return ResponseEntity.badRequest().body("유효하지 않은 입력입니다.");
         }
 
-
         log.info("들어간값 : "+inputLotto);
         log.info("1번 : "+inputLotto.getNum1());
         log.info("2번 : "+inputLotto.getNum2());
@@ -143,15 +114,9 @@ public class LottoController {
         log.info("5번 : "+inputLotto.getNum5());
         log.info("6번 : "+inputLotto.getNum6());
 
-
-
-
-
         List<OutputLotto> OutputLottoList = lottoService.LottoAll(inputLotto);//가공된 데이터만 담겨있는 리스트 가져오기
 
         Long totalWinning = 0L;
-
-
 
         for(OutputLotto outputLotto : OutputLottoList){//누적 금액 생성
 
@@ -161,12 +126,9 @@ public class LottoController {
 
             totalWinning += winningCal;
 
-
             log.info("회차"+outputLotto.getRound() + "누적 금액 :"+totalWinning);
 
         }
-
-
 
         log.info(OutputLottoList);
 //        log.info("리버스 전후@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@리버스 전후@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
@@ -182,26 +144,19 @@ public class LottoController {
         float lockedSafedPrice = 1144000f;
         float submarinePrice = 1400000000000f;
 
-
-
         // VisitStats 테이블에서 id가 1인 레코드 조회
         Optional<VisitStats> optionalVisitStats = visitStatsRepository.findById(1L);
 
-
-
-
         lottoService.addPercentage(totalWinning);
         lottoService.calculatePercentage(totalWinning);
-        log.info("////////////////////////////////");
+
         log.info("상위"+((int)(lottoService.calculatePercentage(totalWinning)*100))+"%");
-        log.info("////////////////////////////////");
 
         int Ranking = ((int)(lottoService.calculatePercentage(totalWinning)*100));
 
         Map<String, Object> lottoMap = new HashMap<>();
 
         lottoMap.put("Ranking",Ranking);
-
 
         lottoMap.put("OutputLottoList", OutputLottoList);
         lottoMap.put("totalWinning", totalWinning);
@@ -226,6 +181,7 @@ public class LottoController {
         String submarineValue = df.format(totalWinning / submarinePrice);
         float submarine = Float.parseFloat(submarineValue);
 
+//        각 항목을 맵에 넣기
         lottoMap.put("logCabin", logCabin);
         lottoMap.put("cochoCake", cochoCake);
         lottoMap.put("circusTent", circusTent);
@@ -234,16 +190,13 @@ public class LottoController {
         lottoMap.put("submarine", submarine);
 
 //       로직이 돌아가면 이용자수에 +1하기
-
         if (optionalVisitStats.isPresent()) {
             VisitStats visitStats = optionalVisitStats.get();
             if (OutputLottoList != null) {
 
-
                 visitStats.addUserCount();//사용자수 1증가시키는 메서드 호출
                 visitStatsRepository.save(visitStats);
                 log.info(visitStats);
-
 
             }
             lottoMap.put("usercount", visitStats.getUserCount());
@@ -254,7 +207,5 @@ public class LottoController {
         return ResponseEntity.ok(lottoMap);
 
     }
-
-
 
 }

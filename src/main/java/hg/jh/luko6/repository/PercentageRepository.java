@@ -7,8 +7,6 @@ import org.springframework.data.repository.query.Param;
 
 public interface PercentageRepository extends JpaRepository<Percentage,Long > {
 
-
-
     @Query(value = "SELECT count(*) FROM percentage WHERE total_winning > :totalWinning", nativeQuery = true)
     Long findByTotalWinning(@Param("totalWinning") Long totalWinning);
 
