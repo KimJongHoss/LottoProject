@@ -8,10 +8,8 @@ import hg.jh.luko6.repository.LottoRepository;
 import hg.jh.luko6.repository.PercentageRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,29 +19,19 @@ import java.util.List;
 public class LottoService {
 
     private final LottoRepository lottoRepository;
-
     private final PercentageRepository percentageRepository;
 
-
     public void addPercentage(Long totalWinning){
-
 
         Percentage percentage = new Percentage();
 
         percentage.setTotalWinning(totalWinning);
 
-
         percentageRepository.save(percentage);
-
-
-
-
-
 
     }
 
     public Double calculatePercentage(Long totalWinning){
-
 
         Long Ranked= percentageRepository.findByTotalWinning(totalWinning);
 
@@ -52,9 +40,6 @@ public class LottoService {
         return Ranked.doubleValue()/totalCount.doubleValue();
 
     }
-
-
-
 
 
 
@@ -172,16 +157,11 @@ public class LottoService {
 
                     outputLottoList.add(outputLotto);
 
-            }else{
-
             }
 
 
         }
 
-        log.info("어디서ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ잘모된거야?????????");
-
-        log.info(outputLottoList);
 
         return outputLottoList;
 

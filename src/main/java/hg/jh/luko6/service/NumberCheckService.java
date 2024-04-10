@@ -1,6 +1,5 @@
 package hg.jh.luko6.service;
 
-
 import hg.jh.luko6.DTO.NumberDTO;
 import hg.jh.luko6.entity.InputLotto;
 import hg.jh.luko6.utility.NumberUtility;
@@ -11,6 +10,8 @@ import org.springframework.stereotype.Service;
 @Log4j2
 public class NumberCheckService {
     public NumberDTO getInputEntity(InputLotto entity) {//InputLotto를 NumberDTO로 변환하는 메소드
+
+
         NumberDTO dto = new NumberDTO();
         dto.setNum1(entity.getNum1());
         dto.setNum2(entity.getNum2());
@@ -18,7 +19,12 @@ public class NumberCheckService {
         dto.setNum4(entity.getNum4());
         dto.setNum5(entity.getNum5());
         dto.setNum6(entity.getNum6());
+
+
+
         return dto;
+
+
     }
 
     public boolean processNumberDTO(NumberDTO dto) {
@@ -49,6 +55,7 @@ public class NumberCheckService {
         return true;
     }
 
+//    숫자의 범위 1~45 체크
     private boolean isValidRange(Integer number) {
         return number >= 1 && number <= 45;
     }
