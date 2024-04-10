@@ -35,15 +35,9 @@ public class LottoService {
 
         percentageRepository.save(percentage);
 
-
-
-
-
-
     }
 
     public Double calculatePercentage(Long totalWinning){
-
 
         Long Ranked= percentageRepository.findByTotalWinning(totalWinning);
 
@@ -52,9 +46,6 @@ public class LottoService {
         return Ranked.doubleValue()/totalCount.doubleValue();
 
     }
-
-
-
 
 
 
@@ -172,16 +163,11 @@ public class LottoService {
 
                     outputLottoList.add(outputLotto);
 
-            }else{
-
             }
 
 
         }
 
-        log.info("어디서ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ잘모된거야?????????");
-
-        log.info(outputLottoList);
 
         return outputLottoList;
 

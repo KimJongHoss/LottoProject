@@ -11,12 +11,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.text.DecimalFormat;
 import java.util.*;
@@ -29,10 +27,7 @@ public class LottoController {
     private final LottoService lottoService;
     private final VisitStatsService visitStatsService;
     private final NumberCheckService numberCheckService;
-    @Autowired
-    private VisitStatsRepository visitStatsRepository;
-
-
+    private final VisitStatsRepository visitStatsRepository;
 
 
     @GetMapping("/stats")

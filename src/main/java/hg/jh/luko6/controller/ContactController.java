@@ -27,6 +27,7 @@ public class ContactController {
     public ResponseEntity<?> sendEmail(@Valid @RequestBody ContactRequest request, BindingResult result) {
 
 
+
         emailService.sendContactEmail(request.getName(), request.getEmail(), request.getPhone(), request.getMessage());
         return ResponseEntity.ok("Email sent successfully");
     }

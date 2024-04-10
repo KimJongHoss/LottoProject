@@ -9,15 +9,10 @@ import java.util.Set;
 public class NumberDTO {
 
     private Integer num1;
-
     private Integer num2;
-
     private Integer num3;
-
     private Integer num4;
-
     private Integer num5;
-
     private Integer num6;
 
     public boolean checkUniqueNumber(){
