@@ -1,6 +1,5 @@
 package hg.jh.luko6.service;
 
-
 import hg.jh.luko6.DTO.NumberDTO;
 import hg.jh.luko6.entity.InputLotto;
 import hg.jh.luko6.utility.NumberUtility;
@@ -56,6 +55,7 @@ public class NumberCheckService {
         return true;
     }
 
+//    숫자의 범위 1~45 체크
     private boolean isValidRange(Integer number) {
         return number >= 1 && number <= 45;
     }

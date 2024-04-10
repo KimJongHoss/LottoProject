@@ -25,3 +25,15 @@ public class BindingCheck {
         return joinPoint.proceed();
     }
 }
+
+
+//        if (result.hasErrors()) {
+//// 검증 실패 시, 에러 메시지를 수집하여 반환
+//Map<String, String> errors = new HashMap<>();
+//            for (
+//FieldError error : result.getFieldErrors()) {
+//        errors.put(error.getField(), error.getDefaultMessage());
+//        }
+//
+//        return ResponseEntity.badRequest().body(errors);
+//        }

@@ -5,11 +5,9 @@ import hg.jh.luko6.repository.VisitStatsRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 import java.util.Optional;
 
 @Service
@@ -17,7 +15,6 @@ import java.util.Optional;
 public class VisitStatsService {
 
     private static final String VISIT_COUNTER_COOKIE = "visitCounter";
-    private static final String NO_COOKIE = "imnotCookie";
     private final VisitStatsRepository visitStatsRepository;
     private VisitStats visitStats;
 
@@ -30,13 +27,11 @@ public class VisitStatsService {
 
     // VisitStats 객체 초기화 메서드
     private void initializeVisitStats() {
-
         Optional<VisitStats> optionalVisitStats = visitStatsRepository.findById(1L);
         visitStats = optionalVisitStats.orElseGet(VisitStats::new);
     }
 
     public Long getVisitorCount(HttpServletRequest request, HttpServletResponse response) {
-        Long visitorCount = 0L;
         Cookie[] cookies = request.getCookies();
 
         if (cookies != null) {
@@ -49,7 +44,6 @@ public class VisitStatsService {
                 }
             }
         }
-
         // 쿠키가 존재하지 않으면 방문자 수를 증가시키고 쿠키를 생성합니다.
         return incrementVisitorCount(request, response);
     }
@@ -74,6 +68,5 @@ public class VisitStatsService {
 
         return visitorCount;
     }
-
 
 }
