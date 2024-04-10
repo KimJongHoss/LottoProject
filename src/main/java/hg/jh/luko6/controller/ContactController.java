@@ -28,21 +28,3 @@ public class ContactController {
         return ResponseEntity.ok("Email sent successfully");
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

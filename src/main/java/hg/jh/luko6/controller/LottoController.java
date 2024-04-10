@@ -33,8 +33,6 @@ public class LottoController {
 //            , HttpServletResponse response){//협업용
     public String index(){
 
-        log.info("index로 갑니당");
-
         return "index";
 //        return optionalVisitStats.orElse(null);
     }
@@ -57,43 +55,6 @@ public class LottoController {
         return stats;
     }
 
-//    @PostMapping("/getLotto")
-//    public String getLotto(InputLotto inputLotto, Model model){
-//
-//        List<OutputLotto> OutputLottoList = lottoService.LottoAll(inputLotto);//가공된 데이터만 담겨있는 리스트 가져오기
-//
-//        Long totalWinning = 0L;
-//
-//        for(OutputLotto outputLotto : OutputLottoList){//누적 금액 생성
-//
-//            Long winningCal = Long.valueOf((outputLotto.getWinning()));
-//
-//            log.info("회차"+outputLotto.getRound() + "당첨금 : "+winningCal);
-//
-//            totalWinning += winningCal;
-//
-//
-//            log.info("회차"+outputLotto.getRound() + "누적 금액 :"+totalWinning);
-//
-//        }
-//
-//
-//
-//        log.info(OutputLottoList);
-////        log.info("리버스 전후@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@리버스 전후@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-////        Collections.reverse(OutputLottoList);
-////        log.info(OutputLottoList);
-//
-//        log.info("누적금액 : "+totalWinning);
-//
-//        model.addAttribute("OutputLottoList",OutputLottoList);
-//
-//        model.addAttribute("totalWinning",totalWinning);
-//
-//        return "lottoResult";
-//
-//    }
-
     @PostMapping("/lottoResult")//로또 기능
     public @ResponseBody ResponseEntity<?> getLotto(@RequestBody InputLotto inputLotto){
 
@@ -105,14 +66,6 @@ public class LottoController {
             return ResponseEntity.badRequest().body("유효하지 않은 입력입니다.");
         }
 
-        log.info("들어간값 : "+inputLotto);
-        log.info("1번 : "+inputLotto.getNum1());
-        log.info("2번 : "+inputLotto.getNum2());
-        log.info("3번 : "+inputLotto.getNum3());
-        log.info("4번 : "+inputLotto.getNum4());
-        log.info("5번 : "+inputLotto.getNum5());
-        log.info("6번 : "+inputLotto.getNum6());
-
         List<OutputLotto> OutputLottoList = lottoService.LottoAll(inputLotto);//가공된 데이터만 담겨있는 리스트 가져오기
 
         Long totalWinning = 0L;
@@ -121,18 +74,9 @@ public class LottoController {
 
             Long winningCal = Long.valueOf((outputLotto.getWinning()));
 
-            log.info("회차"+outputLotto.getRound() + "당첨금 : "+winningCal);
-
             totalWinning += winningCal;
 
-            log.info("회차"+outputLotto.getRound() + "누적 금액 :"+totalWinning);
-
         }
-
-        log.info(OutputLottoList);
-
-
-        log.info("누적금액 : "+totalWinning);
 
         float logCabinPrice = 4500000f;
         float cochoCakePrice = 5900f;
@@ -146,8 +90,6 @@ public class LottoController {
 
         lottoService.addPercentage(totalWinning);
         lottoService.calculatePercentage(totalWinning);
-
-        log.info("상위"+((int)(lottoService.calculatePercentage(totalWinning)*100))+"%");
 
         int Ranking = ((int)(lottoService.calculatePercentage(totalWinning)*100));
 
@@ -193,13 +135,10 @@ public class LottoController {
 
                 visitStats.addUserCount();//사용자수 1증가시키는 메서드 호출
                 visitStatsRepository.save(visitStats);
-                log.info(visitStats);
 
             }
             lottoMap.put("usercount", visitStats.getUserCount());
         }
-
-        log.info("로또 맵:"+lottoMap);
 
         return ResponseEntity.ok(lottoMap);
 
