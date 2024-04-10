@@ -27,7 +27,7 @@ public class VisitStatsService {
 
     // VisitStats 객체 초기화 메서드
     private void initializeVisitStats() {
-        Optional<VisitStats> optionalVisitStats = visitStatsRepository.findById(1L);
+        Optional<VisitStats> optionalVisitStats = visitStatsRepository.findById(2L);
         visitStats = optionalVisitStats.orElseGet(VisitStats::new);
     }
 

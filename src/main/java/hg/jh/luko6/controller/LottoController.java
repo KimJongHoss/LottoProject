@@ -49,7 +49,7 @@ public class LottoController {
         stats.put("visitorCount", visitorCount);//방문자수 맵에 넣기
         // 추가 데이터 처리
 
-        Optional<VisitStats> optionalVisitStats = visitStatsRepository.findById(1L);//visitStats에 있는 id가 1인 컬럼을 불러온다
+        Optional<VisitStats> optionalVisitStats = visitStatsRepository.findById(2L);//visitStats에 있는 id가 1인 컬럼을 불러온다
         VisitStats visitStats = optionalVisitStats.get();//optional은 값이 존재한다면 반환, 없을 경우 NoSuchElementException 발생
         Long userCount = visitStats.getUserCount();
 
@@ -145,7 +145,7 @@ public class LottoController {
         float submarinePrice = 1400000000000f;
 
         // VisitStats 테이블에서 id가 1인 레코드 조회
-        Optional<VisitStats> optionalVisitStats = visitStatsRepository.findById(1L);
+        Optional<VisitStats> optionalVisitStats = visitStatsRepository.findById(2L);
 
         lottoService.addPercentage(totalWinning);
         lottoService.calculatePercentage(totalWinning);
