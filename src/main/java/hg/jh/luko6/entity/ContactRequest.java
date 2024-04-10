@@ -25,5 +25,4 @@ public class ContactRequest {
     @NotBlank(message = "메시지는 필수항목입니다.")
     @Size(min = 10, max = 500, message = "메시지는 10자 이상 500자 이하로 입력해주세요.")
     private String message;
-
 }

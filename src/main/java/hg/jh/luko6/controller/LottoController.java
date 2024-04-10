@@ -10,10 +10,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
 import java.text.DecimalFormat;
 import java.util.*;
 
@@ -25,8 +25,7 @@ public class LottoController {
     private final LottoService lottoService;
     private final VisitStatsService visitStatsService;
     private final NumberCheckService numberCheckService;
-    @Autowired
-    private VisitStatsRepository visitStatsRepository;
+    private final VisitStatsRepository visitStatsRepository;
 
     @GetMapping("/")//홈페이지 시작시 index로 가는 메서드
 //    @ResponseBody//협업용
@@ -131,9 +130,7 @@ public class LottoController {
         }
 
         log.info(OutputLottoList);
-//        log.info("리버스 전후@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@리버스 전후@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-//        Collections.reverse(OutputLottoList);
-//        log.info(OutputLottoList);
+
 
         log.info("누적금액 : "+totalWinning);
 

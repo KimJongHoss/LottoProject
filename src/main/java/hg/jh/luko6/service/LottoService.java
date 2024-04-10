@@ -43,9 +43,6 @@ public class LottoService {
 
 
 
-
-
-
     public List<OutputLotto> LottoAll(InputLotto inputLotto){
 
 
@@ -160,16 +157,11 @@ public class LottoService {
 
                     outputLottoList.add(outputLotto);
 
-            }else{
-
             }
 
 
         }
 
-        log.info("어디서ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ잘모된거야?????????");
-
-        log.info(outputLottoList);
 
         return outputLottoList;
 

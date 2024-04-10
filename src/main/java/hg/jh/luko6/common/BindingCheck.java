@@ -17,7 +17,6 @@ public class BindingCheck {
             if (arg instanceof BindingResult) {
                 BindingResult bindingResult = (BindingResult) arg;
                 if (bindingResult.hasErrors()) {
-                    // 첫 번째 에러의 메시지를 가져옵니다.
                     String errorMessage = bindingResult.getFieldError().getDefaultMessage();
                     throw new ValidationException(errorMessage);
                 }
@@ -26,6 +25,7 @@ public class BindingCheck {
         return joinPoint.proceed();
     }
 }
+
 
 //        if (result.hasErrors()) {
 //// 검증 실패 시, 에러 메시지를 수집하여 반환
