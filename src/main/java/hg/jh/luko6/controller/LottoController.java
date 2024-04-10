@@ -57,42 +57,6 @@ public class LottoController {
         return stats;
     }
 
-//    @PostMapping("/getLotto")
-//    public String getLotto(InputLotto inputLotto, Model model){
-//
-//        List<OutputLotto> OutputLottoList = lottoService.LottoAll(inputLotto);//가공된 데이터만 담겨있는 리스트 가져오기
-//
-//        Long totalWinning = 0L;
-//
-//        for(OutputLotto outputLotto : OutputLottoList){//누적 금액 생성
-//
-//            Long winningCal = Long.valueOf((outputLotto.getWinning()));
-//
-//            log.info("회차"+outputLotto.getRound() + "당첨금 : "+winningCal);
-//
-//            totalWinning += winningCal;
-//
-//
-//            log.info("회차"+outputLotto.getRound() + "누적 금액 :"+totalWinning);
-//
-//        }
-//
-//
-//
-//        log.info(OutputLottoList);
-////        log.info("리버스 전후@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@리버스 전후@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-////        Collections.reverse(OutputLottoList);
-////        log.info(OutputLottoList);
-//
-//        log.info("누적금액 : "+totalWinning);
-//
-//        model.addAttribute("OutputLottoList",OutputLottoList);
-//
-//        model.addAttribute("totalWinning",totalWinning);
-//
-//        return "lottoResult";
-//
-//    }
 
     @PostMapping("/lottoResult")//로또 기능
     public @ResponseBody ResponseEntity<?> getLotto(@RequestBody InputLotto inputLotto){
