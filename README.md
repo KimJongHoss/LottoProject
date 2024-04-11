@@ -84,4 +84,4 @@ public Enginner Luco() {
 
 
 ### 정리내용
-[노션](https://lsh424.tistory.com/37)
+[노션](https://carpal-dumpling-37b.notion.site/5ae55b5632ed4e719effd6abe0558f83?v=2dc108364f7542d6a1557ef722396c66&pvs=4)
