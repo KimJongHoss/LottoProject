@@ -10,7 +10,7 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
-              .csrf().disable() // CSRF 보호 비활성화: csrf()가 곧 사라질 코드라서 빨간줄 나오는거임, //// ( 테스트할때만 활성화 )
+//              .csrf().disable() // CSRF 보호 비활성화: csrf()가 곧 사라질 코드라서 빨간줄 나오는거임, //// ( 로컬에서만 활성화 )
                 .requiresChannel(channel ->
                         channel.anyRequest().requiresSecure())
                 .authorizeRequests(authorize ->

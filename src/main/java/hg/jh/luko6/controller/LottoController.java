@@ -25,7 +25,6 @@ public class LottoController {
     private final LottoService lottoService;
     private final VisitStatsService visitStatsService;
     private final NumberCheckService numberCheckService;
-    private final VisitStatsRepository visitStatsRepository;
 
     @GetMapping("/")//홈페이지 시작시 index로 가는 메서드
 //    @ResponseBody//협업용
@@ -39,6 +38,7 @@ public class LottoController {
 
     @GetMapping("/stats")//방문자/이용자 수 view에 보내기
     public @ResponseBody Map<String, Object> getStats(HttpServletRequest request, HttpServletResponse response) {
+
         Map<String, Object> stats = new HashMap<>();
 
         Long visitorCount = visitStatsService.getVisitorCount(request, response);//방문자수 불러오기
@@ -46,8 +46,8 @@ public class LottoController {
         stats.put("visitorCount", visitorCount);//방문자수 맵에 넣기
         // 추가 데이터 처리
 
-        Optional<VisitStats> optionalVisitStats = visitStatsRepository.findById(2L);//visitStats에 있는 id가 1인 컬럼을 불러온다
-        VisitStats visitStats = optionalVisitStats.get();//optional은 값이 존재한다면 반환, 없을 경우 NoSuchElementException 발생
+        VisitStats visitStats  =visitStatsService.getVisitStats(2L);//visitStats에 있는 id가 1인 컬럼을 불러온다
+        //optional은 값이 존재한다면 반환, 없을 경우 NoSuchElementException 발생
         Long userCount = visitStats.getUserCount();
 
 //        return optionalVisitStats.orElse(null);
@@ -87,7 +87,8 @@ public class LottoController {
         float submarinePrice = 1400000000000f;
 
         // VisitStats 테이블에서 id가 1인 레코드 조회
-        Optional<VisitStats> optionalVisitStats = visitStatsRepository.findById(2L);
+        VisitStats visitStats  =visitStatsService.getVisitStats(2L);//visitStats에 있는 id가 1인 컬럼을 불러온다
+
 
         lottoService.addPercentage(totalWinning);
         lottoService.calculatePercentage(totalWinning);
@@ -129,17 +130,22 @@ public class LottoController {
         lottoMap.put("lockedSafed", lockedSafed);
         lottoMap.put("submarine", submarine);
 
+
+
+         visitStats  =visitStatsService.getVisitStats(2L);//visitStats에 있는 id가 1인 컬럼을 불러온다
+
+
 //       로직이 돌아가면 이용자수에 +1하기
-        if (optionalVisitStats.isPresent()) {
-            VisitStats visitStats = optionalVisitStats.get();
+
             if (OutputLottoList != null) {
 
-                visitStats.addUserCount();//사용자수 1증가시키는 메서드 호출
-                visitStatsRepository.save(visitStats);
+                visitStats.setUserCount(visitStats.getUserCount()+1);
+
+                visitStatsService.save(visitStats);
 
             }
             lottoMap.put("usercount", visitStats.getUserCount());
-        }
+            log.info("여기야///////////////////"+visitStats.getUserCount());
 
         return ResponseEntity.ok(lottoMap);
 
