@@ -18,8 +18,7 @@
 
   
 
-# 개발일지 및 참고사항    
-[노션](http://naver.com)
+
 
 
 
@@ -28,7 +27,7 @@
 
 <img width="400" alt="321467926-33356fa6-034b-4553-a3ab-95f5eb070b33" src="https://github.com/HyungGeun94/luko6/assets/152036928/7f0c4d40-479f-41fb-b9cd-17946269b3d3">
 <img width="400" alt="321467926-33356fa6-034b-4553-a3ab-95f5eb070b33" src="https://github.com/HyungGeun94/luko6/assets/152036928/d5f91bf1-e24c-4306-9cb2-340987b7ceae">
-<img width="400" alt="321467926-33356fa6-034b-4553-a3ab-95f5eb070b33" src="https://github.com/HyungGeun94/luko6/assets/152036928/eaf8b1f1-0edc-4d59-b809-e890e98a66ea">
+<img width="400" height = "364" alt="321467926-33356fa6-034b-4553-a3ab-95f5eb070b33" src="https://github.com/HyungGeun94/luko6/assets/152036928/eaf8b1f1-0edc-4d59-b809-e890e98a66ea">
 <img width="400" alt="321467926-33356fa6-034b-4553-a3ab-95f5eb070b33" src="https://github.com/HyungGeun94/luko6/assets/152036928/a6280715-daf2-41dd-8055-cd1d33c8e918">
 
 
