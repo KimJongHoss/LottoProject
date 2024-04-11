@@ -84,4 +84,7 @@ public Enginner Luco() {
 
 
 ### 정리내용
-[노션](https://carpal-dumpling-37b.notion.site/5ae55b5632ed4e719effd6abe0558f83?v=2dc108364f7542d6a1557ef722396c66&pvs=4)
+<a href="https://carpal-dumpling-37b.notion.site/5ae55b5632ed4e719effd6abe0558f83?v=2dc108364f7542d6a1557ef722396c66&pvs=4" target="_blank">
+                   <img src="https://img.shields.io/badge/notion-181717?style=for-the-badge&logo=notion&logoColor=white">
+                </a>
+                
