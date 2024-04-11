@@ -5,6 +5,7 @@ import hg.jh.luko6.entity.*;
 import hg.jh.luko6.repository.VisitStatsRepository;
 import hg.jh.luko6.service.LottoService;
 import hg.jh.luko6.service.NumberCheckService;
+import hg.jh.luko6.service.ProductService;
 import hg.jh.luko6.service.VisitStatsService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -25,6 +26,7 @@ public class LottoController {
     private final LottoService lottoService;
     private final VisitStatsService visitStatsService;
     private final NumberCheckService numberCheckService;
+    private final ProductService productService;
     private final VisitStatsRepository visitStatsRepository;
 
     @GetMapping("/")//홈페이지 시작시 index로 가는 메서드
@@ -41,23 +43,23 @@ public class LottoController {
     public @ResponseBody Map<String, Object> getStats(HttpServletRequest request, HttpServletResponse response) {
         Map<String, Object> stats = new HashMap<>();
 
-        Long visitorCount = visitStatsService.getVisitorCount(request, response);//방문자수 불러오기
-
-        stats.put("visitorCount", visitorCount);//방문자수 맵에 넣기
-        // 추가 데이터 처리
-
-        Optional<VisitStats> optionalVisitStats = visitStatsRepository.findById(2L);//visitStats에 있는 id가 1인 컬럼을 불러온다
-        VisitStats visitStats = optionalVisitStats.get();//optional은 값이 존재한다면 반환, 없을 경우 NoSuchElementException 발생
-        Long userCount = visitStats.getUserCount();
+        visitStatsService.getVisitorCount(request, response);//방문자수 불러오기
 
 //        return optionalVisitStats.orElse(null);
-        stats.put("userCount", userCount);//이용자수 맵에 넣기
+        stats.put("userCount",  visitStatsService.getStatsById(1L).getUserCount());//이용자수 맵에 넣기
+        stats.put("visitorCount", visitStatsService.getStatsById(1L).getVisitorCount());//방문자수 맵에 넣기
         return stats;
     }
 
-
     @PostMapping("/lottoResult")//로또 기능
     public @ResponseBody ResponseEntity<?> getLotto(@RequestBody InputLotto inputLotto){
+
+        float logCabinPrice = 4500000f;
+        float cochoCakePrice = 5900f;
+        float circusTentPrice = 748000f;
+        float gameControllerPrice = 45050f;
+        float lockedSafedPrice = 1144000f;
+        float submarinePrice = 1400000000000f;
 
         NumberDTO dto = numberCheckService.getInputEntity(inputLotto);//가져온 번호 6개를 이용해서 dto 생성
         // NumberCheckService를 사용하여 유효성 검사 수행
@@ -69,25 +71,7 @@ public class LottoController {
 
         List<OutputLotto> OutputLottoList = lottoService.LottoAll(inputLotto);//가공된 데이터만 담겨있는 리스트 가져오기
 
-        Long totalWinning = 0L;
-
-        for(OutputLotto outputLotto : OutputLottoList){//누적 금액 생성
-
-            Long winningCal = Long.valueOf((outputLotto.getWinning()));
-
-            totalWinning += winningCal;
-
-        }
-
-        float logCabinPrice = 4500000f;
-        float cochoCakePrice = 5900f;
-        float circusTentPrice = 748000f;
-        float gameControllerPrice = 45050f;
-        float lockedSafedPrice = 1144000f;
-        float submarinePrice = 1400000000000f;
-
-        // VisitStats 테이블에서 id가 1인 레코드 조회
-        Optional<VisitStats> optionalVisitStats = visitStatsRepository.findById(2L);
+        Long totalWinning = lottoService.makeTotalWinning(OutputLottoList);
 
         lottoService.addPercentage(totalWinning);
         lottoService.calculatePercentage(totalWinning);
@@ -102,24 +86,13 @@ public class LottoController {
         lottoMap.put("totalWinning", totalWinning);
 
 //        각 항목을 소수점 세자리까지만 맵에 담기
-        DecimalFormat df = new DecimalFormat("#.###");
-        String logCabinValue = df.format(totalWinning / logCabinPrice);
-        float logCabin = Float.parseFloat(logCabinValue);
 
-        String cochoCakeValue = df.format(totalWinning / cochoCakePrice);
-        float cochoCake = Float.parseFloat(cochoCakeValue);
-
-        String circusTentValue = df.format(totalWinning / circusTentPrice);
-        float circusTent = Float.parseFloat(circusTentValue);
-
-        String gameControllerValue = df.format(totalWinning / gameControllerPrice);
-        float gameController = Float.parseFloat(gameControllerValue);
-
-        String lockedSafedValue = df.format(totalWinning / lockedSafedPrice);
-        float lockedSafed = Float.parseFloat(lockedSafedValue);
-
-        String submarineValue = df.format(totalWinning / submarinePrice);
-        float submarine = Float.parseFloat(submarineValue);
+        float logCabin = productService.onlyThreeDecimalPlaces(totalWinning, logCabinPrice);
+        float cochoCake = productService.onlyThreeDecimalPlaces(totalWinning, cochoCakePrice);
+        float circusTent = productService.onlyThreeDecimalPlaces(totalWinning, circusTentPrice);
+        float gameController = productService.onlyThreeDecimalPlaces(totalWinning, gameControllerPrice);
+        float lockedSafed = productService.onlyThreeDecimalPlaces(totalWinning, lockedSafedPrice);
+        float submarine = productService.onlyThreeDecimalPlaces(totalWinning, submarinePrice);
 
 //        각 항목을 맵에 넣기
         lottoMap.put("logCabin", logCabin);
@@ -129,16 +102,18 @@ public class LottoController {
         lottoMap.put("lockedSafed", lockedSafed);
         lottoMap.put("submarine", submarine);
 
+//        VisitStats 테이블에서 id가 1인 레코드 조회
+        Optional<VisitStats> optionalVisitStats = visitStatsRepository.findById(1L);
 //       로직이 돌아가면 이용자수에 +1하기
         if (optionalVisitStats.isPresent()) {
-            VisitStats visitStats = optionalVisitStats.get();
-            if (OutputLottoList != null) {
+            VisitStats visitStats = visitStatsService.getStatsById(1L);
 
-                visitStats.addUserCount();//사용자수 1증가시키는 메서드 호출
-                visitStatsRepository.save(visitStats);
+            visitStats.setUserCount(visitStats.getUserCount()+1L);//사용자수 1증가시키는 메서드 호출
 
-            }
-            lottoMap.put("usercount", visitStats.getUserCount());
+            visitStatsService.saveStatsValue(visitStats);
+
+            lottoMap.put("useUserCount", visitStats.getUserCount());
+            lottoMap.put("visitorCount", visitStats.getVisitorCount());
         }
 
         return ResponseEntity.ok(lottoMap);

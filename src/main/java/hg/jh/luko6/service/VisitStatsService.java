@@ -2,6 +2,7 @@ package hg.jh.luko6.service;
 
 import hg.jh.luko6.entity.VisitStats;
 import hg.jh.luko6.repository.VisitStatsRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,26 +13,16 @@ import java.util.Optional;
 
 @Service
 @Log4j2
+@RequiredArgsConstructor
 public class VisitStatsService {
 
     private static final String VISIT_COUNTER_COOKIE = "visitCounter";
     private final VisitStatsRepository visitStatsRepository;
-    private VisitStats visitStats;
-
-    // VisitStatsRepository를 주입받는 생성자
-    @Autowired
-    public VisitStatsService(VisitStatsRepository visitStatsRepository) {
-        this.visitStatsRepository = visitStatsRepository;
-        initializeVisitStats(); // VisitStats 객체 초기화 메서드 호출
-    }
-
-    // VisitStats 객체 초기화 메서드
-    private void initializeVisitStats() {
-        Optional<VisitStats> optionalVisitStats = visitStatsRepository.findById(2L);
-        visitStats = optionalVisitStats.orElseGet(VisitStats::new);
-    }
 
     public Long getVisitorCount(HttpServletRequest request, HttpServletResponse response) {
+        VisitStats visitStats = getStatsById(1L);
+
+        log.info(visitStats+"getVisitorCount 들어오자마자");
         Cookie[] cookies = request.getCookies();
 
         if (cookies != null) {
@@ -42,28 +33,34 @@ public class VisitStatsService {
                 }
             }
         }
-        // 쿠키가 존재하지 않으면 방문자 수를 증가시키고 쿠키를 생성합니다.
-        return incrementVisitorCount(request, response);
+
+        return giveMeCookie(response, visitStats);
+//        return incrementVisitorCount(response);
     }
 
-    public Long incrementVisitorCount(HttpServletRequest request, HttpServletResponse response) {
-
-        // DB의 방문자 수를 증가시키는 작업 추가
-        visitStats.addVisitorCount();
-        visitStatsRepository.save(visitStats);
-
-        Long visitorCount = visitStats.getVisitorCount();
-        Cookie[] cookies = request.getCookies();
-
-        // "visitCounter" 쿠키가 존재하지 않는 경우 새로운 쿠키 생성
+    public Long giveMeCookie(HttpServletResponse response, VisitStats visitStats){
         Cookie newCookie = new Cookie(VISIT_COUNTER_COOKIE, "");
         newCookie.setMaxAge(24 * 60 * 60); // 1일
         newCookie.setPath("/"); // 애플리케이션 전역에서 사용 가능하도록 지정
         response.addCookie(newCookie);
 
-        // 로그 추가: incrementVisitorCount 메서드가 호출되었음을 표시
+        // 쿠키가 존재하지 않으면 방문자 수를 증가시키고 쿠키를 생성합니다.
+        log.info(visitStats+"invreament 가기 전 visitStats");
+        log.info(response+"리스폰스");
+        visitStats.setVisitorCount(visitStats.getVisitorCount()+1L);
+        visitStatsRepository.save(visitStats);
+        return visitStats.getVisitorCount();
+    }
 
-        return visitorCount;
+//    id로 방문자수/이용자수 값 가져오기
+    public VisitStats getStatsById(Long id){
+        Optional<VisitStats> optionalVisitStats = visitStatsRepository.findById(id);
+        VisitStats visitStats = optionalVisitStats.get();
+        return visitStats;
+    }
+
+    public void saveStatsValue (VisitStats visitStats){
+        visitStatsRepository.save(visitStats);
     }
 
 }

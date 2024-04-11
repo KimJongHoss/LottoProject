@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 public class NumberCheckService {
     public NumberDTO getInputEntity(InputLotto entity) {//InputLotto를 NumberDTO로 변환하는 메소드
 
-
         NumberDTO dto = new NumberDTO();
         dto.setNum1(entity.getNum1());
         dto.setNum2(entity.getNum2());
@@ -20,10 +19,7 @@ public class NumberCheckService {
         dto.setNum5(entity.getNum5());
         dto.setNum6(entity.getNum6());
 
-
-
         return dto;
-
 
     }
 

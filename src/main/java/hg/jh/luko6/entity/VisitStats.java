@@ -18,22 +18,5 @@ public class VisitStats {
     private Long visitorCount;
     private Long userCount;
 
-//    이용자 수를 증가시키는 메서드
-    public void addUserCount(){
-        if (userCount != null){
-            userCount++;
-        }else{
-            userCount = 1L;
-        }
-    }
-
-//    방문자 수를 증가시키는 메서드
-    public void addVisitorCount(){
-        if (visitorCount != null){
-            visitorCount++;
-        }else{
-            visitorCount = 1L;
-        }
-    }
 
 }

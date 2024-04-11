@@ -41,15 +41,9 @@ public class LottoService {
 
     }
 
-
-
     public List<OutputLotto> LottoAll(InputLotto inputLotto){
 
-
-
         List<Lotto> lottoList = lottoRepository.findAll(Sort.by(Sort.Direction.DESC, "round"));
-
-
 
         List<OutputLotto> outputLottoList = new ArrayList<>();
 
@@ -57,16 +51,13 @@ public class LottoService {
 
         int score= 0;
 
-
         for(Lotto lotto : lottoList){
 
             OutputLotto outputLotto = new OutputLotto();
 
-
             String[] lottoArr = new String[]{lotto.getNo1(), lotto.getNo2(), lotto.getNo3(), lotto.getNo4(), lotto.getNo5(), lotto.getNo6()};
 
             score=0;
-
 
             for (String lottoStr : lottoArr) {// 각 번호별 맞으면 score에 +1
                 for(String inputStr : inputArr ) { //각 회차별 score 추출
@@ -75,7 +66,7 @@ public class LottoService {
                         score += 1;
                         continue;
                     }
-                    }
+                }
 
             }
 
@@ -135,12 +126,22 @@ public class LottoService {
 
             }
 
-
         }
-
 
         return outputLottoList;
 
+    }
+
+    public Long makeTotalWinning (List<OutputLotto> List){
+        Long totalWinning = 0L;
+        for(OutputLotto outputLotto : List){//누적 금액 생성
+
+            Long winningCal = Long.valueOf((outputLotto.getWinning()));
+
+            totalWinning += winningCal;
+
+        }
+        return totalWinning;
     }
 
 }

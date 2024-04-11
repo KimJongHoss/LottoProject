@@ -428,9 +428,9 @@
 <!-- Copyright Section-->
 <div class="copyright py-4 text-center text-white">
     <div class="container">
-        <div id="visitorCount" align="left">Visitor Count: </div>
-        <div id="useUserCount" align="left">Using User: </div>
-        <span id="userCount"></span>
+        <div id="visitorCount" align="left"></div>
+        <div id="useUserCount" align="left"></div>
+<!--        <span id="userCount"></span>-->
     </div>
 
     <div class="container"><small>Copyright &copy; luco777 2024</small></div>
@@ -445,16 +445,16 @@
         $.ajax({
             url: '/stats',
             type: 'GET',
-
             //
             // beforeSend: function(xhr){
             //     xhr.setRequestHeader(header, token);
             // },
-
             success: function(data) {
                 $('#visitorCount').text('방문자: ' + data.visitorCount+"명");
                 $('#useUserCount').text('이용자: ' + data.userCount+"명");
-
+                console.log('방문자 수:', data.visitorCount);
+                console.log('이용자 수:', data.userCount);
+                console.log(data);
             },
             error: function(error) {
                 console.error('Error:', error);
@@ -726,7 +726,9 @@
                 imageUrl: 'https://dimg.donga.com/wps/NEWS/IMAGE/2023/11/25/122348638.2.jpg',  // 최대 500px * 500px
                 link: {
                     mobileWebUrl: '웹사이트 URL',
-                    webUrl: '웹사이트 URL'
+                    webUrl:
+
+                        '웹사이트 URL'
                 }
             }
         });
