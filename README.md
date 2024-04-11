@@ -13,7 +13,6 @@
 5) 누적 당첨금액으로 지정된 물품을 얼마나 살 수 있는지 수량확인
 6) 문의 및 건의사항 이메일 전송
 
----
 
 
   
@@ -45,6 +44,43 @@ public Enginner Luco() {
 
 
 ---
+
+# 사용 도구
+
+<img src="https://img.shields.io/badge/springboot 3.2.3 -6DB33F?style=for-the-badge&logo=springboot&logoColor=white">
+
+<img src="https://img.shields.io/badge/java 17 -007396?style=for-the-badge&logo=java&logoColor=white">
+<img src="https://img.shields.io/badge/mysql 8.0.28 -4479A1?style=for-the-badge&logo=mysql&logoColor=white">
+
+
+<img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
+
+<img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
+  
+
+
+ <img src="https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white"> 
+
+ <img src="https://img.shields.io/badge/amazonec2-232F3E?style=for-the-badge&logo=amazonec2&logoColor=white"> 
+
+  <img src="https://img.shields.io/badge/amazonRDS-232F3E?style=for-the-badge&logo=amazonrds&logoColor=white"> 
+
+
+
+ 
+
+  <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
+
+  <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white">
+
+  <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
+
+  <img src="https://img.shields.io/badge/jquery 3.7.1 -0769AD?style=for-the-badge&logo=jquery&logoColor=white">
+
+  
+
+  ---
+
 
 
 ### 정리내용
